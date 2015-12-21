@@ -29,13 +29,12 @@ public class BookTypeServiceImpl implements BookTypeService{
 	}
 
 	public BookType findById(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public List<BookType> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<BookType> bookTypeList = bookTypeMapper.findAll();
+		return bookTypeList;
 	}
 	
 }

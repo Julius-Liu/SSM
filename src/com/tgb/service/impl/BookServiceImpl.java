@@ -4,8 +4,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
+import com.tgb.model.BookType;
+import com.tgb.model.User;
 import com.tgb.service.BookService;
 
 @Service
@@ -34,9 +37,22 @@ public class BookServiceImpl implements BookService{
 	}
 
 	public List<Book> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Book> findAllList = bookMapper.findAll();
+		return findAllList;
 	}
 	
-	
+	public void CalculateTotalPageAndRecordNumber(String barcode, String bookName, 
+			BookType bookType, String publishDate) {
+        String hql = "From Book book where 1=1";
+        if(!barcode.equals("")) hql = hql + " and book.barcode like '%" + barcode + "%'";
+        if(!bookName.equals("")) hql = hql + " and book.bookName like '%" + bookName + "%'";
+        if(null != bookType && bookType.getBookTypeId()!=0) hql += " and book.bookType.bookTypeId=" + bookType.getBookTypeId();
+        if(!publishDate.equals("")) hql = hql + " and book.publishDate like '%" + publishDate + "%'";
+//        Query q = s.createQuery(hql);
+//        List bookList = q.list();
+//        recordNumber = bookList.size();
+//        int mod = recordNumber % this.PAGE_SIZE;
+//        totalPage = recordNumber / this.PAGE_SIZE;
+//        if(mod != 0) totalPage++;
+	}
 }

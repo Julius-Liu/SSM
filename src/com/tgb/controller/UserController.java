@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tgb.model.User;
 import com.tgb.service.UserService;
+import org.apache.log4j.Logger;
 
 @Controller
 @RequestMapping("/user")
@@ -20,7 +21,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	/**
 	 * 获取所有用户列表
 	 * @param request
@@ -105,5 +106,19 @@ public class UserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("/valUser")
+	public String valUser(HttpServletRequest request, HttpServletResponse response) {
+		//String result = "{\"result\":\"error\"}";	
+		
+		String name = (String) request.getParameter("name");
+		String password = (String) request.getParameter("password");
+		
+		if(userService.validate(name, password)) {
+			return "/index";
+		} else {
+			return "/login";
+		}	
 	}
 }

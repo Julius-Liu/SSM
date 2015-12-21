@@ -27,7 +27,11 @@
 	</select>
 	
 	<select id="findAll" resultType="Book">
-		<!-- select user_id id,user_name userName,user_age age from t_user -->
+		select * from t_book
+	</select>
+	
+	<select id="CalculateTotalPageAndRecordNumber" parameterType="String" resultType="Book">
+		
 	</select>
 	
 </mapper>

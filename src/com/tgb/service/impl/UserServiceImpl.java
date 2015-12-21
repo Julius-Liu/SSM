@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tgb.mapper.UserMapper;
 import com.tgb.model.User;
 import com.tgb.service.UserService;
+import org.apache.log4j.Logger;
 
 @Service
 @Transactional  //此处不再进行创建SqlSession和提交事务，都已交由spring去管理了。
@@ -41,7 +42,12 @@ public class UserServiceImpl implements UserService {
 
 		return mapper.update(user);
 	}
-	
-	
 
+	public boolean validate(String name, String password) {
+		if("admin".equals(name) && "admin".equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
