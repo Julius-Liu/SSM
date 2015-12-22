@@ -16,7 +16,7 @@
     int  recordNumber =   (Integer)request.getAttribute("recordNumber");  //一共多少记录
     String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
     String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
-    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关键字 */
+    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字 */
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -175,24 +175,37 @@ function OutputToExcel() {
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书图片</span></div></td>
             <td width="10%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
-             <c:if test="${!empty bookList && !empty bookTypeList}">
-				<c:forEach items="${bookList}" var="book">
+             <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
+				<%-- <c:forEach items="${bookList}" var="book"> --%>
+				<%
+					int bookListSize = bookList.size();
+					System.out.println("BookList size = " + bookListSize);
+					int bookTypeListSize = bookTypeList.size();
+				    for(int i=0;i<bookListSize;i++) {
+            			//int currentIndex = startIndex + i + 1; // 当前记录的序号
+            			Book book = bookList.get(i); // 获取到Book对象
+
+				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.barcode}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.bookName}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.getBookType().getBookTypeName()}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.price}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.count}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.publishDate}</span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">${book.publish}</span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBarcode() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBookName() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBookTypeName() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPrice() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getCount() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublishDate() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublish() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><img src="<%=basePath%>${book.bookPhoto}" width="50px" height="50px" /></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4"></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
+		            <span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>类别&nbsp; &nbsp;</a></span>
+            		<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+		            </div></td>
 		          </tr>
-          		</c:forEach>
-          	</c:if>
+		          <% } %>
+          		<%-- </c:forEach> --%>
+          	<%-- </c:if> --%>
         </table></td>
         <td width="8" background="images/tab_15.gif">&nbsp;</td>
       </tr>

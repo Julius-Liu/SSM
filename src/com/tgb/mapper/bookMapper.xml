@@ -30,6 +30,10 @@
 		select * from t_book
 	</select>
 	
+	<select id="findAllBookWithBookTypeName" resultType="Book">
+		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto from t_book inner join t_booktype on bookType=bookTypeId
+	</select>
+		
 	<select id="CalculateTotalPageAndRecordNumber" parameterType="String" resultType="Book">
 		
 	</select>

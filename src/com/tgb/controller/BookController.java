@@ -56,7 +56,9 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/toAddBook")
-	public String toAddBook(HttpServletRequest request) {		
+	public String toAddBook(HttpServletRequest request) {	
+		List<BookType> bookTypeList = bookTypeService.findAll();
+		request.setAttribute("bookTypeList", bookTypeList);
 		return "/Book/Book_add";
 	}
 	
@@ -80,9 +82,9 @@ public class BookController {
 	 */
 	@RequestMapping("/getAllBook")
 	public String getAllUser(HttpServletRequest request) {		
-		List<Book> bookList = bookService.findAll();	
+		List<Book> bookList = bookService.findAllBookWithBookTypeName();
 		List<BookType> bookTypeList = bookTypeService.findAll();
-
+		
 		request.setAttribute("bookList", bookList);
 		request.setAttribute("bookTypeList", bookTypeList);
 		request.setAttribute("currentPage", currentPage);

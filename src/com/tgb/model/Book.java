@@ -10,7 +10,7 @@ public class Book {
         this.barcode = barcode;
     }
 
-    /*ͼ�����*/
+    // 图书名称
     private String bookName;
     public String getBookName() {
         return bookName;
@@ -20,15 +20,23 @@ public class Book {
     }
 
     /*ͼ���������*/
-    private BookType bookType;
-    public BookType getBookType() {
+    private int bookType;
+    public int getBookType() {
         return bookType;
     }
-    public void setBookType(BookType bookType) {
+    public void setBookType(int bookType) {
         this.bookType = bookType;
     }
 
-    /*ͼ��۸�*/
+    private String bookTypeName;  
+    public String getBookTypeName() {
+		return bookTypeName;
+	}
+	public void setBookTypeName(String bookTypeName) {
+		this.bookTypeName = bookTypeName;
+	}
+
+	/*ͼ��۸�*/
     private float price;
     public float getPrice() {
         return price;

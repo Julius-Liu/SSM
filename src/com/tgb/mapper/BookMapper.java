@@ -10,6 +10,7 @@ public interface BookMapper {
 	boolean delete(int id);
 	Book findById(int id);
 	List<Book> findAll();
+	List<Book> findAllBookWithBookTypeName();
 	void CalculateTotalPageAndRecordNumber(String barcode, String bookName, 
 			BookType bookType, String publishDate);
 }

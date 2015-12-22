@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
-import com.tgb.model.User;
 import com.tgb.service.BookService;
 
 @Service
@@ -39,6 +38,11 @@ public class BookServiceImpl implements BookService{
 	public List<Book> findAll() {
 		List<Book> findAllList = bookMapper.findAll();
 		return findAllList;
+	}
+	
+	public List<Book> findAllBookWithBookTypeName() {
+		List<Book> bookListAd = bookMapper.findAllBookWithBookTypeName();
+		return bookListAd;
 	}
 	
 	public void CalculateTotalPageAndRecordNumber(String barcode, String bookName, 
