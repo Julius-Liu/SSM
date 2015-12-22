@@ -42,6 +42,10 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <welcome-file-list>
+<<<<<<< HEAD
     <welcome-file>login.jsp</welcome-file>
+=======
+    <welcome-file>index.jsp</welcome-file>
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
   </welcome-file-list>
 </web-app>

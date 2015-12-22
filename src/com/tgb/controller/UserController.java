@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tgb.model.User;
 import com.tgb.service.UserService;
+<<<<<<< HEAD
 import org.apache.log4j.Logger;
+=======
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 
 @Controller
 @RequestMapping("/user")
@@ -21,7 +24,11 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 	/**
 	 * 获取所有用户列表
 	 * @param request
@@ -107,6 +114,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping("/valUser")
 	public String valUser(HttpServletRequest request, HttpServletResponse response) {
@@ -121,4 +129,6 @@ public class UserController {
 			return "/login";
 		}	
 	}
+=======
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 }

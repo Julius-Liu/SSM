@@ -12,9 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tgb.model.Book;
+<<<<<<< HEAD
 import com.tgb.model.BookType;
 import com.tgb.service.BookService;
 import com.tgb.service.BookTypeService;
+=======
+import com.tgb.service.BookService;
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 
 @Controller
 @RequestMapping("/book")
@@ -22,6 +26,7 @@ public class BookController {
 	
 	@Autowired
 	private BookService bookService;
+<<<<<<< HEAD
 	@Autowired
 	private BookTypeService bookTypeService;
 	
@@ -48,6 +53,8 @@ public class BookController {
     public int getRecordNumber() {
         return recordNumber;
     }
+=======
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 	
 	/**
 	 * 跳转到添加用户界面
@@ -79,12 +86,17 @@ public class BookController {
 	 */
 	@RequestMapping("/getAllBook")
 	public String getAllUser(HttpServletRequest request) {		
+<<<<<<< HEAD
 		List<Book> bookList = bookService.findAll();	
 		List<BookType> bookTypeList = bookTypeService.findAll();
 
 		request.setAttribute("bookList", bookList);
 		request.setAttribute("bookTypeList", bookTypeList);
 		request.setAttribute("currentPage", currentPage);
+=======
+		List<Book> findAll = bookService.findAll();		
+		request.setAttribute("bookList", findAll);
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 		return "/Book/Book_all";
 	}
 	

@@ -30,7 +30,11 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 这里的配置
 			我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+<<<<<<< HEAD
 		<!-- <property name="prefix" value="/WEB-INF/jsp/" /> -->
+=======
+		<property name="prefix" value="/WEB-INF/jsp/" />
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>

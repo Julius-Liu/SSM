@@ -1,7 +1,11 @@
 package com.tgb.model;
 
 public class Book {
+<<<<<<< HEAD
     
+=======
+    /*ͼ��������*/
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
     private String barcode;
     public String getBarcode() {
         return barcode;

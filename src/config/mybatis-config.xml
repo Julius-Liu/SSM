@@ -6,6 +6,10 @@
 	<!-- 实体类,简称 -设置别名 -->
 	<typeAliases>
 		<typeAlias alias="User" type="com.tgb.model.User" />
+<<<<<<< HEAD
+=======
+		<typeAlias alias="Admin" type="com.tgb.model.Admin" />
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 		<typeAlias alias="Book" type="com.tgb.model.Book" />		
 		<typeAlias alias="BookType" type="com.tgb.model.BookType" />
 		<typeAlias alias="Reader" type="com.tgb.model.Reader" />
@@ -20,6 +24,10 @@
 	-->
 	<mappers>
 		<mapper resource="com/tgb/mapper/userMapper.xml" />
+<<<<<<< HEAD
+=======
+		<mapper resource="com/tgb/mapper/adminMapper.xml" />
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 		<mapper resource="com/tgb/mapper/bookMapper.xml" />
 		<mapper resource="com/tgb/mapper/bookTypeMapper.xml" />
 		<mapper resource="com/tgb/mapper/readerMapper.xml" />

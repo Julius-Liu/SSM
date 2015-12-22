@@ -4,11 +4,16 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< HEAD
 
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
 import com.tgb.model.User;
+=======
+import com.tgb.mapper.BookMapper;
+import com.tgb.model.Book;
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 import com.tgb.service.BookService;
 
 @Service
@@ -37,6 +42,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	public List<Book> findAll() {
+<<<<<<< HEAD
 		List<Book> findAllList = bookMapper.findAll();
 		return findAllList;
 	}
@@ -55,4 +61,11 @@ public class BookServiceImpl implements BookService{
 //        totalPage = recordNumber / this.PAGE_SIZE;
 //        if(mod != 0) totalPage++;
 	}
+=======
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+>>>>>>> af17460962b1e93bb1c45c599f87e54ebfe6a2d6
 }
