@@ -149,6 +149,16 @@ function OutputToExcel() {
   <td>
 图书条形码:<input type=text name="barcode" value=" " />&nbsp;
 图书名称:<input type=text name="bookName" value=" " />&nbsp;
+图书所在类别：<select name="bookType.bookTypeId">
+ 				<option value="0">不限制</option>
+ 				<%
+ 					for(BookType bookTypeTemp:bookTypeList) {
+ 			   %>
+ 			   <option value="<%=bookTypeTemp.getBookTypeId() %>"><%=bookTypeTemp.getBookTypeName() %></option>
+ 			   <%
+ 					}
+ 				%>
+ 			</select>&nbsp;
 出版日期:<input type=text readonly  name="publishDate" value=" " onclick="setDay(this);"/>&nbsp;
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryBook();"  />

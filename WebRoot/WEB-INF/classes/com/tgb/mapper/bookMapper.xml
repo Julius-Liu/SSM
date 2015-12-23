@@ -30,11 +30,28 @@
 		select * from t_book
 	</select>
 	
-	<select id="findAllBookWithBookTypeName" resultType="Book">
-		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto from t_book inner join t_booktype on bookType=bookTypeId
+	<select id="findAllAd" resultType="Book">
+		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto 
+		from t_book inner join t_booktype on bookType=bookTypeId
 	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="String" resultType="Book">
+		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto 
+		from t_book inner join t_booktype on bookType=bookTypeId where barcode like '%" + #{barcode} + "%'
 		
-	<select id="CalculateTotalPageAndRecordNumber" parameterType="String" resultType="Book">
+		String sqlAdd = "";
+        if(!barcode.equals("")) {
+        	sqlAdd = sqlAdd + " and book.barcode like '%" + barcode + "%'";
+        }
+        if(!bookName.equals("")) {
+        	sqlAdd = sqlAdd + " and book.bookName like '%" + bookName + "%'";
+        }
+        if(0 != bookType ) {
+        	sqlAdd += " and book.bookType=" + bookType;
+        }
+        if(!publishDate.equals("")) {
+        	sqlAdd = sqlAdd + " and book.publishDate like '%" + publishDate + "%'";
+        }
 		
 	</select>
 	

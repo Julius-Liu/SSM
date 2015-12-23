@@ -9,5 +9,5 @@ public interface BookService {
 	boolean delete(int id);
 	Book findById(int id);
 	List<Book> findAll();
-	List<Book> findAllBookWithBookTypeName();
+	List<Book> findAllAd();
 }

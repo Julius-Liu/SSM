@@ -72,7 +72,7 @@ public class BookController {
 	public String addBook(Book book, HttpServletRequest request) {
 		System.out.println("添加图书");
 		bookService.save(book);
-		return "redirect:/Book/getAllBook";
+		return "redirect:getAllBook";
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class BookController {
 	 */
 	@RequestMapping("/getAllBook")
 	public String getAllUser(HttpServletRequest request) {		
-		List<Book> bookList = bookService.findAllBookWithBookTypeName();
+		List<Book> bookList = bookService.findAllAd();
 		List<BookType> bookTypeList = bookTypeService.findAll();
 		
 		request.setAttribute("bookList", bookList);

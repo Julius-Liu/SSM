@@ -40,18 +40,15 @@ public class BookServiceImpl implements BookService{
 		return findAllList;
 	}
 	
-	public List<Book> findAllBookWithBookTypeName() {
-		List<Book> bookListAd = bookMapper.findAllBookWithBookTypeName();
+	public List<Book> findAllAd() {
+		List<Book> bookListAd = bookMapper.findAllAd();
 		return bookListAd;
 	}
 	
-	public void CalculateTotalPageAndRecordNumber(String barcode, String bookName, 
-			BookType bookType, String publishDate) {
-        String hql = "From Book book where 1=1";
-        if(!barcode.equals("")) hql = hql + " and book.barcode like '%" + barcode + "%'";
-        if(!bookName.equals("")) hql = hql + " and book.bookName like '%" + bookName + "%'";
-        if(null != bookType && bookType.getBookTypeId()!=0) hql += " and book.bookType.bookTypeId=" + bookType.getBookTypeId();
-        if(!publishDate.equals("")) hql = hql + " and book.publishDate like '%" + publishDate + "%'";
+	public void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
+			int bookType, String publishDate) {
+        List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+        
 //        Query q = s.createQuery(hql);
 //        List bookList = q.list();
 //        recordNumber = bookList.size();

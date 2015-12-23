@@ -26,7 +26,7 @@
 .errorMessage {font-weight:bold; color:red; }
 </STYLE>
 
-<script src="<%=basePath %>calendar.js"></script>
+<script src="<%=basePath %>js/calendar.js"></script>
 <script type="text/javascript">
 
 	/*验证表单*/
