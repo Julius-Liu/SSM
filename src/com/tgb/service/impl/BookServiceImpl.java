@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.tgb.mapper.BookMapper;
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
@@ -16,6 +17,8 @@ public class BookServiceImpl implements BookService{
 	@Resource
 	private BookMapper bookMapper;
 
+	private int PAGE_SIZE = 10;
+	
 	public void save(Book book) {
 		bookMapper.save(book);		
 	}
@@ -41,6 +44,7 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	public List<Book> findAllAd() {
+		PageHelper.startPage(1, 10);
 		List<Book> bookListAd = bookMapper.findAllAd();
 		return bookListAd;
 	}
@@ -48,6 +52,12 @@ public class BookServiceImpl implements BookService{
 	public void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
 			int bookType, String publishDate) {
         List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+        int recordNumber = bookList.size();
+        int mod = recordNumber % this.PAGE_SIZE;
+        int totalPage = recordNumber / this.PAGE_SIZE;
+        if(mod != 0) {
+        	totalPage++;
+        }
         
 //        Query q = s.createQuery(hql);
 //        List bookList = q.list();

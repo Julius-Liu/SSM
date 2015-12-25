@@ -26,6 +26,8 @@ public class BookController {
 	@Autowired
 	private BookTypeService bookTypeService;
 	
+	private int PAGE_SIZE = 10;
+	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
@@ -81,13 +83,51 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/getAllBook")
-	public String getAllUser(HttpServletRequest request) {		
+	public String getAllBook(HttpServletRequest request) {		
 		List<Book> bookList = bookService.findAllAd();
 		List<BookType> bookTypeList = bookTypeService.findAll();
 		
+		recordNumber = bookList.size();
+        int mod = recordNumber % this.PAGE_SIZE;
+        totalPage = recordNumber / this.PAGE_SIZE;
+        if(mod != 0) {
+        	totalPage++;
+        }
+        
 		request.setAttribute("bookList", bookList);
 		request.setAttribute("bookTypeList", bookTypeList);
+		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPage", totalPage);
+		return "/Book/Book_all";
+	}
+	
+	/**
+	 * 获取所有图书列表
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/queryBook")
+	public String queryBook(String barcode, String bookName, String publishDate, HttpServletRequest request) {
+		System.out.println("barcode: " + barcode);
+		System.out.println("bookName: " + bookName);
+		//System.out.println("bookType: " + bookType);
+		System.out.println("publishDate: " + publishDate);
+//		List<Book> bookList = bookService.findAllAd();
+//		List<BookType> bookTypeList = bookTypeService.findAll();
+//		
+//		recordNumber = bookList.size();
+//        int mod = recordNumber % this.PAGE_SIZE;
+//        totalPage = recordNumber / this.PAGE_SIZE;
+//        if(mod != 0) {
+//        	totalPage++;
+//        }
+//        
+//		request.setAttribute("bookList", bookList);
+//		request.setAttribute("bookTypeList", bookTypeList);
+//		request.setAttribute("recordNumber", recordNumber);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPage", totalPage);
 		return "/Book/Book_all";
 	}
 	

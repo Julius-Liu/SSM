@@ -12,11 +12,12 @@
     //BookType bookType = (BookType)request.getAttribute("bookType");
 
     int currentPage =  (Integer)request.getAttribute("currentPage"); //当前页
-/*     int totalPage =   (Integer)request.getAttribute("totalPage");  //一共多少页
+    int totalPage =   (Integer)request.getAttribute("totalPage");  //一共多少页
     int  recordNumber =   (Integer)request.getAttribute("recordNumber");  //一共多少记录
     String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
     String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
-    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字 */
+    //int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
+    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -46,7 +47,7 @@ body {
 </style>
 
 <script type="text/javascript" src="<%=basePath %>js/calendar.js"></script>
-<script>
+<script type="text/javascript">
 var  highlightcolor='#c1ebff';
 //此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
 var  clickcolor='#51b2f6';
@@ -86,12 +87,17 @@ function  changeback() {
 }
 
 /*跳转到查询结果的某页*/
-function GoToPage(currentPage,totalPage) {
-    if(currentPage==0) return;
-    if(currentPage>totalPage) return;
-    document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>/Book/Book_QueryBook.action";
-    document.forms[0].submit();
+function GoToPage(currentPage, totalPage) {
+    if(currentPage == 0) {
+    	return;
+    }
+    if(currentPage > totalPage) {
+    	return;
+    }
+<%--     document.forms[0].currentPage.value = currentPage;
+    document.forms[0].action = "<%=basePath %>/book/queryBook";
+    document.forms[0].submit(); --%>
+    $.get("<%=basePath%>book/queryBook?barcode=<%=barcode%>");
 }
 
 function changepage(totalPage)
@@ -223,7 +229,29 @@ function OutputToExcel() {
   </tr>
 
   <tr>
-
+    <td height="35" background="<%=basePath %>images/tab_19.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="12" height="35"><img src="<%=basePath %>images/tab_18.gif" width="12" height="35" /></td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td class="STYLE4">&nbsp;&nbsp;共有<%=recordNumber %>条记录，当前第 <%=currentPage %>/<%=totalPage %> 页&nbsp;&nbsp;<span style="color:red;text-decoration:underline;cursor:hand" onclick="OutputToExcel();">导出当前记录到excel</span></td>
+            <td><table border="0" align="right" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="40"><img src="<%=basePath %>images/first.gif" width="37" height="15" style="cursor:hand;" onclick="GoToPage(1,<%=totalPage %>);" /></td>
+                  <td width="45"><img src="<%=basePath %>images/back.gif" width="43" height="15" style="cursor:hand;" onclick="GoToPage(<%=currentPage-1 %>,<%=totalPage %>);"/></td>
+                  <td width="45"><img src="<%=basePath %>images/next.gif" width="43" height="15" style="cursor:hand;" onclick="GoToPage(<%=currentPage+1 %>,<%=totalPage %>);" /></td>
+                  <td width="40"><img src="<%=basePath %>images/last.gif" width="37" height="15" style="cursor:hand;" onclick="GoToPage(<%=totalPage %>,<%=totalPage %>);"/></td>
+                  <td width="100"><div align="center"><span class="STYLE1">转到第
+                    <input name="pageValue" type="text" size="4" style="height:12px; width:20px; border:1px solid #999999;" />
+                    页 </span></div></td>
+                  <td width="40"><img src="<%=basePath %>images/go.gif" onclick="changepage(<%=totalPage %>);" width="37" height="15" /></td>
+                </tr>
+            </table></td>
+          </tr>
+        </table></td>
+        <td width="16"><img src="<%=basePath %>images/tab_20.gif" width="16" height="35" /></td>
+      </tr>
+    </table></td>
   </tr>
 </table>
 </form>
