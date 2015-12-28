@@ -15,16 +15,22 @@
  * 默认返回的日期时间格式如同：2005-02-02 08:08
  */
 //------------------ 样式定义 ---------------------------//
+
 //功能按钮同样样式
 var s_tiannet_turn_base = "height:16px;font-size:9pt;color:white;border:0 solid #CCCCCC;cursor:hand;background-color:#2650A6;";
+
 //翻年、月等的按钮
 var s_tiannet_turn = "width:28px;" + s_tiannet_turn_base;
+
 //关闭、清空等按钮样式
 var s_tiannet_turn2 = "width:22px;" + s_tiannet_turn_base;
+
 //年选择下拉框
 var s_tiannet_select = "width:64px;display:none;";
+
 //月、时、分选择下拉框
 var s_tiannet_select2 = "width:46px;display:none;";
+
 //日期选择控件体的样式
 var s_tiannet_body = "width:150;background-color:#2650A6;display:none;z-index:9998;position:absolute;" +
   "border-left:1 solid #CCCCCC;border-top:1 solid #CCCCCC;border-right:1 solid #999999;border-bottom:1 solid #999999;";
@@ -36,6 +42,7 @@ var s_tiannet_font = "color:#FFCC00;font-size:9pt;cursor:hand;";
 var s_tiannet_link = "text-decoration:none;font-size:9pt;color:#2650A6;";
 //横线
 var s_tiannet_line = "border-bottom:1 solid #6699CC";
+
 //------------------ 变量定义 ---------------------------//
 var tiannetYearSt = 1950;//可选择的开始年份
 var tiannetYearEnd = 2010;//可选择的结束年份
@@ -133,6 +140,7 @@ function setDefaultTime(strTime){
  tiannetHour = strTime.substring(0,2);
  tiannetMinute = strTime.substring(3,5);
 }
+
 // ---------------------- end 用户可调用的函数 -----------------------------//
 //------------------ begin 页面显示部分 ---------------------------//
 var weekName = new Array("日","一","二","三","四","五","六");
@@ -220,6 +228,7 @@ document.write('<td align="right" colspan="5"><a href="javascript:tiannetClear()
 document.write (' </tr>');
 document.write('</table>');
 document.write('</div>');
+
 //------------------ end 页面显示部分 ---------------------------//
 //------------------ 显示日期时间的span标签响应事件 ---------------------------//
 //单击年份span标签响应
@@ -399,6 +408,7 @@ function tiannetSetDay(yy,mm) {
  }//end for
  tiannetSetValue(false);//给文本框赋值，但不隐藏本控件
 }//end function tiannetSetDay
+
 //根据option的值选中option
 function checkSelect(objSelect,selectValue) {
  var count = parseInt(objSelect.length);
@@ -561,10 +571,9 @@ function tiannetHideObject(strTagName) {
    arrTiannetHide[arrTiannetHide.length] = obj;
    obj.style.visibility = "hidden";
   }
-  
-  
  }
 }
+
 //显示被隐藏的标签
 function tiannetShowObject(){
  for(var i = 0;i < arrTiannetHide.length;i ++){

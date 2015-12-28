@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
@@ -108,10 +109,15 @@ public class BookController {
 	 * @return
 	 */
 	@RequestMapping("/queryBook")
-	public String queryBook(String barcode, String bookName, String publishDate, HttpServletRequest request) {
+	public String queryBook(
+			@RequestParam(value="barcode", required=false) String barcode, 
+			@RequestParam(value="bookName", required=false)String bookName,
+			@RequestParam(value="bookType", required=false)int bookType,
+			@RequestParam(value="publishDate", required=false)String publishDate, 
+			HttpServletRequest request) {
 		System.out.println("barcode: " + barcode);
 		System.out.println("bookName: " + bookName);
-		//System.out.println("bookType: " + bookType);
+		System.out.println("bookType: " + bookType);
 		System.out.println("publishDate: " + publishDate);
 //		List<Book> bookList = bookService.findAllAd();
 //		List<BookType> bookTypeList = bookTypeService.findAll();

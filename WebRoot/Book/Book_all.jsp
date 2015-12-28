@@ -17,6 +17,7 @@
     String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
     String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
     //int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
+    int bookType = 1;
     String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字
         //String username=(String)session.getAttribute("username");
     //if(username==null){
@@ -94,10 +95,10 @@ function GoToPage(currentPage, totalPage) {
     if(currentPage > totalPage) {
     	return;
     }
-<%--     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>/book/queryBook";
-    document.forms[0].submit(); --%>
-    $.get("<%=basePath%>book/queryBook?barcode=<%=barcode%>");
+    document.forms[0].currentPage.value = currentPage;
+    document.forms[0].action = "<%=basePath %>/book/queryBook?barcode=<%=barcode%>";
+    document.forms[0].submit(); 
+    <%--$.get("<%=basePath%>book/queryBook?barcode=<%=barcode%>");--%>
 }
 
 function changepage(totalPage)
@@ -223,7 +224,7 @@ function OutputToExcel() {
           		<%-- </c:forEach> --%>
           	<%-- </c:if> --%>
         </table></td>
-        <td width="8" background="images/tab_15.gif">&nbsp;</td>
+        <td width="8" background="<%=basePath %>images/tab_15.gif">&nbsp;</td>
       </tr>
     </table></td>
   </tr>
