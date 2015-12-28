@@ -10,4 +10,6 @@ public interface BookService {
 	Book findById(int id);
 	List<Book> findAll();
 	List<Book> findAllAd();
+	void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
+			int bookType, String publishDate);
 }

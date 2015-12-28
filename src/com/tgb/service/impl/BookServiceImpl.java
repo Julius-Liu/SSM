@@ -44,7 +44,8 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	public List<Book> findAllAd() {
-		PageHelper.startPage(1, 10);
+		// 限制每页显示的个数
+		//PageHelper.startPage(1, 10);
 		List<Book> bookListAd = bookMapper.findAllAd();
 		return bookListAd;
 	}
