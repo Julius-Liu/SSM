@@ -156,9 +156,9 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>book/getAllBook" target="main">查看图书</a></li>
+          <li><a href="<%=basePath%>book/queryBook" target="main">查看图书</a></li>
           <li><a href="<%=basePath%>book/toAddBook" target="main">添加图书</a></li>
-          <li><a href="http://www.865171.cn" target="main">广告设置</a></li>
+          <li><a href="<%=basePath%>book/getAllBook" target="main">getAllBook</a></li>
           <li><a href="http://www.865171.cn" target="main">114增加</a></li>
           <li><a href="http://www.865171.cn" target="main">114管理</a></li>
           <li><a href="http://www.865171.cn" target="main">联系方式</a></li>

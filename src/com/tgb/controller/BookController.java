@@ -119,6 +119,17 @@ public class BookController {
 		System.out.println("bookName: " + bookName);
 		System.out.println("bookType: " + bookType);
 		System.out.println("publishDate: " + publishDate);
+		List<BookType> bookTypeList = bookTypeService.findAll();
+		List<Book> bookList = bookService.queryBookInfo(barcode, bookName, bookType, publishDate, currentPage);
+        /*计算总的页数和总的记录数*/
+        //bookDAO.CalculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		bookService.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		
+        /*获取到总的页码数目*/
+        totalPage = bookService.getTotalPage();
+        /*当前查询条件下总记录数*/
+        recordNumber = bookService.getRecordNumber();
+		
 //		List<Book> bookList = bookService.findAllAd();
 //		List<BookType> bookTypeList = bookTypeService.findAll();
 //		

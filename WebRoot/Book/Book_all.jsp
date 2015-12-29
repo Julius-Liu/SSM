@@ -17,7 +17,6 @@
     String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
     String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
     //int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
-    int bookType = 1;
     String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字
         //String username=(String)session.getAttribute("username");
     //if(username==null){
@@ -156,7 +155,7 @@ function OutputToExcel() {
   <td>
 图书条形码:<input type=text name="barcode" value=" " />&nbsp;
 图书名称:<input type=text name="bookName" value=" " />&nbsp;
-图书所在类别：<select name="bookType.bookTypeId">
+图书所在类别：<select name="bookType">
  				<option value="0">不限制</option>
  				<%
  					for(BookType bookTypeTemp:bookTypeList) {

@@ -26,9 +26,11 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3-sources.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3.jar" sourcepath="WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/SSM/WebRoot/WEB-INF/lib/mybatis/pagehelper-4.0.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/jsqlparser-0.9.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/jsqlparser-0.9.1-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sql/jsqlparser-0.9.1.jar"/>
