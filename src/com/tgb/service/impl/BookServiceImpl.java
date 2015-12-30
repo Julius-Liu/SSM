@@ -75,8 +75,10 @@ public class BookServiceImpl implements BookService{
 	
 	public List<Book> queryBookInfo(String barcode, String bookName, int bookType, 
 			String publishDate, int currentPage) {
+		
 		PageHelper.startPage(currentPage, 10);
 		List<Book> bookListAd = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		
 //		Session s = factory.getCurrentSession();
 //    	String hql = "From Book book where 1=1";
 //    	if(!barcode.equals("")) hql = hql + " and book.barcode like '%" + barcode + "%'";
@@ -89,6 +91,7 @@ public class BookServiceImpl implements BookService{
 //    	q.setFirstResult(startIndex);
 //    	q.setMaxResults(this.PAGE_SIZE);
 //    	List bookList = q.list();
+		
     	return bookListAd;
 	}
 	

@@ -39,16 +39,16 @@
 		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto 
 		from t_book inner join t_booktype on bookType=bookTypeId 
 		<where>
-			<if test="barcode != '' ">
+			<if test="barcode != null ">
 				barcode like CONCAT(CONCAT('%', #{barcode, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="bookName != '' ">
+			<if test="bookName != null ">
 				AND bookName like CONCAT(CONCAT('%', #{bookName, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="bookType != '' ">
+			<if test="bookType != 0 ">
 				AND bookType = #{bookType, jdbcType=INTEGER}
 			</if>
-			<if test="publishDate != '' ">
+			<if test="publishDate != null ">
 				AND publishDate like CONCAT(CONCAT('%', #{publishDate, jdbcType=VARCHAR}), '%')
 			</if>
 		</where>

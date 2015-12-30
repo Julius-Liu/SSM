@@ -110,7 +110,7 @@ public class BookController {
 	 */
 	@RequestMapping("/queryBook")
 	public String queryBook(
-			@RequestParam(value="barcode", required=false) String barcode, 
+			@RequestParam(value="barcode", required=false)String barcode, 
 			@RequestParam(value="bookName", required=false)String bookName,
 			@RequestParam(value="bookType", required=false)int bookType,
 			@RequestParam(value="publishDate", required=false)String publishDate, 
@@ -119,8 +119,11 @@ public class BookController {
 		System.out.println("bookName: " + bookName);
 		System.out.println("bookType: " + bookType);
 		System.out.println("publishDate: " + publishDate);
+		
 		List<BookType> bookTypeList = bookTypeService.findAll();
+		
 		List<Book> bookList = bookService.queryBookInfo(barcode, bookName, bookType, publishDate, currentPage);
+		
         /*计算总的页数和总的记录数*/
         //bookDAO.CalculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
 		bookService.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
@@ -140,9 +143,9 @@ public class BookController {
 //        	totalPage++;
 //        }
 //        
-//		request.setAttribute("bookList", bookList);
-//		request.setAttribute("bookTypeList", bookTypeList);
-//		request.setAttribute("recordNumber", recordNumber);
+		request.setAttribute("bookList", bookList);
+		request.setAttribute("bookTypeList", bookTypeList);
+		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
 		return "/Book/Book_all";

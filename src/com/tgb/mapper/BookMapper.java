@@ -1,6 +1,9 @@
 package com.tgb.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
 
@@ -11,6 +14,9 @@ public interface BookMapper {
 	Book findById(int id);
 	List<Book> findAll();
 	List<Book> findAllAd();
-	List<Book> calculateTotalPageAndRecordNumber(String barcode, String bookName, 
-			int bookType, String publishDate);
+	List<Book> calculateTotalPageAndRecordNumber(
+			@Param("barcode")String barcode, 
+			@Param("bookName")String bookName, 
+			@Param("bookType")int bookType, 
+			@Param("publishDate")String publishDate);
 }
