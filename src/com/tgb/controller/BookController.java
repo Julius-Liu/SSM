@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
+import com.tgb.model.User;
 import com.tgb.service.BookService;
 import com.tgb.service.BookTypeService;
 
@@ -73,9 +74,26 @@ public class BookController {
 	 */
 	@RequestMapping("/addBook")
 	public String addBook(Book book, HttpServletRequest request) {
-		System.out.println("添加图书");
+		//System.out.println("添加图书");
 		bookService.save(book);
-		return "redirect:getAllBook";
+		return "redirect:queryBook?bookType=0&currentPage=1";
+	}
+	
+	/**
+	 *编辑用户
+	 * @param user
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/updateBook")
+	public String updateBook(Book book, HttpServletRequest request) {	
+		if(bookService.update(book)) {
+			user = userService.findById(user.getId());
+			request.setAttribute("user", user);
+			return "redirect:/user/getAllUser";
+		}else {
+			return "/error";
+		}
 	}
 	
 	/**
@@ -114,11 +132,13 @@ public class BookController {
 			@RequestParam(value="bookName", required=false)String bookName,
 			@RequestParam(value="bookType", required=false)int bookType,
 			@RequestParam(value="publishDate", required=false)String publishDate, 
+			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
 		System.out.println("barcode: " + barcode);
 		System.out.println("bookName: " + bookName);
 		System.out.println("bookType: " + bookType);
 		System.out.println("publishDate: " + publishDate);
+		System.out.println("currentPage: " + currentPage);
 		
 		List<BookType> bookTypeList = bookTypeService.findAll();
 		
@@ -143,6 +163,9 @@ public class BookController {
 //        	totalPage++;
 //        }
 //        
+        request.setAttribute("barcode", barcode);
+        request.setAttribute("bookName", bookName);
+        request.setAttribute("bookType", bookType);
 		request.setAttribute("bookList", bookList);
 		request.setAttribute("bookTypeList", bookTypeList);
 		request.setAttribute("recordNumber", recordNumber);

@@ -29,7 +29,8 @@ public class BookServiceImpl implements BookService{
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-
+	
+	private int recordNumber;
 	public int getRecordNumber() {
 		return recordNumber;
 	}
@@ -37,8 +38,6 @@ public class BookServiceImpl implements BookService{
 	public void setRecordNumber(int recordNumber) {
 		this.recordNumber = recordNumber;
 	}
-
-	private int recordNumber;
 	
 	private int PAGE_SIZE = 10;
 	
@@ -98,9 +97,9 @@ public class BookServiceImpl implements BookService{
 	public void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
 			int bookType, String publishDate) {
         List<Book> bookList = bookMapper.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
-        int recordNumber = bookList.size();
+        recordNumber = bookList.size();
         int mod = recordNumber % this.PAGE_SIZE;
-        int totalPage = recordNumber / this.PAGE_SIZE;
+        totalPage = recordNumber / this.PAGE_SIZE;
         if(mod != 0) {
         	totalPage++;
         }

@@ -156,7 +156,7 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>book/queryBook?bookType=0" target="main">查看图书</a></li>
+          <li><a href="<%=basePath%>book/queryBook?bookType=0&currentPage=1" target="main">查看图书</a></li>
           <li><a href="<%=basePath%>book/toAddBook" target="main">添加图书</a></li>
           <li><a href="<%=basePath%>book/getAllBook" target="main">getAllBook</a></li>
           <li><a href="http://www.865171.cn" target="main">114增加</a></li>

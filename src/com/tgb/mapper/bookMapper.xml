@@ -32,26 +32,27 @@
 	
 	<select id="findAllAd" resultType="Book">
 		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto 
-		from t_book inner join t_booktype on bookType=bookTypeId
+		from t_book inner join t_booktype on bookType=bookTypeId order by barcode asc
 	</select>
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.Book" resultType="Book">
 		select barcode, bookName, bookTypeName, price, count, publishDate, publish, bookPhoto 
-		from t_book inner join t_booktype on bookType=bookTypeId 
+		from t_book inner join t_booktype on bookType=bookTypeId
 		<where>
-			<if test="barcode != null ">
+			<if test="barcode != null and barcode != '' ">
 				barcode like CONCAT(CONCAT('%', #{barcode, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="bookName != null ">
+			<if test="bookName != null and bookName != '' ">
 				AND bookName like CONCAT(CONCAT('%', #{bookName, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="bookType != 0 ">
 				AND bookType = #{bookType, jdbcType=INTEGER}
 			</if>
-			<if test="publishDate != null ">
+			<if test="publishDate != null and publishDate != '' ">
 				AND publishDate like CONCAT(CONCAT('%', #{publishDate, jdbcType=VARCHAR}), '%')
 			</if>
 		</where>
+		order by barcode asc
 	</select>
 	
 </mapper>

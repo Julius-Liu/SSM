@@ -13,11 +13,11 @@
 
     int currentPage =  (Integer)request.getAttribute("currentPage"); //当前页
     int totalPage =   (Integer)request.getAttribute("totalPage");  //一共多少页
-    int  recordNumber =   (Integer)request.getAttribute("recordNumber");  //一共多少记录
+    int recordNumber =   (Integer)request.getAttribute("recordNumber");  //一共多少记录
     String barcode = (String)request.getAttribute("barcode"); //图书条形码查询关键字
     String bookName = (String)request.getAttribute("bookName"); //图书名称查询关键字
-    //int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
-    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关S键字
+    int bookType = (Integer)request.getAttribute("bookType"); // 图书类型
+    String publishDate = (String)request.getAttribute("publishDate"); //出版日期查询关键字
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -51,7 +51,7 @@ body {
 var  highlightcolor='#c1ebff';
 //此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
 var  clickcolor='#51b2f6';
-function  changeto(){
+function changeto(){
 	source=event.srcElement;
 	if  (source.tagName=="TR"||source.tagName=="TABLE") {
 		return;
@@ -68,13 +68,13 @@ function  changeto(){
 		}
 	}
 	else {
-		for(i=0;i<cs.length;i++){
+		for(i=0;i<cs.length;i++) {
 		    cs[i].style.backgroundColor="";
 		}
 	}
 }
 
-function  changeback() {
+function changeback() {
 	if (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc") {
 		return
 	}
@@ -94,10 +94,11 @@ function GoToPage(currentPage, totalPage) {
     if(currentPage > totalPage) {
     	return;
     }
+    //alert("barcode: " + <%=barcode%>);
     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>/book/queryBook?barcode=<%=barcode%>";
+    //document.forms[0].barcode.value = barcode;
+    document.forms[0].action = "<%=basePath %>book/queryBook";
     document.forms[0].submit(); 
-    <%--$.get("<%=basePath%>book/queryBook?barcode=<%=barcode%>");--%>
 }
 
 function changepage(totalPage)
@@ -108,12 +109,12 @@ function changepage(totalPage)
         return ;
     }
     document.bookQueryForm.currentPage.value = pageValue;
-    document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBookaction";
+    document.forms["bookQueryForm"].action = "<%=basePath %>book/queryBook";
     document.bookQueryForm.submit();
 }
 
 function QueryBook() {
-	document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBook.action";
+	document.forms["bookQueryForm"].action = "<%=basePath %>book/queryBook";
 	document.forms["bookQueryForm"].submit();
 }
 
@@ -126,7 +127,7 @@ function OutputToExcel() {
 </head>
 
 <body>
-<form action="<%=basePath %>/Book/Book_QueryBook.action" name="bookQueryForm" method="post">
+<form action="<%=basePath %>book/queryBook" name="bookQueryForm" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="30" background="<%=basePath %>images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -153,8 +154,8 @@ function OutputToExcel() {
 
   <tr>
   <td>
-图书条形码:<input type=text name="barcode" value=" " />&nbsp;
-图书名称:<input type=text name="bookName" value=" " />&nbsp;
+图书条形码:<input type=text name="barcode"/>&nbsp;
+图书名称:<input type=text name="bookName"/>&nbsp;
 图书所在类别：<select name="bookType">
  				<option value="0">不限制</option>
  				<%
@@ -165,7 +166,7 @@ function OutputToExcel() {
  					}
  				%>
  			</select>&nbsp;
-出版日期:<input type=text readonly  name="publishDate" value=" " onclick="setDay(this);"/>&nbsp;
+出版日期:<input type=text readonly  name="publishDate" onclick="setDay(this);"/>&nbsp;
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryBook();"  />
   </td>
@@ -195,16 +196,17 @@ function OutputToExcel() {
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
 				<%
 					int bookListSize = bookList.size();
+					int startIndex = (currentPage -1) *10;
 					System.out.println("BookList size = " + bookListSize);
 					int bookTypeListSize = bookTypeList.size();
 				    for(int i=0;i<bookListSize;i++) {
-            			//int currentIndex = startIndex + i + 1; // 当前记录的序号
+            			int currentIndex = startIndex + i + 1; // 当前记录的序号
             			Book book = bookList.get(i); // 获取到Book对象
 
 				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-		              <div align="center"></div>
+		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBarcode() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getBookName() %></span></div></td>
@@ -215,7 +217,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublish() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><img src="<%=basePath%>${book.bookPhoto}" width="50px" height="50px" /></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            <span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>类别&nbsp; &nbsp;</a></span>
+		            <span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>类别</a></span>&nbsp; &nbsp;
             		<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
