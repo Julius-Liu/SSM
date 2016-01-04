@@ -80,7 +80,7 @@ public class BookController {
 	}
 	
 	/**
-	 *编辑用户
+	 * 编辑图书
 	 * @param user
 	 * @param request
 	 * @return
@@ -88,9 +88,9 @@ public class BookController {
 	@RequestMapping("/updateBook")
 	public String updateBook(Book book, HttpServletRequest request) {	
 		if(bookService.update(book)) {
-			user = userService.findById(user.getId());
-			request.setAttribute("user", user);
-			return "redirect:/user/getAllUser";
+			book = bookService.findByBarcode(book.getBarcode());
+			request.setAttribute("book", book);
+			return "redirect:queryBook?bookType=0&currentPage=1";
 		}else {
 			return "/error";
 		}

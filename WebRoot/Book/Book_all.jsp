@@ -94,10 +94,9 @@ function GoToPage(currentPage, totalPage) {
     if(currentPage > totalPage) {
     	return;
     }
-    //alert("barcode: " + <%=barcode%>);
     document.forms[0].currentPage.value = currentPage;
-    //document.forms[0].barcode.value = barcode;
-    document.forms[0].action = "<%=basePath %>book/queryBook";
+    //document.forms[0].action = "<%=basePath %>book/queryBook?barcode=<%=barcode%>&bookName=<%=bookName%>&bookType=<%=bookType%>&publishDate=<%=publishDate%>";
+    document.forms[0].action = "<%=basePath %>book/queryBook?bookType=<%=bookType%>";
     document.forms[0].submit(); 
 }
 
@@ -113,11 +112,13 @@ function changepage(totalPage)
     document.bookQueryForm.submit();
 }
 
+/* 查询图书按钮 */
 function QueryBook() {
 	document.forms["bookQueryForm"].action = "<%=basePath %>book/queryBook";
 	document.forms["bookQueryForm"].submit();
 }
 
+/* 导出当前记录到Excel */
 function OutputToExcel() {
 	document.forms["bookQueryForm"].action = "<%=basePath %>/Book/Book_QueryBookOutputToExcel.action";
 	document.forms["bookQueryForm"].submit(); 
@@ -154,8 +155,8 @@ function OutputToExcel() {
 
   <tr>
   <td>
-图书条形码:<input type=text name="barcode"/>&nbsp;
-图书名称:<input type=text name="bookName"/>&nbsp;
+图书条形码:<input type=text name="barcode" />&nbsp;
+图书名称:<input type=text name="bookName" />&nbsp;
 图书所在类别：<select name="bookType">
  				<option value="0">不限制</option>
  				<%
@@ -166,7 +167,7 @@ function OutputToExcel() {
  					}
  				%>
  			</select>&nbsp;
-出版日期:<input type=text readonly  name="publishDate" onclick="setDay(this);"/>&nbsp;
+出版日期:<input type=text readonly name="publishDate" onclick="setDay(this);"/>&nbsp;
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryBook();"  />
   </td>
@@ -202,7 +203,6 @@ function OutputToExcel() {
 				    for(int i=0;i<bookListSize;i++) {
             			int currentIndex = startIndex + i + 1; // 当前记录的序号
             			Book book = bookList.get(i); // 获取到Book对象
-
 				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
@@ -217,7 +217,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublish() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><img src="<%=basePath%>${book.bookPhoto}" width="50px" height="50px" /></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            <span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>类别</a></span>&nbsp; &nbsp;
+		            <span style="cursor:hand;" onclick="location.href='<%=basePath %>book/updateBook?barcode=<%=book.getBarcode() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
             		<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>

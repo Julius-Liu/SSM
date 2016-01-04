@@ -14,7 +14,7 @@
 	</insert>
 	
 	<update id="update" parameterType="Book">
-		<!-- update t_user set user_name=#{userName},user_age=#{age} where user_id=#{id} -->
+		update t_book set user_name=#{userName},user_age=#{age} where user_id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="int">

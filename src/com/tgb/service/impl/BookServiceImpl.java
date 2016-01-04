@@ -45,9 +45,8 @@ public class BookServiceImpl implements BookService{
 		bookMapper.save(book);		
 	}
 
-	public boolean update(Book user) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Book book) {
+		return bookMapper.update(book);
 	}
 
 	public boolean delete(int id) {
@@ -55,7 +54,7 @@ public class BookServiceImpl implements BookService{
 		return false;
 	}
 
-	public Book findById(int id) {
+	public Book findByBarcode(String barcode) {
 		// TODO Auto-generated method stub
 		return null;
 	}
