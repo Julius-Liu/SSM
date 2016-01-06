@@ -89,7 +89,7 @@ public class BookController {
 		if(bookService.update(book)) {
 			book = bookService.findByBarcode(book.getBarcode());
 			request.setAttribute("book", book);
-			return "redirect:queryBook?barcode=''&bookName=''&bookType=0&publishDate=''&currentPage=1";
+			return "redirect:queryBook?barcode=&bookName=&bookType=0&publishDate=&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -102,6 +102,9 @@ public class BookController {
 	 */
 	@RequestMapping("/getBook")
 	public String getBook(String barcode, HttpServletRequest request) {		
+		List<BookType> bookTypeList = bookTypeService.findAll();
+		
+		request.setAttribute("bookTypeList", bookTypeList);
 		request.setAttribute("book", bookService.findByBarcode(barcode));
 		return "/Book/Book_edit";
 	}

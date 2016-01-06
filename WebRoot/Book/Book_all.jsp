@@ -76,7 +76,7 @@ function changeto(){
 
 function changeback() {
 	if (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc") {
-		return
+		return;
 	}
 	if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor) {
 		//source.style.backgroundColor=originalcolor
@@ -226,7 +226,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=book.getPublish() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><img src="<%=basePath%>${book.bookPhoto}" width="50px" height="50px" /></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            <span style="cursor:hand;" onclick="location.href='<%=basePath %>book/updateBook?barcode=<%=book.getBarcode() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
+		            <span style="cursor:hand;" onclick="location.href='<%=basePath %>book/getBook?barcode=<%=book.getBarcode() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
             		<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>

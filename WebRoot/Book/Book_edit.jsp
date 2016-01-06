@@ -79,9 +79,9 @@
     	<td width=70%>
       	<select name="bookType">
       	<%
-        for(BookType bookType:bookTypeList) {
+        for(BookType bookTypeTemp:bookTypeList) {
       	%>
-          <option value='<%=bookType.getBookTypeId() %>'><%=bookType.getBookTypeName() %></option>
+          <option value='<%=bookTypeTemp.getBookTypeId() %>'><%=bookTypeTemp.getBookTypeName() %></option>
       	<%
         }
       	%>
@@ -110,12 +110,12 @@
 
   <tr>
     <td width=30%>图书简介:</td>
-    <td width=70%><textarea id="introduction" name="introduction" value="${book.introduction}" rows="6" cols="80"></textarea></td>
+    <td width=70%><textarea id="introduction" name="introduction" rows="6" cols="80">${book.introduction}</textarea></td>
   </tr>
 
   	<tr>
     	<td width=30%>图书图片:</td>
-    	<td width=70%><input id="bookPhoto" name="bookPhoto" value="${book.photo}" type="file" size="50" /></td>
+    	<td width=70%><input id="bookPhoto" name="bookPhoto" value="${book.bookPhoto}" type="file" size="50" /></td>
   	</tr>
 
   	<tr bgcolor='#FFFFFF'>
