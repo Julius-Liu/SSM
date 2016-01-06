@@ -14,7 +14,9 @@
 	</insert>
 	
 	<update id="update" parameterType="Book">
-		update t_book set user_name=#{userName},user_age=#{age} where user_id=#{id}
+		update t_book set bookName=#{bookName}, bookType=#{bookType}, price=#{price}, 
+		count=#{count}, publishDate=#{publishDate}, publish=#{publish}, introduction=#{introduction}, 
+		bookPhoto=#{bookPhoto} where barcode=#{barcode}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -24,6 +26,10 @@
 	 <!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->  
 	<select id="findById" parameterType="int" resultType="Book">
 		<!-- select user_id id,user_name userName,user_age age from t_user where user_id=#{id} -->
+	</select>
+	
+	<select id="findByBarcode" parameterType="String" resultType="Book">
+		select * from t_book where barcode=#{barcode}
 	</select>
 	
 	<select id="findAll" resultType="Book">

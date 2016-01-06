@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.Book;
 import com.tgb.model.BookType;
-import com.tgb.model.User;
 import com.tgb.service.BookService;
 import com.tgb.service.BookTypeService;
 
@@ -90,7 +89,7 @@ public class BookController {
 		if(bookService.update(book)) {
 			book = bookService.findByBarcode(book.getBarcode());
 			request.setAttribute("book", book);
-			return "redirect:queryBook?bookType=0&currentPage=1";
+			return "redirect:queryBook?barcode=''&bookName=''&bookType=0&publishDate=''&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -101,25 +100,13 @@ public class BookController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/getAllBook")
-	public String getAllBook(HttpServletRequest request) {		
-		List<Book> bookList = bookService.findAllAd();
-		List<BookType> bookTypeList = bookTypeService.findAll();
-		
-		recordNumber = bookList.size();
-        int mod = recordNumber % this.PAGE_SIZE;
-        totalPage = recordNumber / this.PAGE_SIZE;
-        if(mod != 0) {
-        	totalPage++;
-        }
-        
-		request.setAttribute("bookList", bookList);
-		request.setAttribute("bookTypeList", bookTypeList);
-		request.setAttribute("recordNumber", recordNumber);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("totalPage", totalPage);
-		return "/Book/Book_all";
+	@RequestMapping("/getBook")
+	public String getBook(String barcode, HttpServletRequest request) {		
+		request.setAttribute("book", bookService.findByBarcode(barcode));
+		return "/Book/Book_edit";
 	}
+	
+	
 	
 	/**
 	 * 获取所有图书列表

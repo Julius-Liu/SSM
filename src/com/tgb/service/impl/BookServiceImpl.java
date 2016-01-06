@@ -55,8 +55,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	public Book findByBarcode(String barcode) {
-		// TODO Auto-generated method stub
-		return null;
+		Book book = bookMapper.findByBarcode(barcode);
+		return book;
 	}
 
 	public List<Book> findAll() {

@@ -155,19 +155,28 @@ function OutputToExcel() {
 
   <tr>
   <td>
-图书条形码:<input type=text name="barcode" />&nbsp;
-图书名称:<input type=text name="bookName" />&nbsp;
+图书条形码:<input type=text name="barcode" value="<%=barcode%>" />&nbsp;
+图书名称:<input type=text name="bookName" value="<%=bookName%>"/>&nbsp;
 图书所在类别：<select name="bookType">
- 				<option value="0">不限制</option>
+				
+ 				<option value="0"
+ 					<c:if test="${bookType == 0}">selected</c:if>
+ 				>不限制</option>
+				
  				<%
+ 					
  					for(BookType bookTypeTemp:bookTypeList) {
  			   %>
- 			   <option value="<%=bookTypeTemp.getBookTypeId() %>"><%=bookTypeTemp.getBookTypeName() %></option>
+ 			   <option value="<%=bookTypeTemp.getBookTypeId() %>"
+ 			   		<c:if test="${bookType == bookTypeTemp.getBookTypeId()}">selected</c:if>
+ 			   ><%=bookTypeTemp.getBookTypeName() %></option>
  			   <%
  					}
+ 				
  				%>
+ 				
  			</select>&nbsp;
-出版日期:<input type=text readonly name="publishDate" onclick="setDay(this);"/>&nbsp;
+出版日期:<input type=text readonly name="publishDate" value="<%=publishDate%>" onclick="setDay(this);"/>&nbsp;
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryBook();"  />
   </td>
