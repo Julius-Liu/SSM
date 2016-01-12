@@ -156,6 +156,7 @@ public class BookController {
         request.setAttribute("barcode", barcode);
         request.setAttribute("bookName", bookName);
         request.setAttribute("bookType", bookType);
+        request.setAttribute("publishDate", publishDate);
 		request.setAttribute("bookList", bookList);
 		request.setAttribute("bookTypeList", bookTypeList);
 		request.setAttribute("recordNumber", recordNumber);
