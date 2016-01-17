@@ -12,19 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tgb.model.Book;
-import com.tgb.model.BookType;
-import com.tgb.service.BookService;
+import com.tgb.model.XuanTi;
+import com.tgb.model.XuanTiType;
+import com.tgb.model.GaoJianSource;
+import com.tgb.model.ChuShenComments;
+import com.tgb.model.XuanTiStatus;
+
+import com.tgb.service.XuanTiService;
 import com.tgb.service.BookTypeService;
 
 @Controller
-@RequestMapping("/book")
-public class BookController {	
+@RequestMapping("/xuan_ti")
+public class XuanTiController {
 	@Autowired
-	private BookService bookService;
-
-	@Autowired
-	private BookTypeService bookTypeService;
+	private XuanTiService xuanTiService;
+	
+	
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -55,9 +58,9 @@ public class BookController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/toAddBook")
-	public String toAddBook(HttpServletRequest request) {	
-		List<BookType> bookTypeList = bookTypeService.findAll();
+	@RequestMapping("/toAddXuanTi")
+	public String toAddXuanTi(HttpServletRequest request) {	
+		List<XuanTiType> XuanTiTypeList = xuanTiTypeService.findAll();
 		request.setAttribute("bookTypeList", bookTypeList);
 		return "/Book/Book_add";
 	}
@@ -160,6 +163,5 @@ public class BookController {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
 		return "/Book/Book_all";
-	}
-	
+	}	
 }

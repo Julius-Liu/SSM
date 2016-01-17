@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致	
+ -->
+ 
+<mapper namespace="com.tgb.mapper.XuanTiMapper">
+	
+	<insert id="save" parameterType="XuanTi">
+		insert into xuan_ti(id, 
+			type, 
+			year, 
+			season, 
+			book_name, 
+			sub_book_name, 
+			department, 
+			originator, 
+			source,
+			first_comments,
+			status,
+			ISBN) 
+		values(#{id},
+			#{type},
+			#{year},
+			#{season},
+			#{book_name},
+			#{sub_book_name},
+			#{department},
+			#{originator},
+			#{source},
+			#{first_comments},
+			#{status},
+			#{ISBN})
+	</insert>
+	
+	<update id="update" parameterType="XuanTi">
+		update xuan_ti set type=#{type}, 
+			year=#{year}, 
+			season=#{season}, 
+			book_name=#{book_name}, 
+			sub_book_name=#{sub_book_name}, 
+			department=#{department}, 
+			originator=#{originator}, 
+			source=#{source},
+			first_comments=#{first_comments},
+			status=#{status},
+			ISBN=#{ISBN} 
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from xuan_ti where id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="String" resultType="XuanTi">
+		select * from xuan_ti where id=#{id}
+	</select>
+	
+	<select id="findAll" resultType="XuanTi">
+		select xuan_ti.id, 
+			xuan_ti_type.content, 
+			year, 
+			season, 
+			book_name, 
+			sub_book_name, 
+			department, 
+			originator,
+			gao_jian_source.content,
+			chu_shen_comments.content,
+			xuan_ti_status.content,
+			ISBN 
+		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
+				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
+						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
+		order by id asc
+	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
+		select xuan_ti.id, 
+			xuan_ti_type.content, 
+			year, 
+			season, 
+			book_name, 
+			sub_book_name, 
+			department, 
+			originator,
+			gao_jian_source.content,
+			chu_shen_comments.content,
+			xuan_ti_status.content,
+			ISBN 
+		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
+				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
+						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
+		<where>
+			<if test="xuan_ti.id != null and xuan_ti.id != '' ">
+				xuan_ti.id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="type != 0">				
+				AND type = #{type, jdbcType=INTEGER}
+			</if>
+			<if test="year != null and year != '' ">
+				AND year like CONCAT(CONCAT('%', #{year, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="book_name != null and book_name != '' ">
+				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			</if>
+		</where>
+		order by id asc
+	</select>
+	
+</mapper>

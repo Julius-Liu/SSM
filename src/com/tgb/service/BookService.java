@@ -12,6 +12,7 @@ public interface BookService {
 	List<Book> findAllAd();
 	List<Book> queryBookInfo(String barcode, String bookName, int bookType, 
 			String publishDate, int currentPage);
+	
 	void calculateTotalPageAndRecordNumber(String barcode, String bookName, 
 			int bookType, String publishDate);
 	

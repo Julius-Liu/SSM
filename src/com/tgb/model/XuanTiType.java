@@ -1,0 +1,22 @@
+package com.tgb.model;
+
+/*
+ * 选题类型
+ */
+public class XuanTiType {
+	private int id;
+	private String content;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+}

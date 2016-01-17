@@ -18,6 +18,5 @@ import com.tgb.service.BookTypeService;
 @RequestMapping("/bookType")
 public class BookTypeController {
 	@Autowired
-	private BookTypeService bookTypeService;
-	
+	private BookTypeService bookTypeService;	
 }
