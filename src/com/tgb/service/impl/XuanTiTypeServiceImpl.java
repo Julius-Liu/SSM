@@ -4,21 +4,21 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.tgb.mapper.BookTypeMapper;
-import com.tgb.model.BookType;
-import com.tgb.service.BookTypeService;
+import com.tgb.mapper.XuanTiTypeMapper;
+import com.tgb.model.XuanTiType;
+import com.tgb.service.XuanTiTypeService;
 
 @Service
 @Transactional
 public class XuanTiTypeServiceImpl implements XuanTiTypeService{
 	@Resource
-	private BookTypeMapper bookTypeMapper;
+	private XuanTiTypeMapper xuanTiTypeMapper;
 
-	public void save(BookType bookType) {
-		bookTypeMapper.save(bookType);
+	public void save(XuanTiType xuanTiType) {
+		xuanTiTypeMapper.save(xuanTiType);
 	}
 
-	public boolean update(BookType bookType) {
+	public boolean update(XuanTiType xuanTiType) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -28,12 +28,12 @@ public class XuanTiTypeServiceImpl implements XuanTiTypeService{
 		return false;
 	}
 
-	public BookType findById(int id) {
+	public XuanTiType findById(int id) {
 		return null;
 	}
 
-	public List<BookType> findAll() {
-		List<BookType> bookTypeList = bookTypeMapper.findAll();
-		return bookTypeList;
+	public List<XuanTiType> findAll() {
+		List<XuanTiType> xuanTiTypeList = xuanTiTypeMapper.findAll();
+		return xuanTiTypeList;
 	}
 }

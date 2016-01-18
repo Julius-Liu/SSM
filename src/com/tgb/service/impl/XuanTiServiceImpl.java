@@ -63,6 +63,10 @@ public class XuanTiServiceImpl implements XuanTiService{
 		return xuanTiList;
 	}
 	
+	/*
+	 * 查询 选题 信息
+	 * @see com.tgb.service.XuanTiService#queryXuanTiInfo(java.lang.String, int, java.lang.String, java.lang.String, int)
+	 */
 	public List<XuanTi> queryXuanTiInfo(String id, int type, 
 			String year, String book_name, int currentPage) {
 		// 限制每页显示的个数
@@ -72,6 +76,10 @@ public class XuanTiServiceImpl implements XuanTiService{
     	return xuanTiList;
 	}
 	
+	/*
+	 * 计算总页数和总记录数
+	 * @see com.tgb.service.XuanTiService#calculateTotalPageAndRecordNumber(java.lang.String, int, java.lang.String, java.lang.String)
+	 */
 	public void calculateTotalPageAndRecordNumber(String id, int type, 
 			String year, String book_name) {
         List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(id, type, year, book_name);

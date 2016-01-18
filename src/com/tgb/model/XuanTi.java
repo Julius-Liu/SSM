@@ -7,6 +7,8 @@ public class XuanTi {
 	// 选题类型
 	private int type;
 	
+	private String xuan_ti_type;
+	
 	// 选题年度
 	private String year;
 	
@@ -28,11 +30,17 @@ public class XuanTi {
 	// 稿件来源
 	private int source;
 	
+	private String gao_jian_source;
+	
 	// 初审意见
 	private int first_comments;
 	
+	private String chu_shen_comments;
+	
 	// 选题状态
 	private int status;
+	
+	private String xuan_ti_status;
 	
 	// ISBN
 	private String ISBN;
@@ -49,6 +57,16 @@ public class XuanTi {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
+	// 级联查询使用
+	// 选题类型
+	public String getXuanTiType() {
+		return xuan_ti_type;
+	}
+	public void setXuanTiType(String xuan_ti_type) {
+		this.xuan_ti_type = xuan_ti_type;
+	}
+	
 	public String getYear() {
 		return year;
 	}
@@ -91,18 +109,48 @@ public class XuanTi {
 	public void setSource(int source) {
 		this.source = source;
 	}
+	
+	// 级联查询使用
+	// 稿件来源
+	public String getGaoJianSource() {
+		return gao_jian_source;
+	}
+	public void setGaoJianSource(String gao_jian_source) {
+		this.gao_jian_source = gao_jian_source;
+	}
+	
 	public int getFirst_comments() {
 		return first_comments;
 	}
 	public void setFirst_comments(int first_comments) {
 		this.first_comments = first_comments;
 	}
+	
+	// 级联查询使用
+	// 初审意见
+	public String getChuShenComments() {
+		return chu_shen_comments;
+	}
+	public void setChuShencomments(String chu_shen_comments) {
+		this.chu_shen_comments = chu_shen_comments;
+	}
+	
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	// 级联查询使用
+	// 选题状态
+	public String getXuanTiStatus() {
+		return xuan_ti_status;
+	}
+	public void setXuanTiStatus(String xuan_ti_status) {
+		this.xuan_ti_status = xuan_ti_status;
+	}
+	
 	public String getISBN() {
 		return ISBN;
 	}

@@ -6,7 +6,7 @@
 	id:必须与对应接口的某个对应的方法名一致	
  -->
  
-<mapper namespace="com.tgb.mapper.gaoJianSourceMapper">
+<mapper namespace="com.tgb.mapper.GaoJianSourceMapper">
 	
 	<insert id="save" parameterType="GaoJianSource">
 		<!-- insert into t_book(barcode, bookName, bookType, price, count, publishDate, publish, introduction, bookPhoto) 

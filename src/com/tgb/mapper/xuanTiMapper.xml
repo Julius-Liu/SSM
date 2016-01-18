@@ -60,16 +60,16 @@
 	
 	<select id="findAll" resultType="XuanTi">
 		select xuan_ti.id, 
-			xuan_ti_type.content, 
+			xuan_ti_type.content as xuan_ti_type, 
 			year, 
 			season, 
 			book_name, 
 			sub_book_name, 
 			department, 
 			originator,
-			gao_jian_source.content,
-			chu_shen_comments.content,
-			xuan_ti_status.content,
+			gao_jian_source.content as gao_jian_source,
+			chu_shen_comments.content as chu_shen_comments,
+			xuan_ti_status.content as xuan_ti_status,
 			ISBN 
 		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
 				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
@@ -80,24 +80,24 @@
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
 		select xuan_ti.id, 
-			xuan_ti_type.content, 
+			xuan_ti_type.content as xuan_ti_type, 
 			year, 
 			season, 
 			book_name, 
 			sub_book_name, 
 			department, 
 			originator,
-			gao_jian_source.content,
-			chu_shen_comments.content,
-			xuan_ti_status.content,
+			gao_jian_source.content as gao_jian_source,
+			chu_shen_comments.content as chu_shen_comments,
+			xuan_ti_status.content as xuan_ti_status,
 			ISBN 
 		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
 				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
 		<where>
-			<if test="xuan_ti.id != null and xuan_ti.id != '' ">
-				xuan_ti.id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
+			<if test="id != null and id != '' ">
+				id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="type != 0">				
 				AND type = #{type, jdbcType=INTEGER}

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tgb.model.BookType;
 import com.tgb.model.XuanTi;
 import com.tgb.model.XuanTiType;
 import com.tgb.model.GaoJianSource;
@@ -19,7 +20,10 @@ import com.tgb.model.ChuShenComments;
 import com.tgb.model.XuanTiStatus;
 
 import com.tgb.service.XuanTiService;
-import com.tgb.service.BookTypeService;
+import com.tgb.service.XuanTiTypeService;
+import com.tgb.service.GaoJianSourceService;
+import com.tgb.service.ChuShenCommentsService;
+import com.tgb.service.XuanTiStatusService;
 
 @Controller
 @RequestMapping("/xuan_ti")
@@ -27,7 +31,17 @@ public class XuanTiController {
 	@Autowired
 	private XuanTiService xuanTiService;
 	
+	@Autowired
+	private XuanTiTypeService xuanTiTypeService;
 	
+	@Autowired
+	private GaoJianSourceService gaoJianSourceService;
+	
+	@Autowired
+	private ChuShenCommentsService chuShenCommentsService;
+	
+	@Autowired
+	private XuanTiStatusService xuanTiStatusService;
 	
 	private int currentPage;
     public void setCurrentPage(int currentPage) {
@@ -54,114 +68,124 @@ public class XuanTiController {
     }
 	
 	/**
-	 * 跳转到添加用户界面
+	 * 跳转到添加 选题 界面
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/toAddXuanTi")
 	public String toAddXuanTi(HttpServletRequest request) {	
-		List<XuanTiType> XuanTiTypeList = xuanTiTypeService.findAll();
-		request.setAttribute("bookTypeList", bookTypeList);
-		return "/Book/Book_add";
+		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
+		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
+		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
+		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+		
+		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
+		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
+		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
+		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		
+		return "/xuan_ti/xuan_ti_add";
 	}
 	
 	/**
-	 * 添加图书并重定向
-	 * @param user
+	 * 添加 选题 并重定向
+	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/addBook")
-	public String addBook(Book book, HttpServletRequest request) {
-		//System.out.println("添加图书");
-		bookService.save(book);
-		return "redirect:queryBook?bookType=0&currentPage=1";
+	@RequestMapping("/addXuanTi")
+	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
+		xuanTiService.save(xuanTi);
+		return "redirect:queryXuanTi?xuanTiType=0&currentPage=1";
 	}
 	
 	/**
-	 * 编辑图书
-	 * @param user
+	 * 编辑 选题
+	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/updateBook")
-	public String updateBook(Book book, HttpServletRequest request) {	
-		if(bookService.update(book)) {
-			book = bookService.findByBarcode(book.getBarcode());
-			request.setAttribute("book", book);
-			return "redirect:queryBook?barcode=&bookName=&bookType=0&publishDate=&currentPage=1";
+	@RequestMapping("/updateXuanTi")
+	public String updateXuanTi(XuanTi xuanTi, HttpServletRequest request) {	
+		if(xuanTiService.update(xuanTi)) {
+			xuanTi = xuanTiService.findById(xuanTi.getId());
+			request.setAttribute("xuanTi", xuanTi);
+			return "redirect:queryXuanTi?id=&type=0&year=&book_name=&currentPage=1";
 		}else {
 			return "/error";
 		}
-	}
+	}	
 	
 	/**
-	 * 获取所有图书列表
+	 * 获取指定 选题 列表
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/getBook")
-	public String getBook(String barcode, HttpServletRequest request) {		
-		List<BookType> bookTypeList = bookTypeService.findAll();
+	@RequestMapping("/getXuanTi")
+	public String getXuanTi(String id, HttpServletRequest request) {		
+		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
+		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
+		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
+		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+				
+		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
+		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
+		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
+		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
 		
-		request.setAttribute("bookTypeList", bookTypeList);
-		request.setAttribute("book", bookService.findByBarcode(barcode));
-		return "/Book/Book_edit";
+		request.setAttribute("xuanTi", xuanTiService.findById(id));
+		return "/xuan_ti/xuan_ti_edit";
 	}
 	
-	
-	
 	/**
-	 * 获取所有图书列表
+	 * 查询 选题 列表
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/queryBook")
+	@RequestMapping("/queryXuanTi")
 	public String queryBook(
-			@RequestParam(value="barcode", required=false)String barcode, 
-			@RequestParam(value="bookName", required=false)String bookName,
-			@RequestParam(value="bookType", required=false)int bookType,
-			@RequestParam(value="publishDate", required=false)String publishDate, 
+			@RequestParam(value="id", required=false)String id, 
+			@RequestParam(value="type", required=false)int type,
+			@RequestParam(value="year", required=false)String year,
+			@RequestParam(value="book_name", required=false)String book_name, 
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("barcode: " + barcode);
-		System.out.println("bookName: " + bookName);
-		System.out.println("bookType: " + bookType);
-		System.out.println("publishDate: " + publishDate);
+		System.out.println("id: " + id);
+		System.out.println("type: " + type);
+		System.out.println("year: " + year);
+		System.out.println("book_name: " + book_name);
 		System.out.println("currentPage: " + currentPage);
 		
-		List<BookType> bookTypeList = bookTypeService.findAll();
+		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
+		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
+		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
+		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
 		
-		List<Book> bookList = bookService.queryBookInfo(barcode, bookName, bookType, publishDate, currentPage);
+		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(id, type, year, book_name, currentPage);
 		
         /*计算总的页数和总的记录数*/
-        //bookDAO.CalculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
-		bookService.calculateTotalPageAndRecordNumber(barcode, bookName, bookType, publishDate);
+		xuanTiService.calculateTotalPageAndRecordNumber(id, type, year, book_name);
 		
         /*获取到总的页码数目*/
-        totalPage = bookService.getTotalPage();
+        totalPage = xuanTiService.getTotalPage();
         /*当前查询条件下总记录数*/
-        recordNumber = bookService.getRecordNumber();
+        recordNumber = xuanTiService.getRecordNumber();
+        
+        request.setAttribute("id", id);
+        request.setAttribute("type", type);
+        request.setAttribute("year", year);
+        request.setAttribute("book_name", book_name);
+        
+		request.setAttribute("xuanTiList", xuanTiList);
 		
-//		List<Book> bookList = bookService.findAllAd();
-//		List<BookType> bookTypeList = bookTypeService.findAll();
-//		
-//		recordNumber = bookList.size();
-//        int mod = recordNumber % this.PAGE_SIZE;
-//        totalPage = recordNumber / this.PAGE_SIZE;
-//        if(mod != 0) {
-//        	totalPage++;
-//        }
-//        
-        request.setAttribute("barcode", barcode);
-        request.setAttribute("bookName", bookName);
-        request.setAttribute("bookType", bookType);
-        request.setAttribute("publishDate", publishDate);
-		request.setAttribute("bookList", bookList);
-		request.setAttribute("bookTypeList", bookTypeList);
+		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
+		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
+		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
+		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		
 		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
-		return "/Book/Book_all";
+		return "/xuan_ti/xuan_ti_all";
 	}	
 }

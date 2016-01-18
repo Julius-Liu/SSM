@@ -2,9 +2,15 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
 String barcode = "";
 String bookName = "";
 String publishDate = "";
+
+// 选题id初始值为空
+String id = "";
+String year = "";
+String book_name = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -151,7 +157,7 @@ H1 a {
 <table width="100%" height="280" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEF2FB">
   <tr>
     <td width="182" valign="top"><div id="container">
-      <h1 class="type"><a href="javascript:void(0)">图书管理</a></h1>
+      <h1 class="type"><a href="javascript:void(0)">编辑管理</a></h1>
       <div class="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -159,10 +165,10 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>book/queryBook?barcode=<%=barcode%>&bookName=<%=bookName%>&bookType=0&publishDate=<%=publishDate%>&currentPage=1" target="main">查看图书</a></li>
-          <li><a href="<%=basePath%>book/toAddBook" target="main">添加图书</a></li>
-          <li><a href="<%=basePath%>book/getAllBook" target="main">getAllBook</a></li>
-          <li><a href="http://www.865171.cn" target="main">114增加</a></li>
+          <li><a href="<%=basePath%>xuan_ti/queryXuanTi?id=<%=id%>&type=0&year=<%=year%>&book_name=<%=book_name%>&currentPage=1" target="main">查看选题信息</a></li>
+          <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
+          <li><a href="" target="main">查看编审信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加编审信息</a></li>
           <li><a href="http://www.865171.cn" target="main">114管理</a></li>
           <li><a href="http://www.865171.cn" target="main">联系方式</a></li>
           <li><a href="http://www.865171.cn" target="main">汇款方式</a></li>
@@ -170,7 +176,7 @@ H1 a {
           <li><a href="http://www.865171.cn" target="main">管理链接</a></li>
         </ul>
       </div>
-      <h1 class="type"><a href="javascript:void(0)">栏目分类管理</a></h1>
+      <h1 class="type"><a href="javascript:void(0)">印务管理</a></h1>
       <div class="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -178,8 +184,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="http://www.865171.cn" target="main">信息分类</a></li>
-          <li><a href="http://www.865171.cn" target="main">信息类型</a></li>
+          <li><a href="" target="main">查看印务信息</a></li>
+          <li><a href="" target="main" target="main">添加印务信息</a></li>
           <li><a href="http://www.865171.cn" target="main">资讯分类</a></li>
           <li><a href="http://www.865171.cn" target="main">地区设置</a></li>
           <li><a target="main" href="http://www.865171.cn">市场联盟</a></li>
@@ -189,7 +195,7 @@ H1 a {
           <li><a href="http://www.865171.cn" target="main">商品类型</a></li>
         </ul>
       </div>
-      <h1 class="type"><a href="javascript:void(0)">栏目内容管理</a></h1>
+      <h1 class="type"><a href="javascript:void(0)">发行管理</a></h1>
       <div class="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -197,8 +203,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-		  <li><a href="http://www.865171.cn" target="main">信息管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">张贴管理</a></li>
+		  <li><a href="http://www.865171.cn" target="main">查看发行信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加发行信息</a></li>
           <li><a href="http://www.865171.cn" target="main">增加商家</a></li>
           <li><a href="http://www.865171.cn" target="main">管理商家</a></li>
           <li><a href="http://www.865171.cn" target="main">发布资讯</a></li>
@@ -211,7 +217,7 @@ H1 a {
           <li><a href="http://www.865171.cn" target="main">商城公告</a></li>
         </ul>
       </div>
-      <h1 class="type"><a href="javascript:void(0)">注册用户管理</a></h1>
+      <h1 class="type"><a href="javascript:void(0)">库存管理</a></h1>
       <div class="content">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
@@ -219,16 +225,16 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="http://www.865171.cn" target="main">会员管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">留言管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">回复管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">订单管理</a></li>
+          <li><a href="http://www.865171.cn" target="main">查看入库信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加入库信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">查看出库信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加出库信息</a></li>
           <li><a href="http://www.865171.cn" target="main">举报管理</a></li>
           <li><a href="http://www.865171.cn" target="main">评论管理</a></li>
         </ul>
       </div>
     </div>
-        <h1 class="type"><a href="javascript:void(0)">其它参数管理</a></h1>
+        <h1 class="type"><a href="javascript:void(0)">资金管理</a></h1>
       <div class="content">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -236,8 +242,8 @@ H1 a {
             </tr>
           </table>
         <ul class="MM">
-            <li><a href="http://www.865171.cn" target="main">管理设置</a></li>
-          <li><a href="http://www.865171.cn" target="main">主机状态</a></li>
+          <li><a href="http://www.865171.cn" target="main">查看资金信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加资金信息</a></li>
           <li><a href="http://www.865171.cn" target="main">攻击状态</a></li>
           <li><a href="http://www.865171.cn" target="main">登陆记录</a></li>
           <li><a href="http://www.865171.cn" target="main">运行状态</a></li>

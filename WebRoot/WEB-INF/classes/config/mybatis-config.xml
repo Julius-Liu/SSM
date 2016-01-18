@@ -8,9 +8,12 @@
 		<typeAlias alias="User" type="com.tgb.model.User" />
 		<typeAlias alias="Book" type="com.tgb.model.Book" />		
 		<typeAlias alias="BookType" type="com.tgb.model.BookType" />
-		<typeAlias alias="Reader" type="com.tgb.model.Reader" />
-		<typeAlias alias="ReaderType" type="com.tgb.model.ReaderType" />
-		<typeAlias alias="LoanInfo" type="com.tgb.model.LoanInfo" />
+		
+		<typeAlias alias="XuanTi" type="com.tgb.model.XuanTi" />
+		<typeAlias alias="XuanTiType" type="com.tgb.model.XuanTiType" />
+		<typeAlias alias="GaoJianSource" type="com.tgb.model.GaoJianSource" />
+		<typeAlias alias="ChuShenComments" type="com.tgb.model.ChuShenComments" />
+		<typeAlias alias="XuanTiStatus" type="com.tgb.model.XuanTiStatus" />
 	</typeAliases>
 	
 	<!-- 
@@ -62,9 +65,12 @@
 		<mapper resource="com/tgb/mapper/userMapper.xml" />
 		<mapper resource="com/tgb/mapper/bookMapper.xml" />
 		<mapper resource="com/tgb/mapper/bookTypeMapper.xml" />
-		<mapper resource="com/tgb/mapper/readerMapper.xml" />
-		<mapper resource="com/tgb/mapper/readerTypeMapper.xml" />
-		<mapper resource="com/tgb/mapper/loanInfoMapper.xml" />
+		
+		<mapper resource="com/tgb/mapper/xuanTiMapper.xml" />
+		<mapper resource="com/tgb/mapper/xuanTiTypeMapper.xml" />
+		<mapper resource="com/tgb/mapper/gaoJianSourceMapper.xml" />
+		<mapper resource="com/tgb/mapper/chuShenCommentsMapper.xml" />
+		<mapper resource="com/tgb/mapper/xuanTiStatusMapper.xml" />
 	</mappers>
 	
 </configuration>  
