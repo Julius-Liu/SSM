@@ -167,7 +167,7 @@ H1 a {
         <ul class="MM">
           <li><a href="<%=basePath%>xuan_ti/queryXuanTi?id=<%=id%>&type=0&year=<%=year%>&book_name=<%=book_name%>&currentPage=1" target="main">查看选题信息</a></li>
           <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
-          <li><a href="" target="main">查看编审信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">查看编审信息</a></li>
           <li><a href="http://www.865171.cn" target="main">添加编审信息</a></li>
         </ul>
       </div>

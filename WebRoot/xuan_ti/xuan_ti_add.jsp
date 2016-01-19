@@ -82,13 +82,11 @@
     	<td width=30%>选题类型：</td>
     	<td width=70%>
       	<select name="type">
-      	<%
-        for(XuanTiType xuanTiType:xuanTiTypeList) {
-      	%>
-          <option value="<%=xuanTiType.getId() %>"><%=xuanTiType.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${xuanTiTypeList}">
+      			<option value="${item.id }">
+      				${item.content }
+      			</option>
+      		</c:forEach>      	
       	</select>
     	</td>
   	</tr>
@@ -127,13 +125,11 @@
     	<td width=30%>稿件来源：</td>
     	<td width=70%>
       	<select name="source">
-      	<%
-        for(GaoJianSource gaoJianSource:gaoJianSourceList) {
-      	%>
-          <option value="<%=gaoJianSource.getId() %>"><%=gaoJianSource.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${gaoJianSourceList}">
+      			<option value="${item.id }">
+      				${item.content }
+      			</option>
+      		</c:forEach>       	
       	</select>
     	</td>
   	</tr>
@@ -142,13 +138,11 @@
     	<td width=30%>初审意见：</td>
     	<td width=70%>
       	<select name="first_comments">
-      	<%
-        for(ChuShenComments chuShenComments:chuShenCommentsList) {
-      	%>
-          <option value="<%=chuShenComments.getId() %>"><%=chuShenComments.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${chuShenCommentsList}">
+      			<option value="${item.id }">
+      				${item.content }
+      			</option>
+      		</c:forEach>      	
       	</select>
     	</td>
   	</tr>
@@ -157,13 +151,11 @@
     	<td width=30%>选题状态：</td>
     	<td width=70%>
       	<select name="status">
-      	<%
-        for(XuanTiStatus xuanTiStatus:xuanTiStatusList) {
-      	%>
-          <option value="<%=xuanTiStatus.getId() %>"><%=xuanTiStatus.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${xuanTiStatusList}">
+      			<option value="${item.id }">
+      				${item.content }
+      			</option>
+      		</c:forEach>      	
       	</select>
     	</td>
   	</tr>

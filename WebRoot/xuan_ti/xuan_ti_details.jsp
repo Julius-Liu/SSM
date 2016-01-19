@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.tgb.model.XuanTi" %>
 <%@ page import="com.tgb.model.XuanTiType" %>
 <%@ page import="com.tgb.model.GaoJianSource" %>
 <%@ page import="com.tgb.model.ChuShenComments" %>
@@ -10,7 +9,6 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     
     // 获取所有的xuanTiType信息
-    XuanTi xuanTi = (XuanTi)request.getAttribute("xuanTi");
     List<XuanTiType> xuanTiTypeList = (List<XuanTiType>)request.getAttribute("xuanTiTypeList");
     List<GaoJianSource> gaoJianSourceList = (List<GaoJianSource>)request.getAttribute("gaoJianSourceList");
     List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
@@ -60,15 +58,15 @@
     	<td width=30%>选题类型：</td>
     	<td width=70%>
       	<select name="type">
-      	<%
-        for(XuanTiType xuanTiType:xuanTiTypeList) {
-      	%>
-          <option value="<%=xuanTiType.getId() %>"
-          	<c:if test="${xuanTi.type == xuanTiType.getId()}">selected</c:if>
-          ><%=xuanTiType.getContent() %></option>
-      	<%
-        }
-      	%>      	
+      		<c:forEach var="item" items="${xuanTiTypeList}">
+      			<option value="${item.id }"
+      				<c:if test="${item.id == xuanTi.type }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${item.content }
+      			</option>
+      		</c:forEach>      	   	
       	</select>
     	</td>
   	</tr>
@@ -107,15 +105,15 @@
     	<td width=30%>稿件来源：</td>
     	<td width=70%>
       	<select name="source">
-      	<%
-        for(GaoJianSource gaoJianSource:gaoJianSourceList) {
-      	%>
-          <option value="<%=gaoJianSource.getId() %>"
-          	<c:if test="${xuanTi.source == gaoJianSource.getId() }">selected</c:if>
-          ><%=gaoJianSource.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${gaoJianSourceList}">
+      			<option value="${item.id }"
+      				<c:if test="${item.id == xuanTi.source }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${item.content }
+      			</option>
+      		</c:forEach>      	
       	</select>
     	</td>
   	</tr>
@@ -124,15 +122,15 @@
     	<td width=30%>初审意见：</td>
     	<td width=70%>
       	<select name="first_comments">
-      	<%
-        for(ChuShenComments chuShenComments:chuShenCommentsList) {
-      	%>
-          <option value="<%=chuShenComments.getId() %>"
-          	<c:if test="${xuanTi.first_comments == chuShenComments.getId() }">selected</c:if>
-          ><%=chuShenComments.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${chuShenCommentsList}">
+      			<option value="${item.id }"
+      				<c:if test="${item.id == xuanTi.first_comments }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${item.content }
+      			</option>
+      		</c:forEach>         	
       	</select>
     	</td>
   	</tr>
@@ -141,15 +139,15 @@
     	<td width=30%>选题状态：</td>
     	<td width=70%>
       	<select name="status">
-      	<%
-        for(XuanTiStatus xuanTiStatus:xuanTiStatusList) {
-      	%>
-          <option value="<%=xuanTiStatus.getId() %>"
-          	<c:if test="${xuanTi.status == xuanTiStatus.getId() }">selected</c:if>
-          ><%=xuanTiStatus.getContent() %></option>
-      	<%
-        }
-      	%>
+      		<c:forEach var="item" items="${xuanTiStatusList}">
+      			<option value="${item.id }"
+      				<c:if test="${item.id == xuanTi.status }">
+      					<c:out value='selected="selected"'></c:out>
+      				</c:if>
+      			>
+      				${item.content }
+      			</option>
+      		</c:forEach>     	
       	</select>
     	</td>
   	</tr>

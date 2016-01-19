@@ -57,7 +57,7 @@ body{
 	text-decoration:underline;
 	/*
 	background:url('http://localhost:8080/CarSellSystem/images/button1_bg.jpg')  repeat-x;
-	  Ìæ»»±³¾°Í¼Æ¬ */
+	*/
 	background-color:green;
 }
 
@@ -65,7 +65,7 @@ body{
 	width:150px;
 	height:450px;
 	float:left;
-	/*background:#FFFFFF url(leftbottom.jpg) no-repeat bottom;*/ /*ÏÂ¶ËÔ²½Ç */ 
+	/*background:#FFFFFF url(leftbottom.jpg) no-repeat bottom;*/ 
 	margin:1px 0px 0px 0px;
 	background-color:lightyellow;
 }
@@ -98,7 +98,7 @@ body{
 }
  
  
- #footer{
+#footer{
 	background-color:#FFFFFF;
 	margin:1px 0px 0px 0px;
 	clear:both;
@@ -118,7 +118,7 @@ body{
 	text-decoration:none;
 }
 
-/*ÏÂÃæÊÇÊ÷ÐÎ²Ëµ¥µÄÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î²Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ê½*/
 .branch {
  DISPLAY: block; 
  CURSOR: hand

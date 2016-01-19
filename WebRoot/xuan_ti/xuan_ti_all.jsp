@@ -175,22 +175,19 @@ function OutputToExcel() {
   <tr>
   <td>
 选题编号：<input type=text name="id" value="<%=id%>" />&nbsp;
-选题类型：<select name="type">
-				
+选题类型：<select name="type">				
  				<option value="0"
  					<c:if test="${type == 0}">selected</c:if>
  				>--请选择--</option>				
- 				<% 					
- 					for(XuanTiType xuanTiTypeTemp:xuanTiTypeList) {
- 			   %>
- 			   <option value="<%=xuanTiTypeTemp.getId() %>"
- 			   		<c:if test="${type == xuanTiTypeTemp.getId()}">selected</c:if>
- 			   ><%=xuanTiTypeTemp.getContent() %></option>
- 			   <%
- 					}
- 				
- 				%>
- 				
+ 				<c:forEach var="item" items="${xuanTiTypeList }">
+	      	    	<option value="${item.id}" 
+	      	    		<c:if test="${item.id == type }">
+	      	    			<c:out value='selected="selected"'></c:out>
+	      	    		</c:if>
+					>
+	      	    		${item.content }
+	      	    	</option>
+      	    	</c:forEach> 				
  			</select>&nbsp;
 选题年度：<input type=text name="year" value="<%=year%>"/>&nbsp;
 书名：<input type=text readonly name="book_name" value="<%=book_name%>"/>&nbsp;
@@ -210,15 +207,15 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题编号</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题编号</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题类型</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题年度</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题年度</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">部门</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">初审意见</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题状态</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
-            <td width="10%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
+            <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
@@ -243,8 +240,8 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getXuanTiStatus() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getISBN() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/checkXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>详细</a></span>&nbsp; &nbsp;
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/checkXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
             			<span style="cursor:hand;" onclick=""><a href="javascript:del('${xuanTi.id }')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
