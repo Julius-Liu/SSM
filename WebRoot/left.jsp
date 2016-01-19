@@ -169,11 +169,6 @@ H1 a {
           <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
           <li><a href="" target="main">查看编审信息</a></li>
           <li><a href="http://www.865171.cn" target="main">添加编审信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">114管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">联系方式</a></li>
-          <li><a href="http://www.865171.cn" target="main">汇款方式</a></li>
-          <li><a href="http://www.865171.cn" target="main">增加链接</a></li>
-          <li><a href="http://www.865171.cn" target="main">管理链接</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">印务管理</a></h1>

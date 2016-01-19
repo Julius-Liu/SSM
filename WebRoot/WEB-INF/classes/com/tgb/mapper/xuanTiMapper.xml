@@ -75,7 +75,7 @@
 				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
-		order by id asc
+		order by xuan_ti.id asc
 	</select>
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
@@ -109,7 +109,7 @@
 				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>
 		</where>
-		order by id asc
+		order by xuan_ti.id asc
 	</select>
 	
 </mapper>

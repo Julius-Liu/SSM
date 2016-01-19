@@ -96,7 +96,7 @@ public class XuanTiController {
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
 		xuanTiService.save(xuanTi);
-		return "redirect:queryXuanTi?xuanTiType=0&currentPage=1";
+		return "redirect:queryXuanTi?type=0&currentPage=1";
 	}
 	
 	/**
@@ -122,12 +122,14 @@ public class XuanTiController {
 	 * @return
 	 */
 	@RequestMapping("/getXuanTi")
-	public String getXuanTi(String id, HttpServletRequest request) {		
+	public String getXuanTi(String id, HttpServletRequest request) {
+		XuanTi xuanTi = xuanTiService.findById(id);
 		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
 		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
 		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
 		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
 				
+		request.setAttribute("xuanTi", xuanTi);
 		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
 		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
 		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
@@ -136,6 +138,52 @@ public class XuanTiController {
 		request.setAttribute("xuanTi", xuanTiService.findById(id));
 		return "/xuan_ti/xuan_ti_edit";
 	}
+	
+	/**
+	 * 查看指定 选题 详细内容
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/checkXuanTi")
+	public String checkXuanTi(String id, HttpServletRequest request) {
+		XuanTi xuanTi = xuanTiService.findById(id);
+		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
+		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
+		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
+		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+				
+		request.setAttribute("xuanTi", xuanTi);
+		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
+		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
+		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
+		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		
+		request.setAttribute("xuanTi", xuanTiService.findById(id));
+		return "/xuan_ti/xuan_ti_details";
+	}	
+	
+	/**
+	 * 删除用户
+	 * @param id
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/delXuanTi")
+	public void delXuanTi(String id, HttpServletRequest request, HttpServletResponse response) {
+		String result = "{\"result\":\"error\"}";		
+		if(xuanTiService.delete(id)) {
+			result = "{\"result\":\"success\"}";
+		}
+		
+		response.setContentType("application/json");
+		
+		try {
+			PrintWriter out = response.getWriter();
+			out.write(result);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
 	
 	/**
 	 * 查询 选题 列表

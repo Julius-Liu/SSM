@@ -125,6 +125,18 @@ function QueryXuanTi() {
 	document.forms["xuanTiQueryForm"].submit();
 }
 
+/* 删除 选题 */
+function del(id){
+	$.get("<%=basePath%>xuan_ti/delXuanTi?id=" + id,function(data){
+		if("success" == data.result){
+			alert("删除成功！");
+			window.location.reload();
+		}else{
+			alert("删除失败！");
+		}
+	});
+}
+
 /* 导出当前记录到Excel，未启用 */
 function OutputToExcel() {
 	//document.forms["bookQueryForm"].action = "<%=basePath %>Book/Book_QueryBookOutputToExcel.action";
@@ -162,12 +174,12 @@ function OutputToExcel() {
 
   <tr>
   <td>
-选题编号:<input type=text name="id" value="<%=id%>" />&nbsp;
+选题编号：<input type=text name="id" value="<%=id%>" />&nbsp;
 选题类型：<select name="type">
 				
  				<option value="0"
  					<c:if test="${type == 0}">selected</c:if>
- 				>不选择</option>				
+ 				>--请选择--</option>				
  				<% 					
  					for(XuanTiType xuanTiTypeTemp:xuanTiTypeList) {
  			   %>
@@ -180,8 +192,8 @@ function OutputToExcel() {
  				%>
  				
  			</select>&nbsp;
-选题年度:<input type=text name="year" value="<%=year%>"/>&nbsp;
-书名:<input type=text readonly name="book_name" value="<%=book_name%>"/>&nbsp;
+选题年度：<input type=text name="year" value="<%=year%>"/>&nbsp;
+书名：<input type=text readonly name="book_name" value="<%=book_name%>"/>&nbsp;
 
     <input type=hidden name=currentPage value="1" />
     <input type=submit value="查询" onclick="QueryXuanTi();"  />
@@ -231,9 +243,9 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getXuanTiStatus() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getISBN() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>详细</a></span>&nbsp; &nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/checkXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>详细</a></span>&nbsp; &nbsp;
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp; &nbsp;
-            			<span style="cursor:hand;" onclick=""><a href='#'><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+            			<span style="cursor:hand;" onclick=""><a href="javascript:del('${xuanTi.id }')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>
