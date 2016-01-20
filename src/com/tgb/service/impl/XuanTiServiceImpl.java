@@ -1,6 +1,5 @@
 package com.tgb.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 
@@ -38,12 +37,12 @@ public class XuanTiServiceImpl implements XuanTiService{
 	
 	private int PAGE_SIZE = 10;
 	
-	public void save(XuanTi xuan_ti) {
-		xuanTiMapper.save(xuan_ti);		
+	public void save(XuanTi xuanTi) {
+		xuanTiMapper.save(xuanTi);		
 	}
 
-	public boolean update(XuanTi xuan_ti) {
-		return xuanTiMapper.update(xuan_ti);
+	public boolean update(XuanTi xuanTi) {
+		return xuanTiMapper.update(xuanTi);
 	}
 
 	public boolean delete(String id) {

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tgb.model.BookType;
 import com.tgb.model.XuanTi;
 import com.tgb.model.XuanTiType;
 import com.tgb.model.GaoJianSource;
@@ -134,8 +133,7 @@ public class XuanTiController {
 		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
 		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
 		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
-		
-		request.setAttribute("xuanTi", xuanTiService.findById(id));
+
 		return "/xuan_ti/xuan_ti_edit";
 	}
 	
@@ -191,7 +189,7 @@ public class XuanTiController {
 	 * @return
 	 */
 	@RequestMapping("/queryXuanTi")
-	public String queryBook(
+	public String queryXuanTi(
 			@RequestParam(value="id", required=false)String id, 
 			@RequestParam(value="type", required=false)int type,
 			@RequestParam(value="year", required=false)String year,

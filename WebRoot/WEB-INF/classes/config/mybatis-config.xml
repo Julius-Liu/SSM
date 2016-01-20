@@ -14,6 +14,8 @@
 		<typeAlias alias="GaoJianSource" type="com.tgb.model.GaoJianSource" />
 		<typeAlias alias="ChuShenComments" type="com.tgb.model.ChuShenComments" />
 		<typeAlias alias="XuanTiStatus" type="com.tgb.model.XuanTiStatus" />
+		<typeAlias alias="BianShen" type="com.tgb.model.BianShen" />
+		<typeAlias alias="BianShenStatus" type="com.tgb.model.BianShenStatus" />		
 	</typeAliases>
 	
 	<!-- 
@@ -71,6 +73,8 @@
 		<mapper resource="com/tgb/mapper/gaoJianSourceMapper.xml" />
 		<mapper resource="com/tgb/mapper/chuShenCommentsMapper.xml" />
 		<mapper resource="com/tgb/mapper/xuanTiStatusMapper.xml" />
+		<mapper resource="com/tgb/mapper/bianShenMapper.xml" />
+		<mapper resource="com/tgb/mapper/bianShenStatusMapper.xml" />		
 	</mappers>
 	
 </configuration>  

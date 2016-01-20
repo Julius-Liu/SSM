@@ -5,8 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import com.tgb.model.XuanTi;
 
 public interface XuanTiMapper {
-	void save(XuanTi xuan_ti);
-	boolean update(XuanTi xuan_ti);			// 更新选题信息
+	void save(XuanTi xuanTi);
+	boolean update(XuanTi xuanTi);			// 更新选题信息
 	boolean delete(String id);
 	XuanTi findById(String id);
 

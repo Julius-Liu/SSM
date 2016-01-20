@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致	
+ -->
+ 
+<mapper namespace="com.tgb.mapper.BianShenMapper">
+	
+	<insert id="save" parameterType="BianShen">
+		insert into bian_shen(id, 
+			book_id, 
+			book_name, 
+			sub_book_name, 
+			original_author, 
+			original_press, 
+			primary_author, 
+			other_author, 
+			ze_ren_editor,
+			wen_zi_editor,
+			mei_shu_editor,
+			proofreader,
+			bian_shen_status,
+			fu_yin_date) 
+		values(#{id},
+			#{book_id},
+			#{book_name},
+			#{sub_book_name},
+			#{original_author},
+			#{original_press},
+			#{primary_author},
+			#{other_author},
+			#{ze_ren_editor},
+			#{wen_zi_editor},
+			#{mei_shu_editor},
+			#{proofreader},
+			#{bian_shen_status},
+			#{fu_yin_date})
+	</insert>
+	
+	<update id="update" parameterType="BianShen">
+		update bian_shen set book_id=#{book_id}, 
+			book_name=#{book_name}, 
+			sub_book_name=#{sub_book_name}, 
+			original_author=#{original_author}, 
+			original_press=#{original_press}, 
+			primary_author=#{primary_author}, 
+			other_author=#{other_author}, 
+			ze_ren_editor=#{ze_ren_editor},
+			wen_zi_editor=#{wen_zi_editor},
+			mei_shu_editor=#{mei_shu_editor},
+			proofreader=#{proofreader} ,
+			bian_shen_status=#{bian_shen_status},
+			fu_yin_date=#{fu_yin_date}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from bian_shen where id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="String" resultType="BianShen">
+		select * from bian_shen where id=#{id}
+	</select>
+	
+	<select id="findAll" resultType="BianShen">
+		select bian_shen.id, 
+			book_id, 
+			book_name, 
+			sub_book_name, 
+			original_author, 
+			original_press, 
+			primary_author, 
+			other_author, 
+			ze_ren_editor,
+			wen_zi_editor,
+			mei_shu_editor,
+			proofreader,
+			bian_shen_status.content as bian_shen_status_content,
+			fu_yin_date 
+		from bian_shen inner join bian_shen_status on bian_shen.bian_shen_status=bian_shen_status.id								
+		order by bian_shen.id asc
+	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="BianShen">
+		select bian_shen.id, 
+			book_id, 
+			book_name, 
+			sub_book_name, 
+			original_author, 
+			original_press, 
+			primary_author, 
+			other_author, 
+			ze_ren_editor,
+			wen_zi_editor,
+			mei_shu_editor,
+			proofreader,
+			bian_shen_status.content as bian_shen_status_content,
+			fu_yin_date 
+		from bian_shen inner join bian_shen_status on bian_shen.bian_shen_status=bian_shen_status.id		
+		<where>
+			<if test="id != null and id != '' ">
+				id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="book_id != null and book_id != ''">				
+				AND book_id like CONCAT(CONCAT('%', #{book_id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="book_name != null and book_name != '' ">
+				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="bian_shen_status != 0 ">
+				AND bian_shen_status = #{type, jdbcType=INTEGER}
+			</if>
+		</where>
+		order by bian_shen.id asc
+	</select>
+	
+</mapper>

@@ -4,8 +4,8 @@ import java.util.List;
 import com.tgb.model.XuanTi;
 
 public interface XuanTiService {
-	void save(XuanTi xuan_ti);
-	boolean update(XuanTi xuan_ti);			// 更新选题信息	
+	void save(XuanTi xuanTi);
+	boolean update(XuanTi xuanTi);			// 更新选题信息	
 	boolean delete(String id);
 	XuanTi findById(String id);
 	List<XuanTi> findAll();
