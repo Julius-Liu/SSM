@@ -8,10 +8,11 @@ String bookName = "";
 String publishDate = "";
 
 // 选题id初始值为空
-String id = "";
+String xuan_ti_id = "";
 String year = "";
 String book_name = "";
 
+String bian_shen_id = "";
 String book_id = "";
 %>
 
@@ -167,9 +168,9 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>xuan_ti/queryXuanTi?id=<%=id%>&type=0&year=<%=year%>&book_name=<%=book_name%>&currentPage=1" target="main">查看选题信息</a></li>
+          <li><a href="<%=basePath%>xuan_ti/queryXuanTi?xuan_ti_id=<%=xuan_ti_id%>&type=0&year=<%=year%>&book_name=<%=book_name%>&currentPage=1" target="main">查看选题信息</a></li>
           <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
-          <li><a href="<%=basePath%>bian_shen/queryBianShen?id=<%=id%>&book_id=<%=book_id%>&book_name=<%=book_name%>&bian_shen_status=0&currentPage=1" target="main">查看编审信息</a></li>
+          <li><a href="<%=basePath%>bian_shen/queryBianShen?bian_shen_id=<%=bian_shen_id%>&book_id=<%=book_id%>&book_name=<%=book_name%>&bian_shen_status=0&currentPage=1" target="main">查看编审信息</a></li>
           <li><a href="<%=basePath%>bian_shen/toAddBianShen" target="main">添加编审信息</a></li>
         </ul>
       </div>
@@ -181,15 +182,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="" target="main">查看印务信息</a></li>
-          <li><a href="" target="main" target="main">添加印务信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">资讯分类</a></li>
-          <li><a href="http://www.865171.cn" target="main">地区设置</a></li>
-          <li><a target="main" href="http://www.865171.cn">市场联盟</a></li>
-          <li><a href="http://www.865171.cn" target="main">商家类型</a></li>
-          <li><a href="http://www.865171.cn" target="main">商家星级</a></li>
-          <li><a href="http://www.865171.cn" target="main">商品分类</a></li>
-          <li><a href="http://www.865171.cn" target="main">商品类型</a></li>
+          <li><a href="http://www.865171.cn" target="main">查看印务信息</a></li>
+          <li><a href="http://www.865171.cn" target="main">添加印务信息</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">发行管理</a></h1>

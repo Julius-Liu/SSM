@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page import="com.tgb.model.XuanTiType" %>
 <%@ page import="com.tgb.model.GaoJianSource" %>
 <%@ page import="com.tgb.model.ChuShenComments" %>
@@ -20,7 +21,7 @@
         response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
     } */
 %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>

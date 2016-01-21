@@ -15,7 +15,7 @@
     int totalPage =   (Integer)request.getAttribute("totalPage");  		// 一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber"); // 一共多少记录
     
-    String id = (String)request.getAttribute("id"); 	// 编审id
+    String bian_shen_id = (String)request.getAttribute("bian_shen_id"); 	// 编审id
     String book_id = (String)request.getAttribute("book_id"); // 书号
     String book_name = (String)request.getAttribute("book_name"); 	// 书名
     int bian_shen_status = (Integer)request.getAttribute("bian_shen_status"); 	// 编审状态
@@ -47,6 +47,7 @@ body {
 -->
 </style>
 
+<script type="text/javascript" src="<%=basePath %>js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/calendar.js"></script>
 <script type="text/javascript">
 var  highlightcolor='#c1ebff';
@@ -120,7 +121,7 @@ function QueryBianShen() {
 }
 
 /* 删除 选题 */
-function del(id){
+function DelBianShen(id){
 	$.get("<%=basePath%>bian_shen/delBianShen?id=" + id,function(data){
 		if("success" == data.result){
 			alert("删除成功！");
@@ -168,7 +169,7 @@ function OutputToExcel() {
 
   <tr>
   <td>
-编审编号：<input type=text name="id" value="<%=id%>" />&nbsp;
+编审编号：<input type=text name="bian_shen_id" value="<%=bian_shen_id%>" />&nbsp;
 书号：<input type=text name="book_id" value="<%=book_id%>"/>&nbsp;
 书名：<input type=text name="book_name" value="<%=book_name%>"/>&nbsp;
 编审状态：<select name="bian_shen_status">				
@@ -235,7 +236,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>bian_shen/checkBianShen?id=<%=bianShen.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>bian_shen/getBianShen?id=<%=bianShen.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:del('${bianShen.id }')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelBianShen('<%=bianShen.getId() %>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

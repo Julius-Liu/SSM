@@ -46,8 +46,7 @@ public class BianShenServiceImpl implements BianShenService{
 	}
 
 	public boolean delete(String id) {
-		bianShenMapper.delete(id);
-		return false;
+		return bianShenMapper.delete(id);
 	}
 
 	public BianShen findById(String id) {
@@ -65,11 +64,11 @@ public class BianShenServiceImpl implements BianShenService{
 	/*
 	 * 查询 编审 信息
 	 */
-	public List<BianShen> queryBianShenInfo(String id, String book_id, 
+	public List<BianShen> queryBianShenInfo(String bian_shen_id, String book_id, 
 			String book_name, int bian_shen_status, int currentPage) {
 		// 限制每页显示的个数
 		PageHelper.startPage(currentPage, 10);
-		List<BianShen> bianShenList = bianShenMapper.calculateTotalPageAndRecordNumber(id, book_id, book_name, bian_shen_status);
+		List<BianShen> bianShenList = bianShenMapper.calculateTotalPageAndRecordNumber(bian_shen_id, book_id, book_name, bian_shen_status);
 		
     	return bianShenList;
 	}
@@ -77,9 +76,9 @@ public class BianShenServiceImpl implements BianShenService{
 	/*
 	 * 计算总页数和总记录数
 	 */
-	public void calculateTotalPageAndRecordNumber(String id, String book_id, 
+	public void calculateTotalPageAndRecordNumber(String bian_shen_id, String book_id, 
 			String book_name, int bian_shen_status) {
-        List<BianShen> bianShenList = bianShenMapper.calculateTotalPageAndRecordNumber(id, book_id, book_name, bian_shen_status);
+        List<BianShen> bianShenList = bianShenMapper.calculateTotalPageAndRecordNumber(bian_shen_id, book_id, book_name, bian_shen_status);
         recordNumber = bianShenList.size();
         int mod = recordNumber % this.PAGE_SIZE;
         totalPage = recordNumber / this.PAGE_SIZE;

@@ -100,8 +100,8 @@
 			fu_yin_date 
 		from bian_shen inner join bian_shen_status on bian_shen.bian_shen_status=bian_shen_status.id		
 		<where>
-			<if test="id != null and id != '' ">
-				id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
+			<if test="bian_shen_id != null and bian_shen_id != '' ">
+				bian_shen_id like CONCAT(CONCAT('%', #{bian_shen_id, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="book_id != null and book_id != ''">				
 				AND book_id like CONCAT(CONCAT('%', #{book_id, jdbcType=VARCHAR}), '%')
@@ -110,7 +110,7 @@
 				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="bian_shen_status != 0 ">
-				AND bian_shen_status = #{type, jdbcType=INTEGER}
+				AND bian_shen_status = #{bian_shen_status, jdbcType=INTEGER}
 			</if>
 		</where>
 		order by bian_shen.id asc

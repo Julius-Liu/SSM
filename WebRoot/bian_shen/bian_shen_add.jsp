@@ -1,18 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.tgb.model.XuanTiType" %>
-<%@ page import="com.tgb.model.GaoJianSource" %>
-<%@ page import="com.tgb.model.ChuShenComments" %>
-<%@ page import="com.tgb.model.XuanTiStatus" %>
+<%@ page import="com.tgb.model.BianShenStatus" %>
 
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     
     // 获取所有的xuanTiType信息
-    List<XuanTiType> xuanTiTypeList = (List<XuanTiType>)request.getAttribute("xuanTiTypeList");
-    List<GaoJianSource> gaoJianSourceList = (List<GaoJianSource>)request.getAttribute("gaoJianSourceList");
-    List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
-    List<XuanTiStatus> xuanTiStatusList = (List<XuanTiStatus>)request.getAttribute("xuanTiStatusList");
+    List<BianShenStatus> bianShenStatusList = (List<BianShenStatus>)request.getAttribute("bianShenStatusList");
     
     /* 
     String username=(String)session.getAttribute("username");
@@ -24,7 +18,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>
-<TITLE>添加选题信息</TITLE> 
+<TITLE>添加编审信息</TITLE> 
 <STYLE type=text/css>
 	BODY {
     	MARGIN-LEFT: 0px; BACKGROUND-COLOR: #ffffff
@@ -40,12 +34,12 @@
 
 	/*验证表单*/
 	function checkForm() {
-	    var id = document.getElementById("xuanTi.id").value;
+	    var id = document.getElementById("bianShen.id").value;
 	    if(id == "") {
-	        alert('请输入选题编号！');
+	        alert('请输入编审编号！');
 	        return false;
 	    }
-	    var book_name = document.getElementById("xuanTi.book_name").value;
+	    var book_name = document.getElementById("bianShen.book_name").value;
 	    if(book_name == "") {
 	        alert('请输入书名！');
 	        return false;
@@ -53,9 +47,9 @@
 	    return true; 
 	}
 	
-	function addXuanTi() {
+	function addBianShen() {
 		var form = document.forms[0];
-		form.action = "<%=basePath%>xuan_ti/addXuanTi";
+		form.action = "<%=basePath%>bian_shen/addBianShen";
 		form.method="post";
 		form.submit();
 	}
@@ -70,35 +64,17 @@
   <TBODY>
   <TR>
     <TD align="left" vAlign=top >
-    <form action="" name="xuanTi">
+    <form action="" name="bianShen">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
 	<tr>
-	    <td width=30%>选题编号：</td>
-	    <td width=70%><input id="id" name="id" type="text" /></td>
+	    <td width=30%>编审编号：</td>
+	    <td width=70%><input id="bian_shen.id" name="id" type="text" size="10" /></td>
 	</tr>
 
-	<tr>
-    	<td width=30%>选题类型：</td>
-    	<td width=70%>
-      	<select name="type">
-      		<c:forEach var="item" items="${xuanTiTypeList}">
-      			<option value="${item.id }">
-      				${item.content }
-      			</option>
-      		</c:forEach>      	
-      	</select>
-    	</td>
-  	</tr>
-
   	<tr>
-    	<td width=30%>选题年度：</td>
-    	<td width=70%><input id="year" name="year" type="text" size="10" /></td>
-  	</tr>
-
-	<tr>
-    	<td width=30%>选题季度：</td>
-    	<td width=70%><input id="season" name="season" type="text" size="10" /></td>
+    	<td width=30%>书号：</td>
+    	<td width=70%><input id="book_id" name="book_id" type="text" size="10" /></td>
   	</tr>
 
   	<tr>
@@ -112,33 +88,50 @@
   	</tr>
 
   	<tr>
-    	<td width=30%>部门：</td>
-    	<td width=70%><input id="department" name="department" type="text" size="20"/></td>
+    	<td width=30%>原著作者：</td>
+    	<td width=70%><input id="original_author" name="original_author" type="text" size="10"/></td>
   	</tr>
 
   	<tr>
-    	<td width=30%>申报人：</td>
-    	<td width=70%><input id="originator" name="originator" type="text" size="20" /></td>
+    	<td width=30%>原出版社：</td>
+    	<td width=70%><input id="original_press" name="original_press" type="text" size="10" /></td>
   	</tr>
 
-	<tr>
-    	<td width=30%>稿件来源：</td>
-    	<td width=70%>
-      	<select name="source">
-      		<c:forEach var="item" items="${gaoJianSourceList}">
-      			<option value="${item.id }">
-      				${item.content }
-      			</option>
-      		</c:forEach>       	
-      	</select>
-    	</td>
+  	<tr>
+    	<td width=30%>主要作者：</td>
+    	<td width=70%><input id="primary_author" name="primary_author" type="text" size="10" /></td>
+  	</tr>
+  	
+  	<tr>
+    	<td width=30%>其他署名作者：</td>
+    	<td width=70%><input id="other_author" name="other_author" type="text" size="20" /></td>
+  	</tr>
+  	
+  	<tr>
+    	<td width=30%>责任编辑：</td>
+    	<td width=70%><input id="ze_ren_editor" name="ze_ren_editor" type="text" size="10" /></td>
+  	</tr>  	
+
+  	<tr>
+    	<td width=30%>文字编辑：</td>
+    	<td width=70%><input id="wen_zi_editor" name="wen_zi_editor" type="text" size="10" /></td>
   	</tr>
 
+  	<tr>
+    	<td width=30%>美术编辑：</td>
+    	<td width=70%><input id="mei_shu_editor" name="mei_shu_editor" type="text" size="10" /></td>
+  	</tr>
+  	
+  	<tr>
+    	<td width=30%>校对：</td>
+    	<td width=70%><input id="proofreader" name="proofreader" type="text" size="10" /></td>
+  	</tr>	
+  	
 	<tr>
-    	<td width=30%>初审意见：</td>
+    	<td width=30%>编审状态：</td>
     	<td width=70%>
-      	<select name="first_comments">
-      		<c:forEach var="item" items="${chuShenCommentsList}">
+      	<select name="bian_shen_status">
+      		<c:forEach var="item" items="${bianShenStatusList}">
       			<option value="${item.id }">
       				${item.content }
       			</option>
@@ -147,27 +140,14 @@
     	</td>
   	</tr>
 
-	<tr>
-    	<td width=30%>选题状态：</td>
-    	<td width=70%>
-      	<select name="status">
-      		<c:forEach var="item" items="${xuanTiStatusList}">
-      			<option value="${item.id }">
-      				${item.content }
-      			</option>
-      		</c:forEach>      	
-      	</select>
-    	</td>
-  	</tr>
-
   	<tr>
-    	<td width=30%>ISBN:</td>
-    	<td width=70%><input id="ISBN" name="ISBN" type="text" size="20"/></td>
+    	<td width=30%>付印日期:</td>
+    	<td width=70%><input id="fu_yin_date" name="fu_yin_date" type="text" readonly size="10" onclick="setDay(this);"/></td>
   	</tr>
 
   	<tr bgcolor='#FFFFFF'>
       	<td colspan="4" align="center">
-        	<input type='submit' name='button' value='保存' onclick="addXuanTi()">
+        	<input type='submit' name='button' value='保存' onclick="addBianShen()">
         	&nbsp;&nbsp;
         	<input type="reset" value='重写' />
       	</td>

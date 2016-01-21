@@ -13,7 +13,7 @@ public interface XuanTiMapper {
 	List<XuanTi> findAll();
 	
 	List<XuanTi> calculateTotalPageAndRecordNumber(
-			@Param("id")String id, 
+			@Param("xuan_ti_id")String xuan_ti_id, 
 			@Param("type")int type, 
 			@Param("year")String year, 
 			@Param("book_name")String book_name);

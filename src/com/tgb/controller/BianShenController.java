@@ -75,7 +75,7 @@ public class BianShenController {
 	@RequestMapping("/addBianShen")
 	public String addBianShen(BianShen bianShen, HttpServletRequest request) {
 		bianShenService.save(bianShen);
-		return "redirect:queryBianShen?bian_shen_status=0&currentPage=1";
+		return "redirect:queryBianShen?bian_shen_id=&book_id=&book_name=&bian_shen_status=0&currentPage=1";
 	}
 	
 	/**
@@ -87,9 +87,7 @@ public class BianShenController {
 	@RequestMapping("/updateBianShen")
 	public String updateBianShen(BianShen bianShen, HttpServletRequest request) {	
 		if(bianShenService.update(bianShen)) {
-			bianShen = bianShenService.findById(bianShen.getId());
-			request.setAttribute("bianShen", bianShen);
-			return "redirect:queryBianShen?bian_shen_type=0&currentPage=1";
+			return "redirect:queryBianShen?bian_shen_id=&book_id=&book_name=&bian_shen_status=0&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -157,13 +155,13 @@ public class BianShenController {
 	 */
 	@RequestMapping("/queryBianShen")
 	public String queryBianShen(
-			@RequestParam(value="id", required=false)String id, 
+			@RequestParam(value="bian_shen_id", required=false)String bian_shen_id, 
 			@RequestParam(value="book_id", required=false)String book_id,
 			@RequestParam(value="book_name", required=false)String book_name,
 			@RequestParam(value="bian_shen_status", required=false)int bian_shen_status, 
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("id: " + id);
+		System.out.println("bian_shen_id: " + bian_shen_id);
 		System.out.println("book_id: " + book_id);
 		System.out.println("book_name: " + book_name);
 		System.out.println("bian_shen_status: " + bian_shen_status);
@@ -171,17 +169,17 @@ public class BianShenController {
 		
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 		
-		List<BianShen> bianShenList = bianShenService.queryBianShenInfo(id, book_id, book_name, bian_shen_status, currentPage);
+		List<BianShen> bianShenList = bianShenService.queryBianShenInfo(bian_shen_id, book_id, book_name, bian_shen_status, currentPage);
 		
         /*计算总的页数和总的记录数*/
-		bianShenService.calculateTotalPageAndRecordNumber(id, book_id, book_name, bian_shen_status);
+		bianShenService.calculateTotalPageAndRecordNumber(bian_shen_id, book_id, book_name, bian_shen_status);
 		
         /*获取到总的页码数目*/
         totalPage = bianShenService.getTotalPage();
         /*当前查询条件下总记录数*/
         recordNumber = bianShenService.getRecordNumber();
         
-        request.setAttribute("id", id);
+        request.setAttribute("bian_shen_id", bian_shen_id);
         request.setAttribute("book_id", book_id);
         request.setAttribute("book_name", book_name);
         request.setAttribute("bian_shen_status", bian_shen_status);

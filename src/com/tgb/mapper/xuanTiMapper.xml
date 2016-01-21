@@ -96,8 +96,8 @@
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
 		<where>
-			<if test="id != null and id != '' ">
-				id like CONCAT(CONCAT('%', #{id, jdbcType=VARCHAR}), '%')
+			<if test="xuan_ti_id != null and xuan_ti_id != '' ">
+				xuan_ti_id like CONCAT(CONCAT('%', #{xuan_ti_id, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="type != 0">				
 				AND type = #{type, jdbcType=INTEGER}

@@ -10,10 +10,10 @@ public interface BianShenService {
 	BianShen findById(String id);
 	List<BianShen> findAll();
 	
-	List<BianShen> queryBianShenInfo(String id, String book_id, String book_name, 
+	List<BianShen> queryBianShenInfo(String bian_shen_id, String book_id, String book_name, 
 			int bian_shen_status, int currentPage);
 	
-	void calculateTotalPageAndRecordNumber(String id, String book_id, String book_name, 
+	void calculateTotalPageAndRecordNumber(String bian_shen_id, String book_id, String book_name, 
 			int bian_shen_status);
 	
 	int getTotalPage();	

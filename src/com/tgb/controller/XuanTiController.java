@@ -95,7 +95,7 @@ public class XuanTiController {
 	@RequestMapping("/addXuanTi")
 	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
 		xuanTiService.save(xuanTi);
-		return "redirect:queryXuanTi?type=0&currentPage=1";
+		return "redirect:queryXuanTi?xuan_ti_id=&type=0&year=&book_name=&currentPage=1";
 	}
 	
 	/**
@@ -107,9 +107,7 @@ public class XuanTiController {
 	@RequestMapping("/updateXuanTi")
 	public String updateXuanTi(XuanTi xuanTi, HttpServletRequest request) {	
 		if(xuanTiService.update(xuanTi)) {
-			xuanTi = xuanTiService.findById(xuanTi.getId());
-			request.setAttribute("xuanTi", xuanTi);
-			return "redirect:queryXuanTi?id=&type=0&year=&book_name=&currentPage=1";
+			return "redirect:queryXuanTi?xuan_ti_id=&type=0&year=&book_name=&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -161,7 +159,7 @@ public class XuanTiController {
 	}	
 	
 	/**
-	 * 删除用户
+	 * 删除 选题
 	 * @param id
 	 * @param request
 	 * @param response
@@ -169,6 +167,7 @@ public class XuanTiController {
 	@RequestMapping("/delXuanTi")
 	public void delXuanTi(String id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
+		System.out.println("id = " + id);
 		if(xuanTiService.delete(id)) {
 			result = "{\"result\":\"success\"}";
 		}
@@ -190,13 +189,13 @@ public class XuanTiController {
 	 */
 	@RequestMapping("/queryXuanTi")
 	public String queryXuanTi(
-			@RequestParam(value="id", required=false)String id, 
+			@RequestParam(value="xuan_ti_id", required=false)String xuan_ti_id, 
 			@RequestParam(value="type", required=false)int type,
 			@RequestParam(value="year", required=false)String year,
 			@RequestParam(value="book_name", required=false)String book_name, 
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("id: " + id);
+		System.out.println("xuan_ti_id: " + xuan_ti_id);
 		System.out.println("type: " + type);
 		System.out.println("year: " + year);
 		System.out.println("book_name: " + book_name);
@@ -207,17 +206,17 @@ public class XuanTiController {
 		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
 		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
 		
-		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(id, type, year, book_name, currentPage);
+		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(xuan_ti_id, type, year, book_name, currentPage);
 		
         /*计算总的页数和总的记录数*/
-		xuanTiService.calculateTotalPageAndRecordNumber(id, type, year, book_name);
+		xuanTiService.calculateTotalPageAndRecordNumber(xuan_ti_id, type, year, book_name);
 		
         /*获取到总的页码数目*/
         totalPage = xuanTiService.getTotalPage();
         /*当前查询条件下总记录数*/
         recordNumber = xuanTiService.getRecordNumber();
         
-        request.setAttribute("id", id);
+        request.setAttribute("xuan_ti_id", xuan_ti_id);
         request.setAttribute("type", type);
         request.setAttribute("year", year);
         request.setAttribute("book_name", book_name);

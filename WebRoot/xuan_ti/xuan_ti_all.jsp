@@ -21,7 +21,7 @@
     int totalPage =   (Integer)request.getAttribute("totalPage");  		// 一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber"); // 一共多少记录
     
-    String id = (String)request.getAttribute("id"); 	// 选题id
+    String xuan_ti_id = (String)request.getAttribute("xuan_ti_id"); 	// 选题id
     int type = (Integer)request.getAttribute("type"); 	// 选题type
     String year = (String)request.getAttribute("year"); // 选题year
     String book_name = (String)request.getAttribute("book_name"); 	// 选题book_name
@@ -53,6 +53,7 @@ body {
 -->
 </style>
 
+<script type="text/javascript" src="<%=basePath %>js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/calendar.js"></script>
 <script type="text/javascript">
 var  highlightcolor='#c1ebff';
@@ -126,7 +127,7 @@ function QueryXuanTi() {
 }
 
 /* 删除 选题 */
-function del(id){
+function DelXuanTi(id){
 	$.get("<%=basePath%>xuan_ti/delXuanTi?id=" + id,function(data){
 		if("success" == data.result){
 			alert("删除成功！");
@@ -174,7 +175,7 @@ function OutputToExcel() {
 
   <tr>
   <td>
-选题编号：<input type=text name="id" value="<%=id%>" />&nbsp;
+选题编号：<input type=text name="xuan_ti_id" value="<%=xuan_ti_id%>" />&nbsp;
 选题类型：<select name="type">				
  				<option value="0"
  					<c:if test="${type == 0}">selected</c:if>
@@ -242,7 +243,7 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/checkXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:del('${xuanTi.id }')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelXuanTi('<%=xuanTi.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

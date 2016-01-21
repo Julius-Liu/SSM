@@ -13,7 +13,7 @@ public interface BianShenMapper {
 	List<BianShen> findAll();
 	
 	List<BianShen> calculateTotalPageAndRecordNumber(
-			@Param("id")String id, 
+			@Param("bian_shen_id")String bian_shen_id, 
 			@Param("book_id")String book_id, 
 			@Param("book_name")String book_name, 
 			@Param("bian_shen_status")int bian_shen_status);
