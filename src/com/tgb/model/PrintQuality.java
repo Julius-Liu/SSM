@@ -1,5 +1,8 @@
 package com.tgb.model;
 
+/*
+ * 印刷质量 对应表
+ */
 public class PrintQuality {
 	private int id;
 	private String content;

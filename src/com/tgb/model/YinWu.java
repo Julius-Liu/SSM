@@ -4,23 +4,56 @@ package com.tgb.model;
  * 印务
  */
 public class YinWu {
+	// 印务编号
 	private String id;
+	
+	// 起始日期
 	private String start_date;
+	
+	// 终止日期
 	private String end_date;
+	
+	// 出版单位
 	private String publish_company;
+	
+	// 印刷单位
 	private String print_company;
+	
+	// 图书名称
 	private String book_name;
+	
+	// 图书规格
 	private int book_specs;
+	
+	
 	private String book_specs_content;
+	
+	// 印章
 	private int yin_zhang;
+	
+	// 印章对应的content
 	private String yin_zhang_content;
+	
+	// 版次
 	private int revision;
+	
+	// 印刷数
 	private int print_quantity;
+	
+	// ISBN
 	private String ISBN;
+	
+	// 责任编辑
 	private String ze_ren_editor;
+	
+	// 责任部门
 	private String ze_ren_department;
+	
+	// 印刷状态
 	private int print_status;
 	private String print_status_content;
+	
+	// 印刷质量
 	private int print_quality;
 	private String print_quality_content;
 	

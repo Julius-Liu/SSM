@@ -14,8 +14,15 @@
 		<typeAlias alias="GaoJianSource" type="com.tgb.model.GaoJianSource" />
 		<typeAlias alias="ChuShenComments" type="com.tgb.model.ChuShenComments" />
 		<typeAlias alias="XuanTiStatus" type="com.tgb.model.XuanTiStatus" />
+		
 		<typeAlias alias="BianShen" type="com.tgb.model.BianShen" />
-		<typeAlias alias="BianShenStatus" type="com.tgb.model.BianShenStatus" />		
+		<typeAlias alias="BianShenStatus" type="com.tgb.model.BianShenStatus" />	
+		
+		<typeAlias alias="YinWu" type="com.tgb.model.YinWu" />
+		<typeAlias alias="BookSpecs" type="com.tgb.model.BookSpecs" />
+		<typeAlias alias="YinZhang" type="com.tgb.model.YinZhang" />
+		<typeAlias alias="PrintStatus" type="com.tgb.model.PrintStatus" />
+		<typeAlias alias="PrintQuality" type="com.tgb.model.PrintQuality" />
 	</typeAliases>
 	
 	<!-- 
@@ -73,8 +80,15 @@
 		<mapper resource="com/tgb/mapper/gaoJianSourceMapper.xml" />
 		<mapper resource="com/tgb/mapper/chuShenCommentsMapper.xml" />
 		<mapper resource="com/tgb/mapper/xuanTiStatusMapper.xml" />
+		
 		<mapper resource="com/tgb/mapper/bianShenMapper.xml" />
-		<mapper resource="com/tgb/mapper/bianShenStatusMapper.xml" />		
+		<mapper resource="com/tgb/mapper/bianShenStatusMapper.xml" />
+		
+		<mapper resource="com/tgb/mapper/yinWuMapper.xml" />
+		<mapper resource="com/tgb/mapper/bookSpecsMapper.xml" />
+		<mapper resource="com/tgb/mapper/yinZhangMapper.xml" />
+		<mapper resource="com/tgb/mapper/printStatusMapper.xml" />
+		<mapper resource="com/tgb/mapper/printQualityMapper.xml" />
 	</mappers>
 	
 </configuration>  
