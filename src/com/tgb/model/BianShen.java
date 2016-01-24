@@ -5,7 +5,7 @@ package com.tgb.model;
  */
 public class BianShen {
 	// 编审编号
-	private String id;
+	private int id;
 	
 	// 书号
 	private String book_id;
@@ -47,10 +47,10 @@ public class BianShen {
 	// 付印日期
 	private String fu_yin_date;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getBook_id() {

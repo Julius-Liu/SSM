@@ -6,14 +6,14 @@ import com.tgb.model.BianShen;
 public interface BianShenService {
 	void save(BianShen bianShen);
 	boolean update(BianShen bianShen);			// 更新编审信息	
-	boolean delete(String id);
-	BianShen findById(String id);
+	boolean delete(int id);
+	BianShen findById(int id);
 	List<BianShen> findAll();
 	
-	List<BianShen> queryBianShenInfo(String bian_shen_id, String book_id, String book_name, 
+	List<BianShen> queryBianShenInfo(String book_name, String original_author, String ze_ren_editor,  
 			int bian_shen_status, int currentPage);
 	
-	void calculateTotalPageAndRecordNumber(String bian_shen_id, String book_id, String book_name, 
+	void calculateTotalPageAndRecordNumber(String book_name, String original_author, String ze_ren_editor, 
 			int bian_shen_status);
 	
 	int getTotalPage();	

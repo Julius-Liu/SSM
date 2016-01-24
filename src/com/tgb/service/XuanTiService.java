@@ -10,11 +10,11 @@ public interface XuanTiService {
 	XuanTi findById(String id);
 	List<XuanTi> findAll();
 	
-	List<XuanTi> queryXuanTiInfo(String xuan_ti_id, int type, String year, 
-			String book_name, int currentPage);
+	List<XuanTi> queryXuanTiInfo(String xuan_ti_id, String year, int source,
+			int status, int currentPage);
 	
-	void calculateTotalPageAndRecordNumber(String xuan_ti_id, int type, String year, 
-			String book_name);
+	void calculateTotalPageAndRecordNumber(String xuan_ti_id, String year, int source,
+			int status);
 	
 	int getTotalPage();	
 	int getRecordNumber();

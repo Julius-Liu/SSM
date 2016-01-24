@@ -56,11 +56,11 @@
 		where id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		delete from bian_shen where id=#{id}
 	</delete>
 	
-	<select id="findById" parameterType="String" resultType="BianShen">
+	<select id="findById" parameterType="int" resultType="BianShen">
 		select * from bian_shen where id=#{id}
 	</select>
 	
@@ -100,14 +100,14 @@
 			fu_yin_date 
 		from bian_shen inner join bian_shen_status on bian_shen.bian_shen_status=bian_shen_status.id		
 		<where>
-			<if test="bian_shen_id != null and bian_shen_id != '' ">
-				bian_shen_id like CONCAT(CONCAT('%', #{bian_shen_id, jdbcType=VARCHAR}), '%')
-			</if>
-			<if test="book_id != null and book_id != ''">				
-				AND book_id like CONCAT(CONCAT('%', #{book_id, jdbcType=VARCHAR}), '%')
-			</if>
 			<if test="book_name != null and book_name != '' ">
 				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="original_author != null and original_author != '' ">
+				original_author like CONCAT(CONCAT('%', #{original_author, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="ze_ren_editor != null and ze_ren_editor != ''">				
+				AND ze_ren_editor like CONCAT(CONCAT('%', #{ze_ren_editor, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="bian_shen_status != 0 ">
 				AND bian_shen_status = #{bian_shen_status, jdbcType=INTEGER}

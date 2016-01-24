@@ -1,28 +1,31 @@
 <%@ page language="java" import="java.util.*"  contentType="text/html;charset=UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@ page import="com.tgb.model.XuanTi" %>
-<%@ page import="com.tgb.model.GaoJianSource" %>
-<%@ page import="com.tgb.model.ChuShenComments" %>
-<%@ page import="com.tgb.model.XuanTiStatus" %>
+<%@ page import="com.tgb.model.YinWu" %>
+<%@ page import="com.tgb.model.BookSpecs" %>
+<%@ page import="com.tgb.model.YinZhang" %>
+<%@ page import="com.tgb.model.PrintStatus" %>
+<%@ page import="com.tgb.model.PrintQuality" %>
 
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-    List<XuanTi> xuanTiList = (List<XuanTi>)request.getAttribute("xuanTiList");
-    // 获取所有的 gaoJianSource 信息
-    List<GaoJianSource> gaoJianSourceList = (List<GaoJianSource>)request.getAttribute("gaoJianSourceList");
-    List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
-    List<XuanTiStatus> xuanTiStatusList = (List<XuanTiStatus>)request.getAttribute("xuanTiStatusList");
+    List<YinWu> yinWuList = (List<YinWu>)request.getAttribute("yinWuList");
+    // 获取所有的 bookSpecs 信息
+    List<BookSpecs> bookSpecsList = (List<BookSpecs>)request.getAttribute("bookSpecsList");
+    List<YinZhang> yinZhangList = (List<YinZhang>)request.getAttribute("yinZhangList");
+    List<PrintStatus> printStatusList = (List<PrintStatus>)request.getAttribute("printStatusList");
+    List<PrintQuality> printQualityList = (List<PrintQuality>)request.getAttribute("printQualityList");
 
     int currentPage =  (Integer)request.getAttribute("currentPage"); 	// 当前页
     int totalPage =   (Integer)request.getAttribute("totalPage");  		// 一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber"); // 一共多少记录
     
-    String xuan_ti_id = (String)request.getAttribute("xuan_ti_id"); 	// 选题id    
-    String year = (String)request.getAttribute("year"); 		// 选题year
-    int source = (Integer)request.getAttribute("source"); 	
-    int status = (Integer)request.getAttribute("status"); 	
+    String yin_wu_id = (String)request.getAttribute("yin_wu_id"); 	// 印务id
+    String book_name = (String)request.getAttribute("book_name"); 	// 印务book_name
+    int yin_zhang = (Integer)request.getAttribute("yin_zhang"); 	// 印务yin_zhang
+    int print_status = (Integer)request.getAttribute("print_status"); // 印务print_status
+    
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -33,7 +36,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>选题信息查询</title>
+<title>印务信息查询</title>
 <style type="text/css">
 <!--
 body {
@@ -101,31 +104,31 @@ function GoToPage(currentPage, totalPage) {
     	return;
     }
     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>xuan_ti/queryXuanTi?source=<%=source%>&status=<%=status%>";
+    document.forms[0].action = "<%=basePath %>yin_wu/queryYinWu?yin_zhang=<%=yin_zhang%>&print_status=<%=print_status%>";
     document.forms[0].submit(); 
 }
 
 function changepage(totalPage)
 {
-    var pageValue=document.xuanTiQueryForm.pageValue.value;
+    var pageValue=document.yinWuQueryForm.pageValue.value;
     if(pageValue > totalPage) {
         alert('你输入的页码超出了总页数!');
         return ;
     }
-    document.xuanTiQueryForm.currentPage.value = pageValue;
-    document.forms["xuanTiQueryForm"].action = "<%=basePath %>xuan_ti/queryXuanTi";
-    document.xuanTiQueryForm.submit();
+    document.yinWuQueryForm.currentPage.value = pageValue;
+    document.forms["yinWuQueryForm"].action = "<%=basePath %>yin_wu/queryYinWu";
+    document.yinWuQueryForm.submit();
 }
 
 /* 查询 选题 按钮 */
-function QueryXuanTi() {
-	document.forms["xuanTiQueryForm"].action = "<%=basePath %>xuan_ti/queryXuanTi";
-	document.forms["xuanTiQueryForm"].submit();
+function QueryYinWu() {
+	document.forms["yinWuQueryForm"].action = "<%=basePath %>yin_wu/queryYinWu";
+	document.forms["yinWuQueryForm"].submit();
 }
 
 /* 删除 选题 */
-function DelXuanTi(id){
-	$.get("<%=basePath%>xuan_ti/delXuanTi?id=" + id,function(data){
+function DelYinWu(id){
+	$.get("<%=basePath%>yin_wu/delYinWu?id=" + id,function(data){
 		if("success" == data.result){
 			alert("删除成功！");
 			window.location.reload();
@@ -145,7 +148,7 @@ function OutputToExcel() {
 </head>
 
 <body>
-<form action="<%=basePath %>xuan_ti/queryXuanTi" name="xuanTiQueryForm" method="post">
+<form action="<%=basePath %>yin_wu/queryYinWu" name="yinWuQueryForm" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="30" background="<%=basePath %>images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -156,7 +159,7 @@ function OutputToExcel() {
             <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="5%"><div align="center"><img src="<%=basePath %>images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[选题信息管理]-[选题信息查询]</td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[印务信息管理]-[印务信息查询]</td>
               </tr>
             </table></td>
             <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
@@ -172,15 +175,15 @@ function OutputToExcel() {
 
   <tr>
   <td>
-选题编号：<input type=text name="xuan_ti_id" value="<%=xuan_ti_id%>" />&nbsp;
-选题年度：<input type=text name="year" value="<%=year%>"/>&nbsp;
-选题类型：<select name="source">				
+选题编号：<input type=text name="yin_wu_id" value="<%=yin_wu_id%>" />&nbsp;
+书名：<input type=text readonly name="book_name" value="<%=book_name%>"/>&nbsp;
+印章：<select name="yin_zhang">				
  				<option value="0"
- 					<c:if test="${source == 0}">selected</c:if>
+ 					<c:if test="${yin_zhang == 0}">selected</c:if>
  				>--请选择--</option>				
- 				<c:forEach var="item" items="${gaoJianSourceList }">
+ 				<c:forEach var="item" items="${yinZhangList }">
 	      	    	<option value="${item.id}" 
-	      	    		<c:if test="${item.id == source }">
+	      	    		<c:if test="${item.id == yin_zhang }">
 	      	    			<c:out value='selected="selected"'></c:out>
 	      	    		</c:if>
 					>
@@ -188,13 +191,13 @@ function OutputToExcel() {
 	      	    	</option>
       	    	</c:forEach> 				
  			</select>&nbsp;
-选题类型：<select name="status">				
+选题类型：<select name="print_status">				
  				<option value="0"
- 					<c:if test="${status == 0}">selected</c:if>
+ 					<c:if test="${print_status == 0}">selected</c:if>
  				>--请选择--</option>				
- 				<c:forEach var="item" items="${xuanTiStatusList }">
+ 				<c:forEach var="item" items="${printStatusList }">
 	      	    	<option value="${item.id}" 
-	      	    		<c:if test="${item.id == status }">
+	      	    		<c:if test="${item.id == print_status }">
 	      	    			<c:out value='selected="selected"'></c:out>
 	      	    		</c:if>
 					>
@@ -204,7 +207,7 @@ function OutputToExcel() {
  			</select>&nbsp;
 
     <input type=hidden name=currentPage value="1" />
-    <input type=submit value="查询" onclick="QueryXuanTi();"  />
+    <input type=submit value="查询" onclick="QueryYinWu();"  />
   </td>
 </tr>
   <tr>
@@ -218,42 +221,42 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题编号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题类型</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题年度</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印章编号</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">起始日期</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">终止日期</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">部门</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">稿件来源</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">选题状态</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印章</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印刷数</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印刷状态</span></div></td>
             <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
 				<%
-					int xuanTiListSize = xuanTiList.size();
+					int yinWuListSize = yinWuList.size();
 					int startIndex = (currentPage -1) *10;
-					System.out.println("xuanTiList size = " + xuanTiListSize);
-				    for(int i=0;i<xuanTiListSize;i++) {
+					System.out.println("yinWuList size = " + yinWuListSize);
+				    for(int i=0;i<yinWuListSize;i++) {
             			int currentIndex = startIndex + i + 1; 	// 当前记录的序号
-            			XuanTi xuanTi = xuanTiList.get(i); 		// 获取到XuanTi对象
+            			YinWu yinWu = yinWuList.get(i); 		// 获取到XuanTi对象
 				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getId() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getType() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getYear() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getBook_name() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getDepartment() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getGaoJianSource() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getXuanTiStatus() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=xuanTi.getISBN() %></span></div></td>		            
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getId() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getStart_date() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getEnd_date() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getBook_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getYin_zhang_content() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getPrint_quantity() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getISBN() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getPrint_status_content() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/checkXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>xuan_ti/getXuanTi?id=<%=xuanTi.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:DelXuanTi('<%=xuanTi.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>yin_wu/checkYinWu?id=<%=yinWu.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>yin_wu/getYinWu?id=<%=yinWu.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelYinWu('<%=yinWu.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

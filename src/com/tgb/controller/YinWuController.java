@@ -87,88 +87,87 @@ public class YinWuController {
 	}
 	
 	/**
-	 * 添加 选题 并重定向
+	 * 添加 印务 并重定向
 	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/addXuanTi")
-	public String addXuanTi(XuanTi xuanTi, HttpServletRequest request) {
-		xuanTiService.save(xuanTi);
-		return "redirect:queryXuanTi?xuan_ti_id=&type=0&year=&book_name=&currentPage=1";
+	@RequestMapping("/addYinWu")
+	public String addYinWu(YinWu yinWu, HttpServletRequest request) {
+		yinWuService.save(yinWu);
+		return "redirect:queryYinWu?yin_wu_id=&book_name=&yin_zhang=0&print_status=0&currentPage=1";
 	}
 	
 	/**
-	 * 编辑 选题
+	 * 编辑 印务
 	 * @param xuanTi
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/updateXuanTi")
-	public String updateXuanTi(XuanTi xuanTi, HttpServletRequest request) {	
-		if(xuanTiService.update(xuanTi)) {
-			return "redirect:queryXuanTi?xuan_ti_id=&type=0&year=&book_name=&currentPage=1";
+	@RequestMapping("/updateYinWu")
+	public String updateYinWu(YinWu yinWu, HttpServletRequest request) {	
+		if(yinWuService.update(yinWu)) {
+			return "redirect:queryYinWu?yin_wu_id=&book_name=&yin_zhang=0&print_status=0&currentPage=1";
 		}else {
 			return "/error";
 		}
 	}	
 	
 	/**
-	 * 获取指定 选题 列表
+	 * 获取指定 印务 列表
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/getXuanTi")
-	public String getXuanTi(String id, HttpServletRequest request) {
-		XuanTi xuanTi = xuanTiService.findById(id);
-		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
-		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
-		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
-		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+	@RequestMapping("/getYinWu")
+	public String getYinWu(String id, HttpServletRequest request) {
+		YinWu yinWu = yinWuService.findById(id);
+		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
+		List<YinZhang> yinZhangList = yinZhangService.findAll();
+		List<PrintStatus> printStatusList = printStatusService.findAll();
+		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
-		request.setAttribute("xuanTi", xuanTi);
-		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
-		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
-		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
-		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		request.setAttribute("yinWu", yinWu);
+		request.setAttribute("bookSpecsList", bookSpecsList);
+		request.setAttribute("yinZhangList", yinZhangList);
+		request.setAttribute("printStatusList", printStatusList);
+		request.setAttribute("printQualityList", printQualityList);
 
-		return "/xuan_ti/xuan_ti_edit";
+		return "/yin_wu/yin_wu_edit";
 	}
 	
 	/**
-	 * 查看指定 选题 详细内容
+	 * 查看指定 印务 详细内容
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/checkXuanTi")
-	public String checkXuanTi(String id, HttpServletRequest request) {
-		XuanTi xuanTi = xuanTiService.findById(id);
-		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
-		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
-		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
-		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+	@RequestMapping("/checkYinWu")
+	public String checkYinWu(String id, HttpServletRequest request) {
+		YinWu yinWu = yinWuService.findById(id);
+		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
+		List<YinZhang> yinZhangList = yinZhangService.findAll();
+		List<PrintStatus> printStatusList = printStatusService.findAll();
+		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
-		request.setAttribute("xuanTi", xuanTi);
-		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
-		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
-		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
-		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
-		
-		request.setAttribute("xuanTi", xuanTiService.findById(id));
-		return "/xuan_ti/xuan_ti_details";
+		request.setAttribute("yinWu", yinWu);
+		request.setAttribute("bookSpecsList", bookSpecsList);
+		request.setAttribute("yinZhangList", yinZhangList);
+		request.setAttribute("printStatusList", printStatusList);
+		request.setAttribute("printQualityList", printQualityList);
+
+		return "/yin_wu/yin_wu_details";
 	}	
 	
 	/**
-	 * 删除 选题
+	 * 删除 印务
 	 * @param id
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping("/delXuanTi")
-	public void delXuanTi(String id, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/delYinWu")
+	public void delYinWu(String id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
 		System.out.println("id = " + id);
-		if(xuanTiService.delete(id)) {
+		if(yinWuService.delete(id)) {
 			result = "{\"result\":\"success\"}";
 		}
 		
@@ -183,54 +182,54 @@ public class YinWuController {
 	}	
 	
 	/**
-	 * 查询 选题 列表
+	 * 查询 印务 列表
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/queryXuanTi")
-	public String queryXuanTi(
-			@RequestParam(value="xuan_ti_id", required=false)String xuan_ti_id, 
-			@RequestParam(value="type", required=false)int type,
-			@RequestParam(value="year", required=false)String year,
+	@RequestMapping("/queryYinWu")
+	public String queryYinWu(
+			@RequestParam(value="yin_wu_id", required=false)String yin_wu_id, 
 			@RequestParam(value="book_name", required=false)String book_name, 
+			@RequestParam(value="yin_zhang", required=false)int yin_zhang,
+			@RequestParam(value="print_status", required=false)int print_status,
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("xuan_ti_id: " + xuan_ti_id);
-		System.out.println("type: " + type);
-		System.out.println("year: " + year);
+		System.out.println("yin_wu_id: " + yin_wu_id);
 		System.out.println("book_name: " + book_name);
+		System.out.println("yin_zhang: " + yin_zhang);
+		System.out.println("print_status: " + print_status);
 		System.out.println("currentPage: " + currentPage);
 		
-		List<XuanTiType> xuanTiTypeList = xuanTiTypeService.findAll();
-		List<GaoJianSource> gaoJianSourceList = gaoJianSourceService.findAll();
-		List<ChuShenComments> chuShenCommentsList = chuShenCommentsService.findAll();
-		List<XuanTiStatus> xuanTiStatusList = xuanTiStatusService.findAll();
+		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
+		List<YinZhang> yinZhangList = yinZhangService.findAll();
+		List<PrintStatus> printStatusList = printStatusService.findAll();
+		List<PrintQuality> printQualityList = printQualityService.findAll();
 		
-		List<XuanTi> xuanTiList = xuanTiService.queryXuanTiInfo(xuan_ti_id, type, year, book_name, currentPage);
+		List<YinWu> yinWuList = yinWuService.queryYinWuInfo(yin_wu_id, book_name, yin_zhang, print_status, currentPage);
 		
         /*计算总的页数和总的记录数*/
-		xuanTiService.calculateTotalPageAndRecordNumber(xuan_ti_id, type, year, book_name);
+		yinWuService.calculateTotalPageAndRecordNumber(yin_wu_id, book_name, yin_zhang, print_status);
 		
         /*获取到总的页码数目*/
-        totalPage = xuanTiService.getTotalPage();
+        totalPage = yinWuService.getTotalPage();
         /*当前查询条件下总记录数*/
-        recordNumber = xuanTiService.getRecordNumber();
+        recordNumber = yinWuService.getRecordNumber();
         
-        request.setAttribute("xuan_ti_id", xuan_ti_id);
-        request.setAttribute("type", type);
-        request.setAttribute("year", year);
+        request.setAttribute("yin_wu_id", yin_wu_id);
         request.setAttribute("book_name", book_name);
+        request.setAttribute("yin_zhang", yin_zhang);
+        request.setAttribute("print_status", print_status);
         
-		request.setAttribute("xuanTiList", xuanTiList);
+		request.setAttribute("yinWuList", yinWuList);
 		
-		request.setAttribute("xuanTiTypeList", xuanTiTypeList);
-		request.setAttribute("gaoJianSourceList", gaoJianSourceList);
-		request.setAttribute("chuShenCommentsList", chuShenCommentsList);
-		request.setAttribute("xuanTiStatusList", xuanTiStatusList);
+		request.setAttribute("bookSpecsList", bookSpecsList);
+		request.setAttribute("yinZhangList", yinZhangList);
+		request.setAttribute("printStatusList", printStatusList);
+		request.setAttribute("printQualityList", printQualityList);
 		
 		request.setAttribute("recordNumber", recordNumber);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
-		return "/xuan_ti/xuan_ti_all";
+		return "/yin_wu/yin_wu_all";
 	}	
 }

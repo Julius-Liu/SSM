@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.tgb.model.XuanTiType" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page import="com.tgb.model.GaoJianSource" %>
 <%@ page import="com.tgb.model.ChuShenComments" %>
 <%@ page import="com.tgb.model.XuanTiStatus" %>
@@ -8,8 +8,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     
-    // 获取所有的xuanTiType信息
-    List<XuanTiType> xuanTiTypeList = (List<XuanTiType>)request.getAttribute("xuanTiTypeList");
+    // 获取所有的 gaoJianSource 信息
     List<GaoJianSource> gaoJianSourceList = (List<GaoJianSource>)request.getAttribute("gaoJianSourceList");
     List<ChuShenComments> chuShenCommentsList = (List<ChuShenComments>)request.getAttribute("chuShenCommentsList");
     List<XuanTiStatus> xuanTiStatusList = (List<XuanTiStatus>)request.getAttribute("xuanTiStatusList");
@@ -20,7 +19,6 @@
         response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
     } */
 %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
 <HEAD>
@@ -56,19 +54,7 @@
 
 	<tr>
     	<td width=30%>选题类型：</td>
-    	<td width=70%>
-      	<select name="type">
-      		<c:forEach var="item" items="${xuanTiTypeList}">
-      			<option value="${item.id }"
-      				<c:if test="${item.id == xuanTi.type }">
-      					<c:out value='selected="selected"'></c:out>
-      				</c:if>
-      			>
-      				${item.content }
-      			</option>
-      		</c:forEach>      	   	
-      	</select>
-    	</td>
+    	<td width=70%><input id="type" name="type" value="${xuanTi.type }" type="text" size="10"/></td>
   	</tr>
 
   	<tr>

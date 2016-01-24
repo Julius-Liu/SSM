@@ -10,7 +10,6 @@
 		<typeAlias alias="BookType" type="com.tgb.model.BookType" />
 		
 		<typeAlias alias="XuanTi" type="com.tgb.model.XuanTi" />
-		<typeAlias alias="XuanTiType" type="com.tgb.model.XuanTiType" />
 		<typeAlias alias="GaoJianSource" type="com.tgb.model.GaoJianSource" />
 		<typeAlias alias="ChuShenComments" type="com.tgb.model.ChuShenComments" />
 		<typeAlias alias="XuanTiStatus" type="com.tgb.model.XuanTiStatus" />
@@ -76,7 +75,6 @@
 		<mapper resource="com/tgb/mapper/bookTypeMapper.xml" />
 		
 		<mapper resource="com/tgb/mapper/xuanTiMapper.xml" />
-		<mapper resource="com/tgb/mapper/xuanTiTypeMapper.xml" />
 		<mapper resource="com/tgb/mapper/gaoJianSourceMapper.xml" />
 		<mapper resource="com/tgb/mapper/chuShenCommentsMapper.xml" />
 		<mapper resource="com/tgb/mapper/xuanTiStatusMapper.xml" />

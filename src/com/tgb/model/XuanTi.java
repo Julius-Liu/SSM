@@ -5,9 +5,7 @@ public class XuanTi {
 	private String id;
 	
 	// 选题类型
-	private int type;
-	
-	private String xuan_ti_type;
+	private String type;
 	
 	// 选题年度
 	private String year;
@@ -51,20 +49,11 @@ public class XuanTi {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
-	}
-	
-	// 级联查询使用
-	// 选题类型
-	public String getXuanTiType() {
-		return xuan_ti_type;
-	}
-	public void setXuanTiType(String xuan_ti_type) {
-		this.xuan_ti_type = xuan_ti_type;
 	}
 	
 	public String getYear() {

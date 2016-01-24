@@ -42,7 +42,7 @@
 	</insert>
 	
 	<update id="update" parameterType="YinWu">
-		update xuan_ti set start_date=#{start_date}, 
+		update yin_wu set start_date=#{start_date}, 
 			end_date=#{end_date}, 
 			publish_company=#{publish_company}, 
 			print_company=#{print_company}, 
@@ -112,7 +112,7 @@
 						inner join print_quality on yin_wu.print_quality=print_quality.id	
 		<where>
 			<if test="yin_wu_id != null and yin_wu_id != '' ">
-				yin_wu_id like CONCAT(CONCAT('%', #{yin_wu_id, jdbcType=VARCHAR}), '%')
+				yin_wu.id like CONCAT(CONCAT('%', #{yin_wu_id, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="book_name != null and book_name != '' ">
 				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')

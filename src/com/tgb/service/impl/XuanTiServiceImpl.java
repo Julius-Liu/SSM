@@ -65,11 +65,11 @@ public class XuanTiServiceImpl implements XuanTiService{
 	 * 查询 选题 信息
 	 * @see com.tgb.service.XuanTiService#queryXuanTiInfo(java.lang.String, int, java.lang.String, java.lang.String, int)
 	 */
-	public List<XuanTi> queryXuanTiInfo(String xuan_ti_id, int type, 
-			String year, String book_name, int currentPage) {
+	public List<XuanTi> queryXuanTiInfo(String xuan_ti_id, String year, 
+			int source, int status, int currentPage) {
 		// 限制每页显示的个数
 		PageHelper.startPage(currentPage, 10);
-		List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(xuan_ti_id, type, year, book_name);
+		List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(xuan_ti_id, year, source, status);
 		
     	return xuanTiList;
 	}
@@ -78,9 +78,9 @@ public class XuanTiServiceImpl implements XuanTiService{
 	 * 计算总页数和总记录数
 	 * @see com.tgb.service.XuanTiService#calculateTotalPageAndRecordNumber(java.lang.String, int, java.lang.String, java.lang.String)
 	 */
-	public void calculateTotalPageAndRecordNumber(String xuan_ti_id, int type, 
-			String year, String book_name) {
-        List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(xuan_ti_id, type, year, book_name);
+	public void calculateTotalPageAndRecordNumber(String xuan_ti_id, String year, 
+			int source, int status) {
+        List<XuanTi> xuanTiList = xuanTiMapper.calculateTotalPageAndRecordNumber(xuan_ti_id, year, source, status);
         recordNumber = xuanTiList.size();
         int mod = recordNumber % this.PAGE_SIZE;
         totalPage = recordNumber / this.PAGE_SIZE;

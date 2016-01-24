@@ -12,8 +12,11 @@ String xuan_ti_id = "";
 String year = "";
 String book_name = "";
 
-String bian_shen_id = "";
-String book_id = "";
+String original_author = "";
+String ze_ren_editor = "";
+String yin_wu_id = "";
+String yin_zhang = "";
+String print_status = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -168,9 +171,9 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>xuan_ti/queryXuanTi?xuan_ti_id=<%=xuan_ti_id%>&type=0&year=<%=year%>&book_name=<%=book_name%>&currentPage=1" target="main">查看选题信息</a></li>
+          <li><a href="<%=basePath%>xuan_ti/queryXuanTi?xuan_ti_id=<%=xuan_ti_id%>&year=<%=year%>&source=0&status=0&currentPage=1" target="main">查看选题信息</a></li>
           <li><a href="<%=basePath%>xuan_ti/toAddXuanTi" target="main" target="main">添加选题信息</a></li>
-          <li><a href="<%=basePath%>bian_shen/queryBianShen?bian_shen_id=<%=bian_shen_id%>&book_id=<%=book_id%>&book_name=<%=book_name%>&bian_shen_status=0&currentPage=1" target="main">查看编审信息</a></li>
+          <li><a href="<%=basePath%>bian_shen/queryBianShen?book_name=<%=book_name%>&original_author=<%=original_author%>&ze_ren_editor=<%=ze_ren_editor%>&bian_shen_status=0&currentPage=1" target="main">查看编审信息</a></li>
           <li><a href="<%=basePath%>bian_shen/toAddBianShen" target="main">添加编审信息</a></li>
         </ul>
       </div>
@@ -182,8 +185,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="http://www.865171.cn" target="main">查看印务信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">添加印务信息</a></li>
+          <li><a href="<%=basePath%>yin_wu/queryYinWu?yin_wu_id=<%=yin_wu_id%>&book_name=<%=book_name%>&yin_zhang=0&print_status=0&currentPage=1" target="main">查看印务信息</a></li>
+          <li><a href="<%=basePath%>yin_wu/toAddYinWu" target="main">添加印务信息</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">发行管理</a></h1>

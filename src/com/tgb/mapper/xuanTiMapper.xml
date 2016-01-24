@@ -60,7 +60,7 @@
 	
 	<select id="findAll" resultType="XuanTi">
 		select xuan_ti.id, 
-			xuan_ti_type.content as xuan_ti_type, 
+			type, 
 			year, 
 			season, 
 			book_name, 
@@ -71,8 +71,7 @@
 			chu_shen_comments.content as chu_shen_comments,
 			xuan_ti_status.content as xuan_ti_status,
 			ISBN 
-		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
-				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
 		order by xuan_ti.id asc
@@ -80,7 +79,7 @@
 	
 	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
 		select xuan_ti.id, 
-			xuan_ti_type.content as xuan_ti_type, 
+			type, 
 			year, 
 			season, 
 			book_name, 
@@ -91,22 +90,21 @@
 			chu_shen_comments.content as chu_shen_comments,
 			xuan_ti_status.content as xuan_ti_status,
 			ISBN 
-		from (((xuan_ti inner join xuan_ti_type on xuan_ti.type=xuan_ti_type.id)
-				inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
 					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
 						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
 		<where>
 			<if test="xuan_ti_id != null and xuan_ti_id != '' ">
-				xuan_ti_id like CONCAT(CONCAT('%', #{xuan_ti_id, jdbcType=VARCHAR}), '%')
-			</if>
-			<if test="type != 0">				
-				AND type = #{type, jdbcType=INTEGER}
+				xuan_ti.id like CONCAT(CONCAT('%', #{xuan_ti_id, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="year != null and year != '' ">
 				AND year like CONCAT(CONCAT('%', #{year, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="book_name != null and book_name != '' ">
-				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			<if test="source != 0">				
+				AND source = #{source, jdbcType=INTEGER}
+			</if>
+			<if test="status != 0 ">
+				AND status = #{status, jdbcType=INTEGER}
 			</if>
 		</where>
 		order by xuan_ti.id asc

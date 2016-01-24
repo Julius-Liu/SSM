@@ -75,7 +75,7 @@ public class BianShenController {
 	@RequestMapping("/addBianShen")
 	public String addBianShen(BianShen bianShen, HttpServletRequest request) {
 		bianShenService.save(bianShen);
-		return "redirect:queryBianShen?bian_shen_id=&book_id=&book_name=&bian_shen_status=0&currentPage=1";
+		return "redirect:queryBianShen?book_name=&original_author=&ze_ren_editor=&bian_shen_status=0&currentPage=1";
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class BianShenController {
 	@RequestMapping("/updateBianShen")
 	public String updateBianShen(BianShen bianShen, HttpServletRequest request) {	
 		if(bianShenService.update(bianShen)) {
-			return "redirect:queryBianShen?bian_shen_id=&book_id=&book_name=&bian_shen_status=0&currentPage=1";
+			return "redirect:queryBianShen?book_name=&original_author=&ze_ren_editor=&bian_shen_status=0&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -99,7 +99,7 @@ public class BianShenController {
 	 * @return
 	 */
 	@RequestMapping("/getBianShen")
-	public String getBianShen(String id, HttpServletRequest request) {
+	public String getBianShen(int id, HttpServletRequest request) {
 		BianShen bianShen = bianShenService.findById(id);
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 				
@@ -115,7 +115,7 @@ public class BianShenController {
 	 * @return
 	 */
 	@RequestMapping("/checkBianShen")
-	public String checkBianShen(String id, HttpServletRequest request) {
+	public String checkBianShen(int id, HttpServletRequest request) {
 		BianShen bianShen = bianShenService.findById(id);
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 				
@@ -132,7 +132,7 @@ public class BianShenController {
 	 * @param response
 	 */
 	@RequestMapping("/delBianShen")
-	public void delBianShen(String id, HttpServletRequest request, HttpServletResponse response) {
+	public void delBianShen(int id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
 		if(bianShenService.delete(id)) {
 			result = "{\"result\":\"success\"}";
@@ -155,33 +155,33 @@ public class BianShenController {
 	 */
 	@RequestMapping("/queryBianShen")
 	public String queryBianShen(
-			@RequestParam(value="bian_shen_id", required=false)String bian_shen_id, 
-			@RequestParam(value="book_id", required=false)String book_id,
 			@RequestParam(value="book_name", required=false)String book_name,
+			@RequestParam(value="original_author", required=false)String original_author, 
+			@RequestParam(value="ze_ren_editor", required=false)String ze_ren_editor,			
 			@RequestParam(value="bian_shen_status", required=false)int bian_shen_status, 
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("bian_shen_id: " + bian_shen_id);
-		System.out.println("book_id: " + book_id);
 		System.out.println("book_name: " + book_name);
+		System.out.println("original_author: " + original_author);
+		System.out.println("ze_ren_editor: " + ze_ren_editor);		
 		System.out.println("bian_shen_status: " + bian_shen_status);
 		System.out.println("currentPage: " + currentPage);
 		
 		List<BianShenStatus> bianShenStatusList = bianShenStatusService.findAll();
 		
-		List<BianShen> bianShenList = bianShenService.queryBianShenInfo(bian_shen_id, book_id, book_name, bian_shen_status, currentPage);
+		List<BianShen> bianShenList = bianShenService.queryBianShenInfo(book_name, original_author, ze_ren_editor, bian_shen_status, currentPage);
 		
         /*计算总的页数和总的记录数*/
-		bianShenService.calculateTotalPageAndRecordNumber(bian_shen_id, book_id, book_name, bian_shen_status);
+		bianShenService.calculateTotalPageAndRecordNumber(book_name, original_author, ze_ren_editor, bian_shen_status);
 		
         /*获取到总的页码数目*/
         totalPage = bianShenService.getTotalPage();
         /*当前查询条件下总记录数*/
         recordNumber = bianShenService.getRecordNumber();
         
-        request.setAttribute("bian_shen_id", bian_shen_id);
-        request.setAttribute("book_id", book_id);
         request.setAttribute("book_name", book_name);
+        request.setAttribute("original_author", original_author);
+        request.setAttribute("ze_ren_editor", ze_ren_editor);        
         request.setAttribute("bian_shen_status", bian_shen_status);
         
 		request.setAttribute("bianShenList", bianShenList);
