@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page import="com.tgb.model.YinWu" %>
 <%@ page import="com.tgb.model.BookSpecs" %>
-<%@ page import="com.tgb.model.YinZhang" %>
 <%@ page import="com.tgb.model.PrintStatus" %>
 <%@ page import="com.tgb.model.PrintQuality" %>
 
@@ -13,7 +12,6 @@
     List<YinWu> yinWuList = (List<YinWu>)request.getAttribute("yinWuList");
     // 获取所有的 bookSpecs 信息
     List<BookSpecs> bookSpecsList = (List<BookSpecs>)request.getAttribute("bookSpecsList");
-    List<YinZhang> yinZhangList = (List<YinZhang>)request.getAttribute("yinZhangList");
     List<PrintStatus> printStatusList = (List<PrintStatus>)request.getAttribute("printStatusList");
     List<PrintQuality> printQualityList = (List<PrintQuality>)request.getAttribute("printQualityList");
 
@@ -21,9 +19,9 @@
     int totalPage =   (Integer)request.getAttribute("totalPage");  		// 一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber"); // 一共多少记录
     
-    String yin_wu_id = (String)request.getAttribute("yin_wu_id"); 	// 印务id
+    String print_company = (String)request.getAttribute("print_company"); 	
     String book_name = (String)request.getAttribute("book_name"); 	// 印务book_name
-    int yin_zhang = (Integer)request.getAttribute("yin_zhang"); 	// 印务yin_zhang
+    String ze_ren_editor = (String)request.getAttribute("ze_ren_editor"); 	
     int print_status = (Integer)request.getAttribute("print_status"); // 印务print_status
     
         //String username=(String)session.getAttribute("username");
@@ -104,7 +102,7 @@ function GoToPage(currentPage, totalPage) {
     	return;
     }
     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>yin_wu/queryYinWu?yin_zhang=<%=yin_zhang%>&print_status=<%=print_status%>";
+    document.forms[0].action = "<%=basePath %>yin_wu/queryYinWu";
     document.forms[0].submit(); 
 }
 
@@ -175,22 +173,9 @@ function OutputToExcel() {
 
   <tr>
   <td>
-选题编号：<input type=text name="yin_wu_id" value="<%=yin_wu_id%>" />&nbsp;
-书名：<input type=text readonly name="book_name" value="<%=book_name%>"/>&nbsp;
-印章：<select name="yin_zhang">				
- 				<option value="0"
- 					<c:if test="${yin_zhang == 0}">selected</c:if>
- 				>--请选择--</option>				
- 				<c:forEach var="item" items="${yinZhangList }">
-	      	    	<option value="${item.id}" 
-	      	    		<c:if test="${item.id == yin_zhang }">
-	      	    			<c:out value='selected="selected"'></c:out>
-	      	    		</c:if>
-					>
-	      	    		${item.content }
-	      	    	</option>
-      	    	</c:forEach> 				
- 			</select>&nbsp;
+印刷单位：<input type=text name="print_company" value="<%=print_company%>" />&nbsp;
+书名：<input type=text name="book_name" value="<%=book_name%>"/>&nbsp;
+责任编辑：<input type=text name="ze_ren_editor" value="<%=ze_ren_editor%>"/>&nbsp;
 选题类型：<select name="print_status">				
  				<option value="0"
  					<c:if test="${print_status == 0}">selected</c:if>
@@ -221,13 +206,13 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印章编号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">起始日期</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">终止日期</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">起始日期</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">终止日期</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印刷单位</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印章</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">图书规格</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印刷数</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">ISBN</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">责任编辑</span></div></td>
             <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">印刷状态</span></div></td>
             <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
@@ -245,13 +230,13 @@ function OutputToExcel() {
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getId() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getStart_date() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getEnd_date() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getPrint_company() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getBook_name() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getYin_zhang_content() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getBook_specs_content() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getPrint_quantity() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getISBN() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getZe_ren_editor() %></span></div></td>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=yinWu.getPrint_status_content() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
 		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>yin_wu/checkYinWu?id=<%=yinWu.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;

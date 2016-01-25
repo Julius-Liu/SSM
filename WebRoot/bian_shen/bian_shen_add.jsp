@@ -67,11 +67,6 @@
     <form action="" name="bianShen">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
-	<tr>
-	    <td width=30%>编审编号：</td>
-	    <td width=70%><input id="bian_shen.id" name="id" type="text" size="10" /></td>
-	</tr>
-
   	<tr>
     	<td width=30%>书号：</td>
     	<td width=70%><input id="book_id" name="book_id" type="text" size="10" /></td>

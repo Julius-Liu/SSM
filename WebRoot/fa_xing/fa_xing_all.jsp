@@ -1,24 +1,21 @@
 <%@ page language="java" import="java.util.*"  contentType="text/html;charset=UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@ page import="com.tgb.model.BianShen" %>
-<%@ page import="com.tgb.model.BianShenStatus" %>
+<%@ page import="com.tgb.model.FaXing" %>
 
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-    List<BianShen> bianShenList = (List<BianShen>)request.getAttribute("bianShenList");
-    // 获取所有的 bianShenStatus 信息
-    List<BianShenStatus> bianShenStatusList = (List<BianShenStatus>)request.getAttribute("bianShenStatusList");
+    List<FaXing> faXingList = (List<FaXing>)request.getAttribute("faXingList");
 
     int currentPage =  (Integer)request.getAttribute("currentPage"); 	// 当前页
     int totalPage =   (Integer)request.getAttribute("totalPage");  		// 一共多少页
     int recordNumber =   (Integer)request.getAttribute("recordNumber"); // 一共多少记录
     
-    String book_name = (String)request.getAttribute("book_name"); 	// 书名
-    String original_author = (String)request.getAttribute("original_author"); 	
-    String ze_ren_editor = (String)request.getAttribute("ze_ren_editor");     
-    int bian_shen_status = (Integer)request.getAttribute("bian_shen_status"); 	// 编审状态
+    String fa_xing_id = (String)request.getAttribute("fa_xing_id"); 	// 选题id    
+    String book_name = (String)request.getAttribute("book_name"); 		// 选题year
+    String order_receipt = (String)request.getAttribute("order_receipt"); 	
+    String contact_person = (String)request.getAttribute("contact_person"); 	
         //String username=(String)session.getAttribute("username");
     //if(username==null){
         //response.getWriter().println("<script>top.location.href='" + basePath + "login/login_view.action';</script>");
@@ -29,7 +26,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>编审信息查询</title>
+<title>发行信息查询</title>
 <style type="text/css">
 <!--
 body {
@@ -88,6 +85,7 @@ function changeback() {
 }
 
 /*跳转到查询结果的某页*/
+/*不应该加入 source 或 type 的信息*/
 function GoToPage(currentPage, totalPage) {
     if(currentPage == 0) {
     	return;
@@ -96,31 +94,31 @@ function GoToPage(currentPage, totalPage) {
     	return;
     }
     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>bian_shen/queryBianShen";
+    document.forms[0].action = "<%=basePath %>fa_xing/queryFaXing";
     document.forms[0].submit(); 
 }
 
 function changepage(totalPage)
 {
-    var pageValue=document.bianShenQueryForm.pageValue.value;
+    var pageValue=document.faXingQueryForm.pageValue.value;
     if(pageValue > totalPage) {
         alert('你输入的页码超出了总页数!');
         return ;
     }
-    document.bianShenQueryForm.currentPage.value = pageValue;
-    document.forms["bianShenQueryForm"].action = "<%=basePath %>bian_shen/queryBianShen";
-    document.bianShenQueryForm.submit();
+    document.faXingQueryForm.currentPage.value = pageValue;
+    document.forms["faXingQueryForm"].action = "<%=basePath %>fa_xing/queryFaXing";
+    document.faXingQueryForm.submit();
 }
 
-/* 查询 选题 按钮 */
-function QueryBianShen() {
-	document.forms["bianShenQueryForm"].action = "<%=basePath %>bian_shen/queryBianShen";
-	document.forms["bianShenQueryForm"].submit();
+/* 查询 发行 按钮 */
+function QueryFaXing() {
+	document.forms["faXingQueryForm"].action = "<%=basePath %>fa_xing/queryFaXing";
+	document.forms["faXingQueryForm"].submit();
 }
 
-/* 删除 选题 */
-function DelBianShen(id){
-	$.get("<%=basePath%>bian_shen/delBianShen?id=" + id,function(data){
+/* 删除 发行 */
+function DelFaXing(id){
+	$.get("<%=basePath%>fa_xing/delFaXing?id=" + id,function(data){
 		if("success" == data.result){
 			alert("删除成功！");
 			window.location.reload();
@@ -140,7 +138,7 @@ function OutputToExcel() {
 </head>
 
 <body>
-<form action="<%=basePath %>bian_shen/queryBianShen" name="bianShenQueryForm" method="post">
+<form action="<%=basePath %>fa_xing/queryFaXing" name="faXingQueryForm" method="post">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="30" background="<%=basePath %>images/tab_05.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -151,7 +149,7 @@ function OutputToExcel() {
             <td width="46%" valign="middle"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="5%"><div align="center"><img src="<%=basePath %>images/tb.gif" width="16" height="16" /></div></td>
-                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[编审信息管理]-[编审信息查询]</td>
+                <td width="95%" class="STYLE1"><span class="STYLE3">你当前的位置</span>：[发行信息管理]-[发行信息查询]</td>
               </tr>
             </table></td>
             <td width="54%"><table border="0" align="right" cellpadding="0" cellspacing="0">
@@ -167,25 +165,13 @@ function OutputToExcel() {
 
   <tr>
   <td>
+发行编号：<input type=text name="fa_xing_id" value="<%=fa_xing_id%>" />&nbsp;
 书名：<input type=text name="book_name" value="<%=book_name%>"/>&nbsp;
-原著作者：<input type=text name="original_author" value="<%=original_author%>" />&nbsp;
-责任编辑：<input type=text name="ze_ren_editor" value="<%=ze_ren_editor%>"/>&nbsp;
-编审状态：<select name="bian_shen_status">				
- 				<option value="0"
- 					<c:if test="${bian_shen_status == 0}">selected</c:if>
- 				>--请选择--</option>				
- 				<c:forEach var="item" items="${bianShenStatusList }">
-	      	    	<option value="${item.id}" 
-	      	    		<c:if test="${item.id == bian_shen_status }">
-	      	    			<c:out value='selected="selected"'></c:out>
-	      	    		</c:if>
-					>
-	      	    		${item.content }
-	      	    	</option>
-      	    	</c:forEach> 				
- 			</select>&nbsp;
+订书依据：<input type=text name="order_receipt" value="<%=order_receipt%>"/>&nbsp;
+联系人：<input type=text name="contact_person" value="<%=contact_person%>"/>&nbsp;
+
     <input type=hidden name=currentPage value="1" />
-    <input type=submit value="查询" onclick="QueryBianShen();"  />
+    <input type=submit value="查询" onclick="QueryFaXing();"  />
   </td>
 </tr>
   <tr>
@@ -199,42 +185,42 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">原著作者</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">原出版社</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">主要作者</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">责任编辑</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">编审状态</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">付印日期</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">发行编号</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">客户代号</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">码洋</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">订书依据</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">联系人</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">联系电话</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">开户行</span></div></td>
             <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
 				<%
-					int bianShenListSize = bianShenList.size();
+					int faXingListSize = faXingList.size();
 					int startIndex = (currentPage -1) *10;
-					System.out.println("bianShenList size = " + bianShenListSize);
-				    for(int i=0; i<bianShenListSize; i++) {
+					System.out.println("faXingList size = " + faXingListSize);
+				    for(int i=0; i<faXingListSize; i++) {
             			int currentIndex = startIndex + i + 1; 	// 当前记录的序号
-            			BianShen bianShen = bianShenList.get(i); 		// 获取到BianShen对象
+            			FaXing faXing = faXingList.get(i); 		// 获取到XuanTi对象
 				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getBook_id() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getBook_name() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getOriginal_author() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getOriginal_press() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getPrimary_author() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getZe_ren_editor() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getBian_shen_status_content() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=bianShen.getFu_yin_date() %></span></div></td>		            
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getId() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getCustomer_title() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getBook_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getFixed_price() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getOrder_receipt() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getContact_person() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getContact_phone() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getBank_name() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>bian_shen/checkBianShen?id=<%=bianShen.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>bian_shen/getBianShen?id=<%=bianShen.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:DelBianShen('<%=bianShen.getId() %>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/checkFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/getFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelXuanTi('<%=faXing.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

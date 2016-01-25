@@ -14,9 +14,8 @@ String book_name = "";
 
 String original_author = "";
 String ze_ren_editor = "";
-String yin_wu_id = "";
-String yin_zhang = "";
-String print_status = "";
+
+String print_company = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -185,7 +184,7 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="<%=basePath%>yin_wu/queryYinWu?yin_wu_id=<%=yin_wu_id%>&book_name=<%=book_name%>&yin_zhang=0&print_status=0&currentPage=1" target="main">查看印务信息</a></li>
+          <li><a href="<%=basePath%>yin_wu/queryYinWu?print_company=<%=print_company%>&book_name=<%=book_name%>&ze_ren_editor=<%=ze_ren_editor %>&print_status=0&currentPage=1" target="main">查看印务信息</a></li>
           <li><a href="<%=basePath%>yin_wu/toAddYinWu" target="main">添加印务信息</a></li>
         </ul>
       </div>
@@ -199,16 +198,6 @@ H1 a {
         <ul class="MM">
 		  <li><a href="http://www.865171.cn" target="main">查看发行信息</a></li>
           <li><a href="http://www.865171.cn" target="main">添加发行信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">增加商家</a></li>
-          <li><a href="http://www.865171.cn" target="main">管理商家</a></li>
-          <li><a href="http://www.865171.cn" target="main">发布资讯</a></li>
-          <li><a href="http://www.865171.cn" target="main">资讯管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">市场联盟</a></li>
-          <li><a href="http://www.865171.cn" target="main">名片管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">商城管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">商品管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">商城留言</a></li>
-          <li><a href="http://www.865171.cn" target="main">商城公告</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">库存管理</a></h1>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespac: 必须与对应的接口全类名一致
+	id: 必须与对应接口的某个对应的方法名一致	
+ -->
+ 
+<mapper namespace="com.tgb.mapper.FaXingMapper">
+	
+	<insert id="save" parameterType="FaXing">
+		insert into fa_xing(id, 
+			invoice_title, 
+			customer_title, 
+			invoice_address, 
+			create_date, 
+			book_id, 
+			book_name, 
+			price, 
+			quantity,
+			fixed_price,
+			discount,
+			warehouse_location,
+			shi_pei,
+			order_receipt,
+			site,
+			contact_person,
+			contact_phone,
+			deliver_account,
+			postcode,
+			deliver_address,
+			bank_name,
+			bank_account,
+			pei_shu_person,
+			fu_he_person,
+			da_bao_person,
+			comments) 
+		values(#{id},
+			#{invoice_title},
+			#{customer_title},
+			#{invoice_address},
+			#{create_date},
+			#{book_id},
+			#{book_name},
+			#{price},
+			#{quantity},
+			#{fixed_price},
+			#{discount},
+			#{warehouse_location},
+			#{shi_pei},
+			#{order_receipt},
+			#{site},
+			#{contact_person},
+			#{contact_phone},
+			#{deliver_account},
+			#{postcode},
+			#{deliver_address},
+			#{bank_name},
+			#{bank_account},
+			#{pei_shu_person},
+			#{fu_he_person},
+			#{da_bao_person},
+			#{comments})
+	</insert>
+	
+	<update id="update" parameterType="FaXing">
+		update fa_xing set invoice_title=#{invoice_title}, 
+			customer_title=#{customer_title}, 
+			invoice_address=#{invoice_address}, 
+			create_date=#{create_date}, 
+			book_id=#{book_id}, 
+			book_name=#{book_name}, 
+			price=#{price}, 
+			quantity=#{quantity},
+			fixed_price=#{fixed_price},
+			discount=#{discount},
+			warehouse_location=#{warehouse_location},
+			shi_pei=#{shi_pei},
+			order_receipt=#{order_receipt},
+			site=#{site},
+			contact_person=#{contact_person},
+			contact_phone=#{contact_phone},
+			deliver_account=#{deliver_account},
+			postcode=#{postcode},
+			deliver_address=#{deliver_address},
+			bank_name=#{bank_name},
+			bank_account=#{bank_account},
+			pei_shu_person=#{pei_shu_person},
+			fu_he_person=#{fu_he_person},
+			da_bao_person=#{da_bao_person},
+			comments=#{comments} 
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from fa_xing where id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="String" resultType="FaXing">
+		select * from fa_xing where id=#{id}
+	</select>
+	
+	<select id="findAll" resultType="FaXing">
+		select * from fa_xing			
+		order by id asc
+	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.FaXing" resultType="FaXing">
+		select * from fa_xing
+		<where>
+			<if test="fa_xing_id != null and fa_xing_id != '' ">
+				id like CONCAT(CONCAT('%', #{fa_xing_id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="book_name != null and book_name != '' ">
+				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="order_receipt != null and order_receipt != '' ">				
+				AND order_receipt like CONCAT(CONCAT('%', #{order_receipt, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="contact_person != null and contact_person != '' ">				
+				AND contact_person like CONCAT(CONCAT('%', #{contact_person, jdbcType=VARCHAR}), '%')
+			</if>
+		</where>
+		order by id asc
+	</select>
+	
+</mapper>

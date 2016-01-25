@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tgb.model.YinWu;
 import com.tgb.model.BookSpecs;
-import com.tgb.model.YinZhang;
 import com.tgb.model.PrintStatus;
 import com.tgb.model.PrintQuality;
 
 import com.tgb.service.YinWuService;
 import com.tgb.service.BookSpecsService;
-import com.tgb.service.YinZhangService;
 import com.tgb.service.PrintStatusService;
 import com.tgb.service.PrintQualityService;
 
@@ -32,9 +30,6 @@ public class YinWuController {
 	
 	@Autowired
 	private BookSpecsService bookSpecsService;
-	
-	@Autowired
-	private YinZhangService yinZhangService;
 	
 	@Autowired
 	private PrintStatusService printStatusService;
@@ -74,12 +69,10 @@ public class YinWuController {
 	@RequestMapping("/toAddYinWu")
 	public String toAddYinWu(HttpServletRequest request) {	
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
-		List<YinZhang> yinZhangList = yinZhangService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 		
 		request.setAttribute("bookSpecsList", bookSpecsList);
-		request.setAttribute("yinZhangList", yinZhangList);
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 		
@@ -95,7 +88,7 @@ public class YinWuController {
 	@RequestMapping("/addYinWu")
 	public String addYinWu(YinWu yinWu, HttpServletRequest request) {
 		yinWuService.save(yinWu);
-		return "redirect:queryYinWu?yin_wu_id=&book_name=&yin_zhang=0&print_status=0&currentPage=1";
+		return "redirect:queryYinWu?print_company=&book_name=&ze_ren_editor=&print_status=0&currentPage=1";
 	}
 	
 	/**
@@ -107,7 +100,7 @@ public class YinWuController {
 	@RequestMapping("/updateYinWu")
 	public String updateYinWu(YinWu yinWu, HttpServletRequest request) {	
 		if(yinWuService.update(yinWu)) {
-			return "redirect:queryYinWu?yin_wu_id=&book_name=&yin_zhang=0&print_status=0&currentPage=1";
+			return "redirect:queryYinWu?print_company=&book_name=&ze_ren_editor=&print_status=0&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -119,16 +112,14 @@ public class YinWuController {
 	 * @return
 	 */
 	@RequestMapping("/getYinWu")
-	public String getYinWu(String id, HttpServletRequest request) {
+	public String getYinWu(int id, HttpServletRequest request) {
 		YinWu yinWu = yinWuService.findById(id);
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
-		List<YinZhang> yinZhangList = yinZhangService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
 		request.setAttribute("yinWu", yinWu);
 		request.setAttribute("bookSpecsList", bookSpecsList);
-		request.setAttribute("yinZhangList", yinZhangList);
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 
@@ -141,16 +132,14 @@ public class YinWuController {
 	 * @return
 	 */
 	@RequestMapping("/checkYinWu")
-	public String checkYinWu(String id, HttpServletRequest request) {
+	public String checkYinWu(int id, HttpServletRequest request) {
 		YinWu yinWu = yinWuService.findById(id);
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
-		List<YinZhang> yinZhangList = yinZhangService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 				
 		request.setAttribute("yinWu", yinWu);
 		request.setAttribute("bookSpecsList", bookSpecsList);
-		request.setAttribute("yinZhangList", yinZhangList);
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 
@@ -164,7 +153,7 @@ public class YinWuController {
 	 * @param response
 	 */
 	@RequestMapping("/delYinWu")
-	public void delYinWu(String id, HttpServletRequest request, HttpServletResponse response) {
+	public void delYinWu(int id, HttpServletRequest request, HttpServletResponse response) {
 		String result = "{\"result\":\"error\"}";		
 		System.out.println("id = " + id);
 		if(yinWuService.delete(id)) {
@@ -188,42 +177,40 @@ public class YinWuController {
 	 */
 	@RequestMapping("/queryYinWu")
 	public String queryYinWu(
-			@RequestParam(value="yin_wu_id", required=false)String yin_wu_id, 
+			@RequestParam(value="print_company", required=false)String print_company, 
 			@RequestParam(value="book_name", required=false)String book_name, 
-			@RequestParam(value="yin_zhang", required=false)int yin_zhang,
+			@RequestParam(value="ze_ren_editor", required=false)String ze_ren_editor,
 			@RequestParam(value="print_status", required=false)int print_status,
 			@RequestParam(value="currentPage", required=false)int currentPage, 
 			HttpServletRequest request) {
-		System.out.println("yin_wu_id: " + yin_wu_id);
+		System.out.println("print_company: " + print_company);
 		System.out.println("book_name: " + book_name);
-		System.out.println("yin_zhang: " + yin_zhang);
+		System.out.println("ze_ren_editor: " + ze_ren_editor);
 		System.out.println("print_status: " + print_status);
 		System.out.println("currentPage: " + currentPage);
 		
 		List<BookSpecs> bookSpecsList = bookSpecsService.findAll();
-		List<YinZhang> yinZhangList = yinZhangService.findAll();
 		List<PrintStatus> printStatusList = printStatusService.findAll();
 		List<PrintQuality> printQualityList = printQualityService.findAll();
 		
-		List<YinWu> yinWuList = yinWuService.queryYinWuInfo(yin_wu_id, book_name, yin_zhang, print_status, currentPage);
+		List<YinWu> yinWuList = yinWuService.queryYinWuInfo(print_company, book_name, ze_ren_editor, print_status, currentPage);
 		
         /*计算总的页数和总的记录数*/
-		yinWuService.calculateTotalPageAndRecordNumber(yin_wu_id, book_name, yin_zhang, print_status);
+		yinWuService.calculateTotalPageAndRecordNumber(print_company, book_name, ze_ren_editor, print_status);
 		
         /*获取到总的页码数目*/
         totalPage = yinWuService.getTotalPage();
         /*当前查询条件下总记录数*/
         recordNumber = yinWuService.getRecordNumber();
         
-        request.setAttribute("yin_wu_id", yin_wu_id);
+        request.setAttribute("print_company", print_company);
         request.setAttribute("book_name", book_name);
-        request.setAttribute("yin_zhang", yin_zhang);
+        request.setAttribute("ze_ren_editor", ze_ren_editor);
         request.setAttribute("print_status", print_status);
         
 		request.setAttribute("yinWuList", yinWuList);
 		
 		request.setAttribute("bookSpecsList", bookSpecsList);
-		request.setAttribute("yinZhangList", yinZhangList);
 		request.setAttribute("printStatusList", printStatusList);
 		request.setAttribute("printQualityList", printQualityList);
 		

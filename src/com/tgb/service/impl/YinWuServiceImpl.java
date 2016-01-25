@@ -45,11 +45,11 @@ public class YinWuServiceImpl implements YinWuService{
 		return yinWuMapper.update(yinWu);
 	}
 
-	public boolean delete(String id) {
+	public boolean delete(int id) {
 		return yinWuMapper.delete(id);
 	}
 
-	public YinWu findById(String id) {
+	public YinWu findById(int id) {
 		YinWu yinWu = yinWuMapper.findById(id);
 		return yinWu;
 	}
@@ -64,11 +64,11 @@ public class YinWuServiceImpl implements YinWuService{
 	/*
 	 * 查询 选题 信息
 	 */
-	public List<YinWu> queryYinWuInfo(String yin_wu_id, String book_name, int yin_zhang, 
+	public List<YinWu> queryYinWuInfo(String print_company, String book_name, String ze_ren_editor, 
 			int print_status, int currentPage) {
 		// 限制每页显示的个数
 		PageHelper.startPage(currentPage, 10);
-		List<YinWu> yinWuList = yinWuMapper.calculateTotalPageAndRecordNumber(yin_wu_id, book_name, yin_zhang, print_status);
+		List<YinWu> yinWuList = yinWuMapper.calculateTotalPageAndRecordNumber(print_company, book_name, ze_ren_editor, print_status);
 		
     	return yinWuList;
 	}
@@ -76,9 +76,9 @@ public class YinWuServiceImpl implements YinWuService{
 	/*
 	 * 计算总页数和总记录数
 	 */
-	public void calculateTotalPageAndRecordNumber(String yin_wu_id, String book_name, 
-			int yin_zhang, int print_status) {
-        List<YinWu> yinWuList = yinWuMapper.calculateTotalPageAndRecordNumber(yin_wu_id, book_name, yin_zhang, print_status);
+	public void calculateTotalPageAndRecordNumber(String print_company, String book_name, 
+			String ze_ren_editor, int print_status) {
+        List<YinWu> yinWuList = yinWuMapper.calculateTotalPageAndRecordNumber(print_company, book_name, ze_ren_editor, print_status);
         recordNumber = yinWuList.size();
         int mod = recordNumber % this.PAGE_SIZE;
         totalPage = recordNumber / this.PAGE_SIZE;

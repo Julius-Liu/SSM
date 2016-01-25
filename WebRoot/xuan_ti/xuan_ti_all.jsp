@@ -93,6 +93,7 @@ function changeback() {
 }
 
 /*跳转到查询结果的某页*/
+/*不应该加入 source 或 type 的信息*/
 function GoToPage(currentPage, totalPage) {
     if(currentPage == 0) {
     	return;
@@ -101,7 +102,7 @@ function GoToPage(currentPage, totalPage) {
     	return;
     }
     document.forms[0].currentPage.value = currentPage;
-    document.forms[0].action = "<%=basePath %>xuan_ti/queryXuanTi?source=<%=source%>&status=<%=status%>";
+    document.forms[0].action = "<%=basePath %>xuan_ti/queryXuanTi";
     document.forms[0].submit(); 
 }
 
@@ -174,7 +175,7 @@ function OutputToExcel() {
   <td>
 选题编号：<input type=text name="xuan_ti_id" value="<%=xuan_ti_id%>" />&nbsp;
 选题年度：<input type=text name="year" value="<%=year%>"/>&nbsp;
-选题类型：<select name="source">				
+稿件来源：<select name="source">				
  				<option value="0"
  					<c:if test="${source == 0}">selected</c:if>
  				>--请选择--</option>				

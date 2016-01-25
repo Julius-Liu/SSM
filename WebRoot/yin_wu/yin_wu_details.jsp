@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page import="com.tgb.model.BookSpecs" %>
-<%@ page import="com.tgb.model.YinZhang" %>
 <%@ page import="com.tgb.model.PrintStatus" %>
 <%@ page import="com.tgb.model.PrintQuality" %>
 
@@ -11,7 +10,6 @@
     
     // 获取所有的 bookSpecs 信息
     List<BookSpecs> bookSpecsList = (List<BookSpecs>)request.getAttribute("bookSpecsList");
-    List<YinZhang> yinZhangList = (List<YinZhang>)request.getAttribute("yinZhangList");
     List<PrintStatus> printStatusList = (List<PrintStatus>)request.getAttribute("printStatusList");
     List<PrintQuality> printQualityList = (List<PrintQuality>)request.getAttribute("printQualityList");
     
@@ -99,19 +97,7 @@
 
 	<tr>
     	<td width=30%>印章：</td>
-    	<td width=70%>
-      	<select name="yin_zhang">
-      		<c:forEach var="item" items="${yinZhangList}">
-      			<option value="${item.id }"
-      				<c:if test="${item.id == yinWu.yin_zhang }">
-      					<c:out value='selected="selected"'></c:out>
-      				</c:if>
-      			>
-      				${item.content }
-      			</option>
-      		</c:forEach>       	
-      	</select>
-    	</td>
+    	<td width=70%><input id="yin_zhang" name="yin_zhang" value="${yinWu.yin_zhang }" type="text" size="10" /></td>
   	</tr>
 
   	<tr>

@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ page import="com.tgb.model.BookSpecs" %>
-<%@ page import="com.tgb.model.YinZhang" %>
 <%@ page import="com.tgb.model.PrintStatus" %>
 <%@ page import="com.tgb.model.PrintQuality" %>
 
@@ -11,7 +10,6 @@
     
     // 获取所有的 bookSpecs 信息
     List<BookSpecs> bookSpecsList = (List<BookSpecs>)request.getAttribute("bookSpecsList");
-    List<YinZhang> yinZhangList = (List<YinZhang>)request.getAttribute("yinZhangList");
     List<PrintStatus> printStatusList = (List<PrintStatus>)request.getAttribute("printStatusList");
     List<PrintQuality> printQualityList = (List<PrintQuality>)request.getAttribute("printQualityList");
     
@@ -74,11 +72,6 @@
     <form action="" name="yinWu">
 	<table width='100%' cellspacing='1' cellpadding='3' class="tablewidth">
 
-	<tr>
-	    <td width=30%>印务编号：</td>
-	    <td width=70%><input id="id" name="id" type="text" /></td>
-	</tr>
-
   	<tr>
     	<td width=30%>起始日期：</td>
     	<td width=70%><input id="start_date" name="start_date" type="text" readonly size="10" onclick="setDay(this);"/></td>
@@ -119,15 +112,7 @@
 
 	<tr>
     	<td width=30%>印章：</td>
-    	<td width=70%>
-      	<select name="yin_zhang">
-      		<c:forEach var="item" items="${yinZhangList}">
-      			<option value="${item.id }">
-      				${item.content }
-      			</option>
-      		</c:forEach>       	
-      	</select>
-    	</td>
+    	<td width=70%><input id="yin_zhang" name="yin_zhang" type="text" size="10" /></td>
   	</tr>
 
   	<tr>

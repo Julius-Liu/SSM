@@ -8,9 +8,8 @@
  
 <mapper namespace="com.tgb.mapper.YinWuMapper">
 	
-	<insert id="save" parameterType="YinWu">
-		insert into yin_wu(id, 
-			start_date, 
+	<insert id="save" parameterType="YinWu" useGeneratedKeys="true" keyProperty="id">
+		insert into yin_wu(start_date, 
 			end_date, 
 			publish_company, 
 			print_company, 
@@ -24,8 +23,7 @@
 			ze_ren_department,
 			print_status,
 			print_quality) 
-		values(#{id},
-			#{start_date},
+		values(#{start_date},
 			#{end_date},
 			#{publish_company},
 			#{print_company},
@@ -59,11 +57,11 @@
 		where id=#{id}
 	</update>
 	
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		delete from yin_wu where id=#{id}
 	</delete>
 	
-	<select id="findById" parameterType="String" resultType="YinWu">
+	<select id="findById" parameterType="int" resultType="YinWu">
 		select * from yin_wu where id=#{id}
 	</select>
 	
@@ -75,7 +73,7 @@
 			print_company, 
 			book_name, 
 			book_specs.content as book_specs_content, 
-			yin_zhang.content as yin_zhang_content,
+			yin_zhang,
 			revision,
 			print_quantity,
 			ISBN,
@@ -83,8 +81,7 @@
 			ze_ren_department,
 			print_status.content as print_status_content,
 			print_quality.content as print_quality_content
-		from (((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)
-				inner join yin_zhang on yin_wu.yin_zhang=yin_zhang.id)
+		from ((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)				
 					inner join print_status on yin_wu.print_status=print_status.id)
 						inner join print_quality on yin_wu.print_quality=print_quality.id				
 		order by yin_wu.id asc
@@ -98,7 +95,7 @@
 			print_company, 
 			book_name, 
 			book_specs.content as book_specs_content, 
-			yin_zhang.content as yin_zhang_content,
+			yin_zhang,
 			revision,
 			print_quantity,
 			ISBN,
@@ -106,19 +103,18 @@
 			ze_ren_department,
 			print_status.content as print_status_content,
 			print_quality.content as print_quality_content
-		from (((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)
-				inner join yin_zhang on yin_wu.yin_zhang=yin_zhang.id)
+		from ((yin_wu inner join book_specs on yin_wu.book_specs=book_specs.id)
 					inner join print_status on yin_wu.print_status=print_status.id)
 						inner join print_quality on yin_wu.print_quality=print_quality.id	
 		<where>
-			<if test="yin_wu_id != null and yin_wu_id != '' ">
-				yin_wu.id like CONCAT(CONCAT('%', #{yin_wu_id, jdbcType=VARCHAR}), '%')
+			<if test="print_company != null and print_company != '' ">
+				print_company like CONCAT(CONCAT('%', #{print_company, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="book_name != null and book_name != '' ">
 				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>			
-			<if test="yin_zhang != 0">				
-				AND yin_zhang = #{yin_zhang, jdbcType=INTEGER}
+			<if test="ze_ren_editor != null and ze_ren_editor != '' ">				
+				AND ze_ren_editor like CONCAT(CONCAT('%', #{ze_ren_editor, jdbcType=VARCHAR}), '%')
 			</if>
 			<if test="print_status != 0">
 				AND print_status = #{print_status, jdbcType=INTEGER}

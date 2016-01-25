@@ -5,7 +5,7 @@ package com.tgb.model;
  */
 public class YinWu {
 	// 印务编号
-	private String id;
+	private int id;
 	
 	// 起始日期
 	private String start_date;
@@ -29,10 +29,7 @@ public class YinWu {
 	private String book_specs_content;
 	
 	// 印章
-	private int yin_zhang;
-	
-	// 印章对应的content
-	private String yin_zhang_content;
+	private String yin_zhang;
 	
 	// 版次
 	private int revision;
@@ -57,10 +54,10 @@ public class YinWu {
 	private int print_quality;
 	private String print_quality_content;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getStart_date() {
@@ -105,17 +102,11 @@ public class YinWu {
 	public void setBook_specs_content(String book_specs_content) {
 		this.book_specs_content = book_specs_content;
 	}
-	public int getYin_zhang() {
+	public String getYin_zhang() {
 		return yin_zhang;
 	}
-	public void setYin_zhang(int yin_zhang) {
+	public void setYin_zhang(String yin_zhang) {
 		this.yin_zhang = yin_zhang;
-	}
-	public String getYin_zhang_content() {
-		return yin_zhang_content;
-	}
-	public void setYin_zhang_content(String yin_zhang_content) {
-		this.yin_zhang_content = yin_zhang_content;
 	}
 	public int getRevision() {
 		return revision;
