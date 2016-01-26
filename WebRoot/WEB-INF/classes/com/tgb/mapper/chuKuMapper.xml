@@ -8,8 +8,8 @@
  
 <mapper namespace="com.tgb.mapper.ChuKuMapper">
 	
-	<insert id="save" parameterType="XuanTi">
-		insert into chu_ku(deliver_id, 
+	<insert id="save" parameterType="ChuKu">
+		insert into chu_ku(id, 
 			deliver_date, 
 			customer_id, 
 			customer_name, 
@@ -31,7 +31,7 @@
 			site_arrived,
 			contact_person,
 			contact_phone) 
-		values(#{deliver_id},
+		values(#{id},
 			#{deliver_date},
 			#{customer_id},
 			#{customer_name},
@@ -77,67 +77,83 @@
 			site_arrived=#{site_arrived},
 			contact_person=#{contact_person},
 			contact_phone=#{contact_phone}
-		where deliver_id=#{deliver_id}
+		where id=#{id}
 	</update>
 	
 	<delete id="delete" parameterType="String">
-		delete from xuan_ti where id=#{id}
+		delete from chu_ku where id=#{id}
 	</delete>
 	
-	<select id="findById" parameterType="String" resultType="XuanTi">
-		select * from xuan_ti where id=#{id}
+	<select id="findById" parameterType="String" resultType="ChuKu">
+		select * from chu_ku where id=#{id}
 	</select>
 	
-	<select id="findAll" resultType="XuanTi">
-		select xuan_ti.id, 
-			type, 
-			year, 
-			season, 
-			book_name, 
-			sub_book_name, 
-			department, 
-			originator,
-			gao_jian_source.content as gao_jian_source,
-			chu_shen_comments.content as chu_shen_comments,
-			xuan_ti_status.content as xuan_ti_status,
-			ISBN 
-		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
-					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
-						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
-		order by xuan_ti.id asc
+	<select id="findAll" resultType="ChuKu">
+		select chu_ku.id, 
+			deliver_date, 
+			customer_id, 
+			customer_name, 
+			book_owner_id, 
+			book_owner_name, 
+			deliver_man, 
+			deliver_contact_phone, 
+			book_name,
+			revision,
+			quantity,
+			price,
+			fixed_price,
+			discount,
+			discounted_price,
+			crate_id,
+			deliver_address,
+			postcode,
+			transportation.content as transportation_content,
+			site_arrived,
+			contact_person,
+			contact_phone
+		from chu_ku inner join transportation on chu_ku.transportation=transportation.id		
+		order by chu_ku.id asc
 	</select>
 	
-	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
-		select xuan_ti.id, 
-			type, 
-			year, 
-			season, 
-			book_name, 
-			sub_book_name, 
-			department, 
-			originator,
-			gao_jian_source.content as gao_jian_source,
-			chu_shen_comments.content as chu_shen_comments,
-			xuan_ti_status.content as xuan_ti_status,
-			ISBN 
-		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
-					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
-						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.ChuKu" resultType="ChuKu">
+		select chu_ku.id, 
+			deliver_date, 
+			customer_id, 
+			customer_name, 
+			book_owner_id, 
+			book_owner_name, 
+			deliver_man, 
+			deliver_contact_phone, 
+			book_name,
+			revision,
+			quantity,
+			price,
+			fixed_price,
+			discount,
+			discounted_price,
+			crate_id,
+			deliver_address,
+			postcode,
+			transportation.content as transportation_content,
+			site_arrived,
+			contact_person,
+			contact_phone
+		from chu_ku inner join transportation on chu_ku.transportation=transportation.id		
 		<where>
-			<if test="xuan_ti_id != null and xuan_ti_id != '' ">
-				xuan_ti.id like CONCAT(CONCAT('%', #{xuan_ti_id, jdbcType=VARCHAR}), '%')
+			<if test="customer_name != null and customer_name != '' ">
+				customer_name like CONCAT(CONCAT('%', #{customer_name, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="year != null and year != '' ">
-				AND year like CONCAT(CONCAT('%', #{year, jdbcType=VARCHAR}), '%')
+			<if test="deliver_man != null and deliver_man != '' ">
+				AND deliver_man like CONCAT(CONCAT('%', #{deliver_man, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="source != 0">				
-				AND source = #{source, jdbcType=INTEGER}
+			<if test="book_name != null and book_name != '' ">
+				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
 			</if>
-			<if test="status != 0 ">
-				AND status = #{status, jdbcType=INTEGER}
+			<if test="contact_person != null and contact_person != '' ">
+				AND contact_person like CONCAT(CONCAT('%', #{contact_person, jdbcType=VARCHAR}), '%')
 			</if>
 		</where>
-		order by xuan_ti.id asc
+		order by chu_ku.id asc
 	</select>
 	
 </mapper>

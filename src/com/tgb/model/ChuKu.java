@@ -2,7 +2,7 @@ package com.tgb.model;
 
 public class ChuKu {
 	// 发书编号
-	private String deliver_id;
+	private String id;
 	
 	// 发书日期
 	private String deliver_date;
@@ -70,11 +70,11 @@ public class ChuKu {
 	// 联系电话
 	private String contact_phone;
 	
-	public String getDeliver_id() {
-		return deliver_id;
+	public String getId() {
+		return id;
 	}
-	public void setDeliver_id(String deliver_id) {
-		this.deliver_id = deliver_id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getDeliver_date() {
 		return deliver_date;
