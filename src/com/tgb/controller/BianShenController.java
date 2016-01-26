@@ -20,7 +20,6 @@ import com.tgb.service.BianShenStatusService;
 
 @Controller
 @RequestMapping("/bian_shen")
-
 public class BianShenController {
 	@Autowired
 	private BianShenService bianShenService;

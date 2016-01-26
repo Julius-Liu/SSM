@@ -1,8 +1,8 @@
 package com.tgb.mapper;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.tgb.model.XuanTi;
+import org.apache.ibatis.annotations.Param;
 
 public interface XuanTiMapper {
 	void save(XuanTi xuanTi);

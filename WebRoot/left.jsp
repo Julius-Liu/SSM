@@ -16,6 +16,14 @@ String original_author = "";
 String ze_ren_editor = "";
 
 String print_company = "";
+
+String fa_xing_id = "";
+String order_receipt = "";
+String contact_person = "";
+
+String order_id = "";
+String deliver_company = "";
+String receive_man = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -196,8 +204,8 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-		  <li><a href="http://www.865171.cn" target="main">查看发行信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">添加发行信息</a></li>
+		  <li><a href="<%=basePath%>fa_xing/queryFaXing?fa_xing_id=<%=fa_xing_id%>&book_name=<%=book_name%>&order_receipt=<%=order_receipt %>&contact_person=<%=contact_person %>&currentPage=1" target="main">查看发行信息</a></li>
+          <li><a href="<%=basePath%>fa_xing/toAddFaXing" target="main">添加发行信息</a></li>
         </ul>
       </div>
       <h1 class="type"><a href="javascript:void(0)">库存管理</a></h1>
@@ -208,12 +216,10 @@ H1 a {
           </tr>
         </table>
         <ul class="MM">
-          <li><a href="http://www.865171.cn" target="main">查看入库信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">添加入库信息</a></li>
+          <li><a href="<%=basePath%>ru_ku/queryRuKu?order_id=<%=order_id%>&deliver_company=<%=deliver_company%>&book_name=<%=book_name %>&receive_man=<%=receive_man %>&currentPage=1" target="main">查看入库信息</a></li>
+          <li><a href="<%=basePath%>ru_ku/toAddRuKu" target="main">添加入库信息</a></li>
           <li><a href="http://www.865171.cn" target="main">查看出库信息</a></li>
           <li><a href="http://www.865171.cn" target="main">添加出库信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">举报管理</a></li>
-          <li><a href="http://www.865171.cn" target="main">评论管理</a></li>
         </ul>
       </div>
     </div>
@@ -227,9 +233,6 @@ H1 a {
         <ul class="MM">
           <li><a href="http://www.865171.cn" target="main">查看资金信息</a></li>
           <li><a href="http://www.865171.cn" target="main">添加资金信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">攻击状态</a></li>
-          <li><a href="http://www.865171.cn" target="main">登陆记录</a></li>
-          <li><a href="http://www.865171.cn" target="main">运行状态</a></li>
         </ul>
       </div>
       </div>

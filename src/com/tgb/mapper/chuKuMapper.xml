@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespac: 必须与对应的接口全类名一致
+	id: 必须与对应接口的某个对应的方法名一致	
+ -->
+ 
+<mapper namespace="com.tgb.mapper.ChuKuMapper">
+	
+	<insert id="save" parameterType="XuanTi">
+		insert into chu_ku(deliver_id, 
+			deliver_date, 
+			customer_id, 
+			customer_name, 
+			book_owner_id, 
+			book_owner_name, 
+			deliver_man, 
+			deliver_contact_phone, 
+			book_name,
+			revision,
+			quantity,
+			price,
+			fixed_price,
+			discount,
+			discounted_price,
+			crate_id,
+			deliver_address,
+			postcode,
+			transportation,
+			site_arrived,
+			contact_person,
+			contact_phone) 
+		values(#{deliver_id},
+			#{deliver_date},
+			#{customer_id},
+			#{customer_name},
+			#{book_owner_id},
+			#{book_owner_name},
+			#{deliver_man},
+			#{deliver_contact_phone},
+			#{book_name},
+			#{revision},
+			#{quantity},
+			#{price},
+			#{fixed_price},
+			#{discount},
+			#{discounted_price},
+			#{crate_id},
+			#{deliver_address},
+			#{postcode},
+			#{transportation},
+			#{site_arrived},
+			#{contact_person},
+			#{contact_phone})
+	</insert>
+	
+	<update id="update" parameterType="ChuKu">
+		update chu_ku set deliver_date=#{deliver_date}, 
+			customer_id=#{customer_id}, 
+			customer_name=#{customer_name}, 
+			book_owner_id=#{book_owner_id}, 
+			book_owner_name=#{book_owner_name}, 
+			deliver_man=#{deliver_man}, 
+			deliver_contact_phone=#{deliver_contact_phone},
+			book_name=#{book_name},
+			revision=#{revision},
+			quantity=#{quantity},
+			price=#{price}, 
+			fixed_price=#{fixed_price},
+			discount=#{discount},
+			discounted_price=#{discounted_price},
+			crate_id=#{crate_id},
+			deliver_address=#{deliver_address},
+			postcode=#{postcode},
+			transportation=#{transportation},
+			site_arrived=#{site_arrived},
+			contact_person=#{contact_person},
+			contact_phone=#{contact_phone}
+		where deliver_id=#{deliver_id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from xuan_ti where id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="String" resultType="XuanTi">
+		select * from xuan_ti where id=#{id}
+	</select>
+	
+	<select id="findAll" resultType="XuanTi">
+		select xuan_ti.id, 
+			type, 
+			year, 
+			season, 
+			book_name, 
+			sub_book_name, 
+			department, 
+			originator,
+			gao_jian_source.content as gao_jian_source,
+			chu_shen_comments.content as chu_shen_comments,
+			xuan_ti_status.content as xuan_ti_status,
+			ISBN 
+		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
+						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id				
+		order by xuan_ti.id asc
+	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.XuanTi" resultType="XuanTi">
+		select xuan_ti.id, 
+			type, 
+			year, 
+			season, 
+			book_name, 
+			sub_book_name, 
+			department, 
+			originator,
+			gao_jian_source.content as gao_jian_source,
+			chu_shen_comments.content as chu_shen_comments,
+			xuan_ti_status.content as xuan_ti_status,
+			ISBN 
+		from ((xuan_ti inner join gao_jian_source on xuan_ti.source=gao_jian_source.id)
+					inner join chu_shen_comments on xuan_ti.first_comments=chu_shen_comments.id)
+						inner join xuan_ti_status on xuan_ti.status=xuan_ti_status.id		
+		<where>
+			<if test="xuan_ti_id != null and xuan_ti_id != '' ">
+				xuan_ti.id like CONCAT(CONCAT('%', #{xuan_ti_id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="year != null and year != '' ">
+				AND year like CONCAT(CONCAT('%', #{year, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="source != 0">				
+				AND source = #{source, jdbcType=INTEGER}
+			</if>
+			<if test="status != 0 ">
+				AND status = #{status, jdbcType=INTEGER}
+			</if>
+		</where>
+		order by xuan_ti.id asc
+	</select>
+	
+</mapper>

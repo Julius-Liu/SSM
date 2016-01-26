@@ -43,9 +43,9 @@
 	    return true; 
 	}
 	
-	function updateXuanTi(){
+	function updateFaXing(){
 		var form = document.forms[0];
-		form.action = "<%=basePath%>xuan_ti/updateXuanTi";
+		form.action = "<%=basePath%>fa_xing/updateFaXing";
 		form.method="post";
 		form.submit();
 	}
@@ -85,7 +85,7 @@
 
   	<tr>
     	<td width=30%>开单日期：</td>
-    	<td width=70%><input id="create_date" name="create_date" value="${faXing.create_date}" type="text" size="20" /></td>
+    	<td width=70%><input id="create_date" name="create_date" value="${faXing.create_date}" type="text" size="10" readonly onclick="setDay(this);"/></td>
   	</tr>
 
   	<tr>
@@ -180,7 +180,7 @@
   	</tr>
   	<tr>
     	<td width=30%>备注：</td>
-    	<td width=70%><input id="comments" name="comments" value="${faXing.comments}" type="text" size="10" /></td>
+    	<td width=70%><input id="comments" name="comments" value="${faXing.comments}" type="text" size="20" /></td>
   	</tr>
   	<tr bgcolor='#FFFFFF'>
       	<td colspan="4" align="center">

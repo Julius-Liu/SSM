@@ -61,7 +61,7 @@
 
   	<tr>
     	<td width=30%>开单日期：</td>
-    	<td width=70%><input id="create_date" name="create_date" value="${faXing.create_date}" type="text" size="20" /></td>
+    	<td width=70%><input id="create_date" name="create_date" value="${faXing.create_date}" type="text" size="10" /></td>
   	</tr>
 
   	<tr>

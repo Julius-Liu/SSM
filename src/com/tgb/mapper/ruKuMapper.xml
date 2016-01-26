@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	namespace：必须与对应的接口全类名一致
+	id:必须与对应接口的某个对应的方法名一致	
+ -->
+ 
+<mapper namespace="com.tgb.mapper.RuKuMapper">
+	
+	<insert id="save" parameterType="RuKu" useGeneratedKeys="true" keyProperty="id">
+		insert into ru_ku(ru_ku_date, 
+			order_id, 
+			order_create_date, 
+			publish_company, 
+			deliver_company, 
+			receive_company, 
+			store_center, 
+			book_name,
+			revision,
+			quantity,
+			price,
+			fixed_price,
+			check_man,
+			receive_man,
+			comments) 
+		values(#{ru_ku_date},
+			#{order_id},
+			#{order_create_date},
+			#{publish_company},
+			#{deliver_company},
+			#{receive_company},
+			#{store_center},
+			#{book_name},
+			#{revision},
+			#{quantity},
+			#{price},
+			#{fixed_price},
+			#{check_man},
+			#{receive_man},
+			#{comments})
+	</insert>
+	
+	<update id="update" parameterType="RuKu">
+		update ru_ku set ru_ku_date=#{ru_ku_date}, 
+			order_id=#{order_id}, 
+			order_create_date=#{order_create_date}, 
+			publish_company=#{publish_company}, 
+			deliver_company=#{deliver_company}, 
+			receive_company=#{receive_company}, 
+			store_center=#{store_center}, 
+			book_name=#{book_name},
+			revision=#{revision},
+			quantity=#{quantity},
+			price=#{price} ,
+			fixed_price=#{fixed_price},
+			check_man=#{check_man},
+			receive_man=#{receive_man},
+			comments=#{comments},
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from ru_ku where id=#{id}
+	</delete>
+	
+	<select id="findById" parameterType="int" resultType="RuKu">
+		select * from ru_ku where id=#{id}
+	</select>
+	
+	<select id="findAll" resultType="RuKu">
+		select * from ru_ku								
+		order by id asc
+	</select>
+	
+	<select id="calculateTotalPageAndRecordNumber" parameterType="com.tgb.model.RuKu" resultType="RuKu">
+		select * from ru_ku		
+		<where>
+			<if test="order_id != null and order_id != '' ">
+				AND order_id like CONCAT(CONCAT('%', #{order_id, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="deliver_company != null and deliver_company != '' ">
+				deliver_company like CONCAT(CONCAT('%', #{deliver_company, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="book_name != null and book_name != ''">				
+				AND book_name like CONCAT(CONCAT('%', #{book_name, jdbcType=VARCHAR}), '%')
+			</if>
+			<if test="receive_man != null and receive_man != ''">				
+				AND receive_man like CONCAT(CONCAT('%', #{receive_man, jdbcType=VARCHAR}), '%')
+			</if>
+		</where>
+		order by id asc
+	</select>
+	
+</mapper>

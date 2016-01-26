@@ -52,7 +52,7 @@ public class FaXingController {
 	 */
 	@RequestMapping("/toAddFaXing")
 	public String toAddFaXing(HttpServletRequest request) {			
-		return "/xuan_ti/xuan_ti_add";
+		return "/fa_xing/fa_xing_add";
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class FaXingController {
 	 * @return
 	 */
 	@RequestMapping("/addFaXing")
-	public String addXuanTi(FaXing faXing, HttpServletRequest request) {
+	public String addFaXing(FaXing faXing, HttpServletRequest request) {
 		faXingService.save(faXing);
 		return "redirect:queryFaXing?fa_xing_id=&book_name=&order_receipt=&contact_person=&currentPage=1";
 	}
@@ -74,9 +74,9 @@ public class FaXingController {
 	 * @return
 	 */
 	@RequestMapping("/updateFaXing")
-	public String updateXuanTi(FaXing faXing, HttpServletRequest request) {	
+	public String updateFaXing(FaXing faXing, HttpServletRequest request) {	
 		if(faXingService.update(faXing)) {
-			return "redirect:queryXuanTi?fa_xing_id=&book_name=&order_receipt=&contact_person=&currentPage=1";
+			return "redirect:queryFaXing?fa_xing_id=&book_name=&order_receipt=&contact_person=&currentPage=1";
 		}else {
 			return "/error";
 		}
@@ -140,7 +140,7 @@ public class FaXingController {
 	 * @return
 	 */
 	@RequestMapping("/queryFaXing")
-	public String queryXuanTi(
+	public String queryFaXing(
 			@RequestParam(value="fa_xing_id", required=false)String fa_xing_id, 
 			@RequestParam(value="book_name", required=false)String book_name,
 			@RequestParam(value="order_receipt", required=false)String order_receipt,

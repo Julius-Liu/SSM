@@ -21,6 +21,9 @@
 		<typeAlias alias="BookSpecs" type="com.tgb.model.BookSpecs" />
 		<typeAlias alias="PrintStatus" type="com.tgb.model.PrintStatus" />
 		<typeAlias alias="PrintQuality" type="com.tgb.model.PrintQuality" />
+		
+		<typeAlias alias="FaXing" type="com.tgb.model.FaXing" />
+		<typeAlias alias="RuKu" type="com.tgb.model.RuKu" />
 	</typeAliases>
 	
 	<!-- 
@@ -85,6 +88,9 @@
 		<mapper resource="com/tgb/mapper/bookSpecsMapper.xml" />
 		<mapper resource="com/tgb/mapper/printStatusMapper.xml" />
 		<mapper resource="com/tgb/mapper/printQualityMapper.xml" />
+		
+		<mapper resource="com/tgb/mapper/faXingMapper.xml" />
+		<mapper resource="com/tgb/mapper/ruKuMapper.xml" />
 	</mappers>
 	
 </configuration>  

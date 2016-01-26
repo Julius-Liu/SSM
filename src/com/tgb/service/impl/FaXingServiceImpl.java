@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.tgb.mapper.FaXingMapper;
 import com.tgb.model.FaXing;
+import com.tgb.service.FaXingService;
 
 @Service
 @Transactional
-public class FaXingServiceImpl {
+public class FaXingServiceImpl implements FaXingService{
 	@Resource
 	private FaXingMapper faXingMapper;
 
