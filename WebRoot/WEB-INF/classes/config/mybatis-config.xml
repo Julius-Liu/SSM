@@ -24,6 +24,10 @@
 		
 		<typeAlias alias="FaXing" type="com.tgb.model.FaXing" />
 		<typeAlias alias="RuKu" type="com.tgb.model.RuKu" />
+		
+		<typeAlias alias="ChuKu" type="com.tgb.model.ChuKu" />
+		<typeAlias alias="Transportation" type="com.tgb.model.Transportation" />
+		<typeAlias alias="AssetsBalance" type="com.tgb.model.AssetsBalance" />
 	</typeAliases>
 	
 	<!-- 
@@ -91,6 +95,10 @@
 		
 		<mapper resource="com/tgb/mapper/faXingMapper.xml" />
 		<mapper resource="com/tgb/mapper/ruKuMapper.xml" />
+		
+		<mapper resource="com/tgb/mapper/chuKuMapper.xml" />
+		<mapper resource="com/tgb/mapper/transportationMapper.xml" />
+		<mapper resource="com/tgb/mapper/assetsBalanceMapper.xml" />
 	</mappers>
 	
 </configuration>  

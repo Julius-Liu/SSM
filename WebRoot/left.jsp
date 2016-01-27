@@ -24,6 +24,9 @@ String contact_person = "";
 String order_id = "";
 String deliver_company = "";
 String receive_man = "";
+
+String customer_name = "";
+String deliver_man = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -218,8 +221,8 @@ H1 a {
         <ul class="MM">
           <li><a href="<%=basePath%>ru_ku/queryRuKu?order_id=<%=order_id%>&deliver_company=<%=deliver_company%>&book_name=<%=book_name %>&receive_man=<%=receive_man %>&currentPage=1" target="main">查看入库信息</a></li>
           <li><a href="<%=basePath%>ru_ku/toAddRuKu" target="main">添加入库信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">查看出库信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">添加出库信息</a></li>
+          <li><a href="<%=basePath%>chu_ku/queryChuKu?customer_name=<%=customer_name%>&deliver_man=<%=deliver_man%>&book_name=<%=book_name %>&contact_person=<%=contact_person %>&currentPage=1" target="main">查看出库信息</a></li>
+          <li><a href="<%=basePath%>chu_ku/toAddChuKu" target="main">添加出库信息</a></li>
         </ul>
       </div>
     </div>
