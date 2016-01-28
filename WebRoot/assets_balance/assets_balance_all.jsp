@@ -185,42 +185,42 @@ function OutputToExcel() {
               <input type="checkbox" name="checkall" onclick="checkAll();" />
             </div></td> -->
             <td width="3%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">序号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">发行编号</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">客户代号</span></div></td>
-            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">书名</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">码洋</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">订书依据</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">联系人</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">联系电话</span></div></td>
-            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">开户行</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">资金编号</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">科目名称</span></div></td>
+            <td width="6%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">客户名称</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">初期余额</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">期末余额</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">总计</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">银行</span></div></td>
+            <td  height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">制单人</span></div></td>
             <td width="12%" height="22" background="<%=basePath %>images/bg.gif" bgcolor="#FFFFFF" class="STYLE1"><div align="center">基本操作</div></td>
           </tr>
              <%-- <c:if test="${!empty bookList && !empty bookTypeList}"> --%>
 				<%-- <c:forEach items="${bookList}" var="book"> --%>
 				<%
-					int faXingListSize = faXingList.size();
+					int assetsBalanceListSize = assetsBalanceList.size();
 					int startIndex = (currentPage -1) *10;
-					System.out.println("faXingList size = " + faXingListSize);
-				    for(int i=0; i<faXingListSize; i++) {
+					System.out.println("assetsBalanceList size = " + assetsBalanceListSize);
+				    for(int i=0; i<assetsBalanceListSize; i++) {
             			int currentIndex = startIndex + i + 1; 	// 当前记录的序号
-            			FaXing faXing = faXingList.get(i); 		// 获取到XuanTi对象
+            			AssetsBalance assetsBalance = assetsBalanceList.get(i); 		// 获取到 assetsBalance 对象
 				 %>
 		          <tr>
 		            <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
 		              <div align="center"><%=currentIndex %></div>
 		            </div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getId() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getCustomer_title() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getBook_name() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getFixed_price() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getOrder_receipt() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getContact_person() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getContact_phone() %></span></div></td>
-		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=faXing.getBank_name() %></span></div></td>		            
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getId() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getDepartment_title() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getCustomer_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getOriginal_balance() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getFinal_balance() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getBalance_total() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getBank_name() %></span></div></td>
+		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"><%=assetsBalance.getRecord_creator() %></span></div></td>		            
 		            <td height="20" bgcolor="#FFFFFF"><div align="center"><span class="STYLE4">
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/checkFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
-		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>fa_xing/getFaXing?id=<%=faXing.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
-            			<span style="cursor:hand;" onclick=""><a href="javascript:DelXuanTi('<%=faXing.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>assets_balance/checkAssetsBalance?id=<%=assetsBalance.getId() %>'"><a href='#'><img src="<%=basePath %>images/vie.gif" width="16" height="16"/>详细</a></span>&nbsp;
+		            	<span style="cursor:hand;" onclick="location.href='<%=basePath %>assets_balance/getAssetsBalance?id=<%=assetsBalance.getId() %>'"><a href='#'><img src="<%=basePath %>images/edt.gif" width="16" height="16"/>编辑</a></span>&nbsp;
+            			<span style="cursor:hand;" onclick=""><a href="javascript:DelAssetsBalance('<%=assetsBalance.getId()%>')"><img src="<%=basePath %>images/del.gif" width="16" height="16"/>删除</a></span>
 		            </div></td>
 		          </tr>
 		          <% } %>

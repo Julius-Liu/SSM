@@ -27,6 +27,10 @@ String receive_man = "";
 
 String customer_name = "";
 String deliver_man = "";
+
+String assets_balance_id = "";
+String bank_name = "";
+String record_creator = "";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -234,8 +238,8 @@ H1 a {
             </tr>
           </table>
         <ul class="MM">
-          <li><a href="http://www.865171.cn" target="main">查看资金信息</a></li>
-          <li><a href="http://www.865171.cn" target="main">添加资金信息</a></li>
+          <li><a href="<%=basePath%>assets_balance/queryAssetsBalance?assets_balance_id=<%=assets_balance_id%>&customer_name=<%=customer_name%>&bank_name=<%=bank_name %>&record_creator=<%=record_creator %>&currentPage=1" target="main">查看资金信息</a></li>
+          <li><a href="<%=basePath%>assets_balance/toAddAssetsBalance" target="main">添加资金信息</a></li>
         </ul>
       </div>
       </div>

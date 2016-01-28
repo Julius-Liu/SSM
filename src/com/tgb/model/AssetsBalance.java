@@ -20,10 +20,10 @@ public class AssetsBalance {
 	private double original_balance;
 	
 	// 借方累计
-	private double debit_balance;
+	private double debit_total;
 	
 	// 贷方累计
-	private double credit_balance;
+	private double credit_total;
 	
 	// 期末余额
 	private double final_balance;
@@ -77,16 +77,16 @@ public class AssetsBalance {
 		this.original_balance = original_balance;
 	}
 	public double getDebit_balance() {
-		return debit_balance;
+		return debit_total;
 	}
 	public void setDebit_balance(double debit_balance) {
-		this.debit_balance = debit_balance;
+		this.debit_total = debit_balance;
 	}
 	public double getCredit_balance() {
-		return credit_balance;
+		return credit_total;
 	}
 	public void setCredit_balance(double credit_balance) {
-		this.credit_balance = credit_balance;
+		this.credit_total = credit_balance;
 	}
 	public double getFinal_balance() {
 		return final_balance;
